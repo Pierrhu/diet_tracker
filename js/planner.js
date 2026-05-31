@@ -5,7 +5,8 @@ import { state, setState, currentEntry } from './state.js';
 import { saveEntry, getTodayDate }       from '../data/log.js';
 import { getDinners, getLunches, getSides, getSweets, getById } from '../data/recipes.js';
 import { USER }                          from '../data/user.js';
-import { el, formatDate, mbar, scaledMacros, computeDayMacros, openSheet, closeSheet } from './utils.js';
+import { el, formatDate, mbar, scaledMacros, itemMacros, computeDayMacros, openSheet, closeSheet } from './utils.js';
+import { optimizeDay }                   from './optimizer.js';
 
 const SLOTS = [
   { key: 'lunch',  label: 'Déjeuner',        emoji: '',  fn: getLunches },
@@ -33,6 +34,7 @@ export function changeServings(slot, index, delta) {
   const entry = currentEntry();
   const item = entry.meals[slot][index];
   if (!item) return;
+  delete item.overrides; // retour à un réglage proportionnel
   item.servings = Math.max(0.25, Math.round((item.servings + delta) * 4) / 4);
   save(entry);
 }
@@ -41,8 +43,27 @@ export function setServings(slot, index, value) {
   const entry = currentEntry();
   const item = entry.meals[slot][index];
   if (!item) return;
+  delete item.overrides;
   const v = parseFloat(String(value).replace(',', '.'));
   if (!isNaN(v) && v > 0) item.servings = Math.round(v * 4) / 4;
+  save(entry);
+}
+
+// Optimise les portions de tous les plats du jour pour caler les macros (kcal + protéines).
+export function optimizeMeals() {
+  const entry = currentEntry();
+  const slots = ['lunch', 'dinner', 'sides', 'sweet'];
+  // aplatir tous les plats du jour, en gardant la trace de leur emplacement
+  const flat = [];
+  slots.forEach(slot => (entry.meals[slot] || []).forEach((item, idx) => flat.push({ slot, idx, item })));
+  if (!flat.length) return;
+  const optimized = optimizeDay(flat.map(f => f.item), USER.targets);
+  // réécrire les overrides + servings dans l'entrée
+  flat.forEach((f, i) => {
+    const o = optimized[i];
+    entry.meals[f.slot][f.idx].overrides = o.overrides;
+    entry.meals[f.slot][f.idx].servings = 1; // les overrides sont en grammes absolus
+  });
   save(entry);
 }
 
@@ -81,14 +102,15 @@ export function renderPlanner() {
       </div>
       <div class="mini-macro"><span class="mm-val carbs">${Math.round(macros.carbs)}g</span><span class="mm-label">Glucides</span></div>
       <div class="mini-macro"><span class="mm-val fat">${Math.round(macros.fat)}g</span><span class="mm-label">Lipides</span></div>
-    </div>`;
+    </div>
+    ${entry.meals.lunch.length || entry.meals.dinner.length || entry.meals.sides.length || entry.meals.sweet.length
+      ? `<button class="optimize-btn">✦ Optimiser les portions</button>` : ''}`;
   view.appendChild(hdr);
 
   SLOTS.forEach(({ key, label, emoji }) => {
     const selected = entry.meals[key] || [];
     const slotMacros = selected.reduce((a, item) => {
-      const r = getById(item.id);
-      if (r) { const m = scaledMacros(r, item.servings); a.kcal += m.kcal; a.protein += m.protein; }
+      const m = itemMacros(item); a.kcal += m.kcal; a.protein += m.protein;
       return a;
     }, { kcal: 0, protein: 0 });
 
@@ -102,16 +124,17 @@ export function renderPlanner() {
         ${selected.map((item, idx) => {
           const r = getById(item.id);
           if (!r) return '';
-          const m = scaledMacros(r, item.servings);
+          const m = itemMacros(item);
+          const adjusted = !!item.overrides;
           return `<div class="recipe-chip">
             <span class="chip-emoji">${r.emoji}</span>
-            <div class="chip-info">
-              <div class="chip-name">${r.name}</div>
-              <div class="chip-kcal">${m.kcal} kcal · ${m.protein}g P</div>
+            <div class="chip-info" data-edit-slot="${key}" data-edit-idx="${idx}">
+              <div class="chip-name">${r.name}${adjusted ? ' <span class="chip-adj">ajusté</span>' : ''}</div>
+              <div class="chip-kcal">${Math.round(m.kcal)} kcal · ${Math.round(m.protein)}g P · tap pour ajuster</div>
             </div>
             <div class="serv-control">
               <button class="serv-btn" data-slot="${key}" data-idx="${idx}" data-delta="-0.25">−</button>
-              <input class="serv-input" type="text" inputmode="decimal" data-slot="${key}" data-idx="${idx}" value="${item.servings}">
+              <input class="serv-input" type="text" inputmode="decimal" data-slot="${key}" data-idx="${idx}" value="${item.overrides ? '•' : item.servings}">
               <button class="serv-btn" data-slot="${key}" data-idx="${idx}" data-delta="0.25">+</button>
             </div>
             <button class="chip-remove" data-slot="${key}" data-idx="${idx}">×</button>
@@ -129,6 +152,8 @@ export function renderPlanner() {
 
   view.querySelector('.planner-back').addEventListener('click', () => window._nav?.('week'));
   view.querySelector('.planner-settings').addEventListener('click', () => window._nav?.('settings'));
+  view.querySelector('.optimize-btn')?.addEventListener('click', () => optimizeMeals());
+  view.querySelectorAll('.chip-info[data-edit-slot]').forEach(ci => ci.addEventListener('click', () => openIngredientEditor(ci.dataset.editSlot, parseInt(ci.dataset.editIdx))));
   view.querySelectorAll('.chip-remove').forEach(b =>
     b.addEventListener('click', () => removeMeal(b.dataset.slot, parseInt(b.dataset.idx)))
   );
@@ -142,6 +167,86 @@ export function renderPlanner() {
   view.querySelectorAll('.add-btn').forEach(b =>
     b.addEventListener('click', () => openRecipePicker(b.dataset.slot))
   );
+}
+
+// Éditeur d'ingrédients d'un plat planifié — ajustement fin en grammes.
+function openIngredientEditor(slot, index) {
+  const entry = currentEntry();
+  const item = entry.meals[slot][index];
+  if (!item) return;
+  const r = getById(item.id);
+  if (!r) return;
+  const s = item.servings || 1;
+  // overrides courants (en grammes absolus) ; si absent, dérivé de servings
+  const ov = { ...(item.overrides || {}) };
+  r.ingredients.forEach((ing, i) => { if (ov[i] == null) ov[i] = Math.round(ing.qty * s); });
+
+  function macrosNow() {
+    return r.ingredients.reduce((a, ing, i) => {
+      const q = ing.qty || 1; const qty = ov[i];
+      a.kcal += ing.kcal/q*qty; a.protein += ing.protein/q*qty;
+      a.carbs += ing.carbs/q*qty; a.fat += ing.fat/q*qty; return a;
+    }, {kcal:0,protein:0,carbs:0,fat:0});
+  }
+
+  function sheetHTML() {
+    const m = macrosNow();
+    return `
+      <div class="sheet-handle"></div>
+      <div class="ing-editor-hd">
+        <div class="ing-editor-title">${r.emoji} ${r.name}</div>
+        <div class="ing-editor-macros">${Math.round(m.kcal)} kcal · ${Math.round(m.protein)}g P · ${Math.round(m.carbs)}g G · ${Math.round(m.fat)}g L</div>
+      </div>
+      <div class="ing-editor-list">
+        ${r.ingredients.map((ing, i) => `
+          <div class="ing-edit-row">
+            <span class="ing-edit-name">${ing.name}</span>
+            <div class="ing-edit-control">
+              <button class="ing-edit-btn" data-i="${i}" data-d="-1">−</button>
+              <input class="ing-edit-input" data-i="${i}" type="text" inputmode="numeric" value="${ov[i]}">
+              <span class="ing-edit-unit">${ing.unit}</span>
+              <button class="ing-edit-btn" data-i="${i}" data-d="1">+</button>
+            </div>
+          </div>`).join('')}
+      </div>
+      <button class="ing-editor-done">Terminé</button>`;
+  }
+
+  openSheet(sheetHTML());
+  const sheet = document.getElementById('sheet');
+  if (!sheet) return;
+
+  function persist() {
+    item.overrides = { ...ov };
+    item.servings = 1;
+    saveEntry(entry);
+  }
+  function refreshHead() {
+    const m = macrosNow();
+    const el2 = sheet.querySelector('.ing-editor-macros');
+    if (el2) el2.textContent = `${Math.round(m.kcal)} kcal · ${Math.round(m.protein)}g P · ${Math.round(m.carbs)}g G · ${Math.round(m.fat)}g L`;
+  }
+  function step(unit) {
+    // pas adapté : 1 pour les pièces, 10g sinon
+    return /pi[èe]ce|unit|tranche/i.test(unit) ? 1 : 10;
+  }
+  function bind() {
+    sheet.querySelectorAll('.ing-edit-btn').forEach(b => b.addEventListener('click', () => {
+      const i = +b.dataset.i; const d = +b.dataset.d;
+      const st = step(r.ingredients[i].unit);
+      ov[i] = Math.max(0, Math.round(ov[i] + d*st));
+      const inp = sheet.querySelector(`.ing-edit-input[data-i="${i}"]`);
+      if (inp) inp.value = ov[i];
+      refreshHead(); persist();
+    }));
+    sheet.querySelectorAll('.ing-edit-input').forEach(inp => inp.addEventListener('change', () => {
+      const i = +inp.dataset.i; const v = parseFloat(inp.value.replace(',','.'));
+      if (!isNaN(v) && v >= 0) ov[i] = Math.round(v);
+      inp.value = ov[i]; refreshHead(); persist();
+    }));
+    sheet.querySelector('.ing-editor-done')?.addEventListener('click', () => { persist(); closeSheet(); renderPlanner(); });
+  }
+  bind();
 }
 
 function openRecipePicker(slot) {

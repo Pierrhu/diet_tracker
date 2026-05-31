@@ -1,5 +1,5 @@
 // DIET — bundled app (généré par build.js)
-// 2026-05-31T13:50:04.714Z
+// 2026-05-31T14:38:44.171Z
 
 
 // ──────────────────────────────────────────────
@@ -2512,7 +2512,9 @@ const EMPTY_MEALS = () => ({ lunch: [], dinner: [], sides: [], sweet: [] });
 function normalizeItem(item) {
   // Ancien format : string → { id, servings:1 }
   if (typeof item === 'string') return { id: item, servings: 1 };
-  return { id: item.id, servings: item.servings || 1 };
+  const out = { id: item.id, servings: item.servings || 1 };
+  if (item.overrides) out.overrides = item.overrides; // quantités d'ingrédients ajustées
+  return out;
 }
 
 function normalizeEntry(entry) {
@@ -2608,6 +2610,34 @@ function mbar(value, target, color) {
 }
 
 // Macros d'une recette × servings, arrondis
+// Macros d'un plat : tient compte des overrides (quantités d'ingrédients ajustées en g).
+// item = { id, servings, overrides? : { ingIndex: qtyGrams } }
+function itemMacros(item) {
+  const r = getById(item.id);
+  if (!r) return { kcal: 0, protein: 0, carbs: 0, fat: 0 };
+  const ov = item.overrides;
+  const s = item.servings || 1;
+  if (!ov) {
+    // pas d'overrides : simple multiplication par les portions
+    return {
+      kcal:    r.macros.kcal    * s,
+      protein: r.macros.protein * s,
+      carbs:   r.macros.carbs   * s,
+      fat:     r.macros.fat     * s,
+    };
+  }
+  // overrides présents : on recalcule ingrédient par ingrédient
+  return r.ingredients.reduce((acc, ing, idx) => {
+    const q = ing.qty || 1;
+    const qty = (ov[idx] != null ? ov[idx] : ing.qty * s);
+    acc.kcal    += (ing.kcal    / q) * qty;
+    acc.protein += (ing.protein / q) * qty;
+    acc.carbs   += (ing.carbs   / q) * qty;
+    acc.fat     += (ing.fat     / q) * qty;
+    return acc;
+  }, { kcal: 0, protein: 0, carbs: 0, fat: 0 });
+}
+
 function scaledMacros(recipe, servings = 1) {
   return {
     kcal:    Math.round(recipe.macros.kcal    * servings),
@@ -2617,18 +2647,13 @@ function scaledMacros(recipe, servings = 1) {
   };
 }
 
-// Total d'un jour : meals = { slot: [{id, servings}] }
+// Total d'un jour : meals = { slot: [{id, servings, overrides?}] }
 function computeDayMacros(entry) {
   const slots = ['lunch', 'dinner', 'sides', 'sweet'];
   return slots.reduce((acc, slot) => {
     (entry.meals[slot] || []).forEach(item => {
-      const r = getById(item.id);
-      if (!r) return;
-      const s = item.servings || 1;
-      acc.kcal    += r.macros.kcal    * s;
-      acc.protein += r.macros.protein * s;
-      acc.carbs   += r.macros.carbs   * s;
-      acc.fat     += r.macros.fat     * s;
+      const m = itemMacros(item);
+      acc.kcal += m.kcal; acc.protein += m.protein; acc.carbs += m.carbs; acc.fat += m.fat;
     });
     return acc;
   }, { kcal: 0, protein: 0, carbs: 0, fat: 0 });
@@ -2645,6 +2670,160 @@ function openSheet(html, onClose) {
 function closeSheet() {
   const o = document.querySelector('.overlay');
   if (o) { o._onClose?.(); o.remove(); }
+}
+
+
+// ──────────────────────────────────────────────
+// js/optimizer.js
+// ──────────────────────────────────────────────
+// optimizer.js — Ajuste les quantités d'ingrédients leviers pour caler les macros.
+// Priorité : CALORIES + PROTÉINES, puis glucides/lipides suivent.
+// Leviers : féculents (glucides) + sources de protéines. Le reste reste fixe.
+
+
+const CARB_WORDS = ['riz','pâte','pate','quinoa','semoule','boulghour','boulgour','flocon','avoine',
+  'pain','tortilla','nouille','patate','pomme de terre','maïs','mais','orzo','blé','ble','couscous',
+  'polenta','gnocchi','miel','sucre','banane','dattes','datte'];
+const PROT_WORDS = ['poulet','boeuf','bœuf','steak','dinde','porc','veau','thon','saumon','colin',
+  'merlu','cabillaud','poisson','crevette','fromage blanc','skyr','yaourt','whey','protéine','proteine',
+  'jambon','bacon','tofu','tempeh','feta','ricotta','mozzarella','blanc de poulet'];
+const BOTH_WORDS = ['lentille','pois chiche','haricot rouge','haricot blanc'];
+
+const norm = s => s.toLowerCase();
+
+function classifyIngredient(name) {
+  const n = norm(name);
+  if (BOTH_WORDS.some(w => n.includes(w))) return 'both';
+  const isCarb = CARB_WORDS.some(w => n.includes(w));
+  const isProt = PROT_WORDS.some(w => n.includes(w));
+  if (isProt) return 'protein';
+  if (isCarb) return 'carb';
+  return 'fixed';
+}
+
+// Les ingrédients "comptables" (œufs, pièces) ne doivent pas exploser
+function isCountable(unit) {
+  return unit && /pi[èe]ce|unit|tranche/i.test(unit);
+}
+
+function perGram(ing) {
+  const q = ing.qty || 1;
+  return { kcal: ing.kcal/q, protein: ing.protein/q, carbs: ing.carbs/q, fat: ing.fat/q };
+}
+
+function computeMealMacros(item) {
+  const r = getById(item.id);
+  if (!r) return { kcal:0, protein:0, carbs:0, fat:0 };
+  const ov = item.overrides || {};
+  const s = item.servings || 1;
+  return r.ingredients.reduce((acc, ing, idx) => {
+    const pg = perGram(ing);
+    const qty = (ov[idx] != null ? ov[idx] : ing.qty * s);
+    acc.kcal+=pg.kcal*qty; acc.protein+=pg.protein*qty; acc.carbs+=pg.carbs*qty; acc.fat+=pg.fat*qty;
+    return acc;
+  }, { kcal:0, protein:0, carbs:0, fat:0 });
+}
+
+function computeDayFromItems(items) {
+  return items.reduce((acc, it) => {
+    const m = computeMealMacros(it);
+    acc.kcal+=m.kcal; acc.protein+=m.protein; acc.carbs+=m.carbs; acc.fat+=m.fat;
+    return acc;
+  }, { kcal:0, protein:0, carbs:0, fat:0 });
+}
+
+function optimizeDay(items, targets) {
+  const levers = [];
+  const work = items.map(it => {
+    const r = getById(it.id);
+    const s = it.servings || 1;
+    const ov = {};
+    const isFixedRecipe = r && (r.tags || []).includes('cantine');
+    if (r) {
+      r.ingredients.forEach((ing, idx) => {
+        ov[idx] = ing.qty * s;                 // grammes absolus de départ
+        const cls = classifyIngredient(ing.name);
+        // On n'ajoute des leviers que pour les recettes ajustables (pas la cantine)
+        if (cls !== 'fixed' && !isFixedRecipe) {
+          const countable = isCountable(ing.unit);
+          levers.push({
+            ref: ov, idx, type: cls,
+            // bornes : comptables limités (ex. œufs 1–6×base), sinon 0.3×–3.5×
+            min: countable ? ing.qty : Math.max(10, ing.qty * 0.3),
+            max: countable ? ing.qty * 2 : ing.qty * 3.5,
+            countable,
+            base: ing.qty,
+          });
+        }
+      });
+    }
+    // recette figée : on garde ses portions d'origine (pas d'overrides imposés)
+    return isFixedRecipe
+      ? { id: it.id, servings: s }
+      : { id: it.id, servings: 1, overrides: ov };
+  });
+
+  if (!levers.length) return work;
+
+  // Normalisation : on raisonne en % d'écart, kcal & protéines pèsent le plus.
+  const W = { kcal: 4, protein: 9, carbs: 1.5, fat: 0.7 };
+  const T = {
+    kcal: targets.kcal || 2000, protein: targets.protein || 150,
+    carbs: targets.carbs || 200, fat: targets.fat || 60,
+  };
+
+  function totals() {
+    const acc = {kcal:0,protein:0,carbs:0,fat:0};
+    work.forEach(it => {
+      const r = getById(it.id);
+      const s = it.servings || 1;
+      r.ingredients.forEach((ing, idx) => {
+        const pg = perGram(ing);
+        const q = it.overrides ? it.overrides[idx] : ing.qty * s; // figé = qty × portions
+        acc.kcal+=pg.kcal*q; acc.protein+=pg.protein*q; acc.carbs+=pg.carbs*q; acc.fat+=pg.fat*q;
+      });
+    });
+    return acc;
+  }
+  function cost(t) {
+    // Écarts relatifs. Pour les protéines : sous la cible = lourdement pénalisé,
+    // au-dessus = légèrement (avoir plus de protéines n'est pas grave).
+    const dK = (t.kcal - T.kcal) / T.kcal;
+    const dP = (t.protein - T.protein) / T.protein;
+    const dC = (t.carbs - T.carbs) / T.carbs;
+    const dF = (t.fat - T.fat) / T.fat;
+    const protPen = dP < 0 ? W.protein * dP * dP : W.protein * 0.15 * dP * dP;
+    return W.kcal * dK * dK + protPen + W.carbs * dC * dC + W.fat * dF * dF;
+  }
+
+  // Optimisation : on répète des passes de descente de coordonnées.
+  // À chaque passe et pour chaque levier, on cherche LE meilleur réglage
+  // sur une grille de pas, en gardant toute amélioration. On boucle jusqu'à stabilité.
+  function curCost() { return cost(totals()); }
+
+  let lastCost = curCost();
+  for (let pass = 0; pass < 60; pass++) {
+    for (const lev of levers) {
+      const start = lev.ref[lev.idx];
+      let bestVal = start;
+      let bestCost = curCost();
+      // balaye toute la plage du levier par incréments fins
+      const inc = lev.countable ? Math.max(1, Math.round(lev.base / 3)) : 5;
+      for (let v = lev.min; v <= lev.max + 0.001; v += inc) {
+        const val = lev.countable ? Math.round(v) : v;
+        lev.ref[lev.idx] = val;
+        const cc = curCost();
+        if (cc < bestCost - 1e-9) { bestCost = cc; bestVal = val; }
+      }
+      lev.ref[lev.idx] = bestVal; // applique le meilleur trouvé pour ce levier
+    }
+    const nowCost = curCost();
+    if (lastCost - nowCost < 1e-6) break; // plus d'amélioration
+    lastCost = nowCost;
+  }
+
+  work.forEach(it => { if (it.overrides) Object.keys(it.overrides).forEach(k => it.overrides[k] = Math.round(it.overrides[k])); });
+  return work;
 }
 
 
@@ -2863,6 +3042,7 @@ function changeServings(slot, index, delta) {
   const entry = currentEntry();
   const item = entry.meals[slot][index];
   if (!item) return;
+  delete item.overrides; // retour à un réglage proportionnel
   item.servings = Math.max(0.25, Math.round((item.servings + delta) * 4) / 4);
   save(entry);
 }
@@ -2871,8 +3051,27 @@ function setServings(slot, index, value) {
   const entry = currentEntry();
   const item = entry.meals[slot][index];
   if (!item) return;
+  delete item.overrides;
   const v = parseFloat(String(value).replace(',', '.'));
   if (!isNaN(v) && v > 0) item.servings = Math.round(v * 4) / 4;
+  save(entry);
+}
+
+// Optimise les portions de tous les plats du jour pour caler les macros (kcal + protéines).
+function optimizeMeals() {
+  const entry = currentEntry();
+  const slots = ['lunch', 'dinner', 'sides', 'sweet'];
+  // aplatir tous les plats du jour, en gardant la trace de leur emplacement
+  const flat = [];
+  slots.forEach(slot => (entry.meals[slot] || []).forEach((item, idx) => flat.push({ slot, idx, item })));
+  if (!flat.length) return;
+  const optimized = optimizeDay(flat.map(f => f.item), USER.targets);
+  // réécrire les overrides + servings dans l'entrée
+  flat.forEach((f, i) => {
+    const o = optimized[i];
+    entry.meals[f.slot][f.idx].overrides = o.overrides;
+    entry.meals[f.slot][f.idx].servings = 1; // les overrides sont en grammes absolus
+  });
   save(entry);
 }
 
@@ -2911,14 +3110,15 @@ function renderPlanner() {
       </div>
       <div class="mini-macro"><span class="mm-val carbs">${Math.round(macros.carbs)}g</span><span class="mm-label">Glucides</span></div>
       <div class="mini-macro"><span class="mm-val fat">${Math.round(macros.fat)}g</span><span class="mm-label">Lipides</span></div>
-    </div>`;
+    </div>
+    ${entry.meals.lunch.length || entry.meals.dinner.length || entry.meals.sides.length || entry.meals.sweet.length
+      ? `<button class="optimize-btn">✦ Optimiser les portions</button>` : ''}`;
   view.appendChild(hdr);
 
   SLOTS.forEach(({ key, label, emoji }) => {
     const selected = entry.meals[key] || [];
     const slotMacros = selected.reduce((a, item) => {
-      const r = getById(item.id);
-      if (r) { const m = scaledMacros(r, item.servings); a.kcal += m.kcal; a.protein += m.protein; }
+      const m = itemMacros(item); a.kcal += m.kcal; a.protein += m.protein;
       return a;
     }, { kcal: 0, protein: 0 });
 
@@ -2932,16 +3132,17 @@ function renderPlanner() {
         ${selected.map((item, idx) => {
           const r = getById(item.id);
           if (!r) return '';
-          const m = scaledMacros(r, item.servings);
+          const m = itemMacros(item);
+          const adjusted = !!item.overrides;
           return `<div class="recipe-chip">
             <span class="chip-emoji">${r.emoji}</span>
-            <div class="chip-info">
-              <div class="chip-name">${r.name}</div>
-              <div class="chip-kcal">${m.kcal} kcal · ${m.protein}g P</div>
+            <div class="chip-info" data-edit-slot="${key}" data-edit-idx="${idx}">
+              <div class="chip-name">${r.name}${adjusted ? ' <span class="chip-adj">ajusté</span>' : ''}</div>
+              <div class="chip-kcal">${Math.round(m.kcal)} kcal · ${Math.round(m.protein)}g P · tap pour ajuster</div>
             </div>
             <div class="serv-control">
               <button class="serv-btn" data-slot="${key}" data-idx="${idx}" data-delta="-0.25">−</button>
-              <input class="serv-input" type="text" inputmode="decimal" data-slot="${key}" data-idx="${idx}" value="${item.servings}">
+              <input class="serv-input" type="text" inputmode="decimal" data-slot="${key}" data-idx="${idx}" value="${item.overrides ? '•' : item.servings}">
               <button class="serv-btn" data-slot="${key}" data-idx="${idx}" data-delta="0.25">+</button>
             </div>
             <button class="chip-remove" data-slot="${key}" data-idx="${idx}">×</button>
@@ -2959,6 +3160,8 @@ function renderPlanner() {
 
   view.querySelector('.planner-back').addEventListener('click', () => window._nav?.('week'));
   view.querySelector('.planner-settings').addEventListener('click', () => window._nav?.('settings'));
+  view.querySelector('.optimize-btn')?.addEventListener('click', () => optimizeMeals());
+  view.querySelectorAll('.chip-info[data-edit-slot]').forEach(ci => ci.addEventListener('click', () => openIngredientEditor(ci.dataset.editSlot, parseInt(ci.dataset.editIdx))));
   view.querySelectorAll('.chip-remove').forEach(b =>
     b.addEventListener('click', () => removeMeal(b.dataset.slot, parseInt(b.dataset.idx)))
   );
@@ -2972,6 +3175,86 @@ function renderPlanner() {
   view.querySelectorAll('.add-btn').forEach(b =>
     b.addEventListener('click', () => openRecipePicker(b.dataset.slot))
   );
+}
+
+// Éditeur d'ingrédients d'un plat planifié — ajustement fin en grammes.
+function openIngredientEditor(slot, index) {
+  const entry = currentEntry();
+  const item = entry.meals[slot][index];
+  if (!item) return;
+  const r = getById(item.id);
+  if (!r) return;
+  const s = item.servings || 1;
+  // overrides courants (en grammes absolus) ; si absent, dérivé de servings
+  const ov = { ...(item.overrides || {}) };
+  r.ingredients.forEach((ing, i) => { if (ov[i] == null) ov[i] = Math.round(ing.qty * s); });
+
+  function macrosNow() {
+    return r.ingredients.reduce((a, ing, i) => {
+      const q = ing.qty || 1; const qty = ov[i];
+      a.kcal += ing.kcal/q*qty; a.protein += ing.protein/q*qty;
+      a.carbs += ing.carbs/q*qty; a.fat += ing.fat/q*qty; return a;
+    }, {kcal:0,protein:0,carbs:0,fat:0});
+  }
+
+  function sheetHTML() {
+    const m = macrosNow();
+    return `
+      <div class="sheet-handle"></div>
+      <div class="ing-editor-hd">
+        <div class="ing-editor-title">${r.emoji} ${r.name}</div>
+        <div class="ing-editor-macros">${Math.round(m.kcal)} kcal · ${Math.round(m.protein)}g P · ${Math.round(m.carbs)}g G · ${Math.round(m.fat)}g L</div>
+      </div>
+      <div class="ing-editor-list">
+        ${r.ingredients.map((ing, i) => `
+          <div class="ing-edit-row">
+            <span class="ing-edit-name">${ing.name}</span>
+            <div class="ing-edit-control">
+              <button class="ing-edit-btn" data-i="${i}" data-d="-1">−</button>
+              <input class="ing-edit-input" data-i="${i}" type="text" inputmode="numeric" value="${ov[i]}">
+              <span class="ing-edit-unit">${ing.unit}</span>
+              <button class="ing-edit-btn" data-i="${i}" data-d="1">+</button>
+            </div>
+          </div>`).join('')}
+      </div>
+      <button class="ing-editor-done">Terminé</button>`;
+  }
+
+  openSheet(sheetHTML());
+  const sheet = document.getElementById('sheet');
+  if (!sheet) return;
+
+  function persist() {
+    item.overrides = { ...ov };
+    item.servings = 1;
+    saveEntry(entry);
+  }
+  function refreshHead() {
+    const m = macrosNow();
+    const el2 = sheet.querySelector('.ing-editor-macros');
+    if (el2) el2.textContent = `${Math.round(m.kcal)} kcal · ${Math.round(m.protein)}g P · ${Math.round(m.carbs)}g G · ${Math.round(m.fat)}g L`;
+  }
+  function step(unit) {
+    // pas adapté : 1 pour les pièces, 10g sinon
+    return /pi[èe]ce|unit|tranche/i.test(unit) ? 1 : 10;
+  }
+  function bind() {
+    sheet.querySelectorAll('.ing-edit-btn').forEach(b => b.addEventListener('click', () => {
+      const i = +b.dataset.i; const d = +b.dataset.d;
+      const st = step(r.ingredients[i].unit);
+      ov[i] = Math.max(0, Math.round(ov[i] + d*st));
+      const inp = sheet.querySelector(`.ing-edit-input[data-i="${i}"]`);
+      if (inp) inp.value = ov[i];
+      refreshHead(); persist();
+    }));
+    sheet.querySelectorAll('.ing-edit-input').forEach(inp => inp.addEventListener('change', () => {
+      const i = +inp.dataset.i; const v = parseFloat(inp.value.replace(',','.'));
+      if (!isNaN(v) && v >= 0) ov[i] = Math.round(v);
+      inp.value = ov[i]; refreshHead(); persist();
+    }));
+    sheet.querySelector('.ing-editor-done')?.addEventListener('click', () => { persist(); closeSheet(); renderPlanner(); });
+  }
+  bind();
 }
 
 function openRecipePicker(slot) {
@@ -3316,11 +3599,15 @@ function buildList(dates) {
       (entry.meals[slot] || []).forEach(item => {
         const r = getById(item.id);
         if (!r) return;
+        // Le menu cantine n'est pas acheté (mangé au self) → on l'exclut
+        if ((r.tags || []).includes('cantine')) return;
         const s = item.servings || 1;
-        r.ingredients.forEach(ing => {
+        const ov = item.overrides;
+        r.ingredients.forEach((ing, idx) => {
           const key = ing.name.toLowerCase();
           if (!map[key]) map[key] = { name: ing.name, qty: 0, unit: ing.unit, cat: categorize(ing.name) };
-          map[key].qty += ing.qty * s;
+          // quantité réelle : override en grammes si présent, sinon qty × portions
+          map[key].qty += (ov && ov[idx] != null) ? ov[idx] : ing.qty * s;
         });
       });
     });

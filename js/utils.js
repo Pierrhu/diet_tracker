@@ -26,6 +26,34 @@ export function mbar(value, target, color) {
 }
 
 // Macros d'une recette × servings, arrondis
+// Macros d'un plat : tient compte des overrides (quantités d'ingrédients ajustées en g).
+// item = { id, servings, overrides? : { ingIndex: qtyGrams } }
+export function itemMacros(item) {
+  const r = getById(item.id);
+  if (!r) return { kcal: 0, protein: 0, carbs: 0, fat: 0 };
+  const ov = item.overrides;
+  const s = item.servings || 1;
+  if (!ov) {
+    // pas d'overrides : simple multiplication par les portions
+    return {
+      kcal:    r.macros.kcal    * s,
+      protein: r.macros.protein * s,
+      carbs:   r.macros.carbs   * s,
+      fat:     r.macros.fat     * s,
+    };
+  }
+  // overrides présents : on recalcule ingrédient par ingrédient
+  return r.ingredients.reduce((acc, ing, idx) => {
+    const q = ing.qty || 1;
+    const qty = (ov[idx] != null ? ov[idx] : ing.qty * s);
+    acc.kcal    += (ing.kcal    / q) * qty;
+    acc.protein += (ing.protein / q) * qty;
+    acc.carbs   += (ing.carbs   / q) * qty;
+    acc.fat     += (ing.fat     / q) * qty;
+    return acc;
+  }, { kcal: 0, protein: 0, carbs: 0, fat: 0 });
+}
+
 export function scaledMacros(recipe, servings = 1) {
   return {
     kcal:    Math.round(recipe.macros.kcal    * servings),
@@ -35,18 +63,13 @@ export function scaledMacros(recipe, servings = 1) {
   };
 }
 
-// Total d'un jour : meals = { slot: [{id, servings}] }
+// Total d'un jour : meals = { slot: [{id, servings, overrides?}] }
 export function computeDayMacros(entry) {
   const slots = ['lunch', 'dinner', 'sides', 'sweet'];
   return slots.reduce((acc, slot) => {
     (entry.meals[slot] || []).forEach(item => {
-      const r = getById(item.id);
-      if (!r) return;
-      const s = item.servings || 1;
-      acc.kcal    += r.macros.kcal    * s;
-      acc.protein += r.macros.protein * s;
-      acc.carbs   += r.macros.carbs   * s;
-      acc.fat     += r.macros.fat     * s;
+      const m = itemMacros(item);
+      acc.kcal += m.kcal; acc.protein += m.protein; acc.carbs += m.carbs; acc.fat += m.fat;
     });
     return acc;
   }, { kcal: 0, protein: 0, carbs: 0, fat: 0 });

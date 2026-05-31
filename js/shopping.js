@@ -36,11 +36,15 @@ function buildList(dates) {
       (entry.meals[slot] || []).forEach(item => {
         const r = getById(item.id);
         if (!r) return;
+        // Le menu cantine n'est pas acheté (mangé au self) → on l'exclut
+        if ((r.tags || []).includes('cantine')) return;
         const s = item.servings || 1;
-        r.ingredients.forEach(ing => {
+        const ov = item.overrides;
+        r.ingredients.forEach((ing, idx) => {
           const key = ing.name.toLowerCase();
           if (!map[key]) map[key] = { name: ing.name, qty: 0, unit: ing.unit, cat: categorize(ing.name) };
-          map[key].qty += ing.qty * s;
+          // quantité réelle : override en grammes si présent, sinon qty × portions
+          map[key].qty += (ov && ov[idx] != null) ? ov[idx] : ing.qty * s;
         });
       });
     });
