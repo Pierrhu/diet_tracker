@@ -82,7 +82,7 @@ export function renderShopping() {
 
     view.innerHTML = `
       <div class="shopping-header">
-        <div class="shopping-title">🛒 Liste de courses</div>
+        <div class="shopping-title">Liste de courses</div>
         ${rangeDates ? `
           <div class="shop-range-banner">${rangeLabel}
             <button class="shop-switch">Utiliser N jours</button>

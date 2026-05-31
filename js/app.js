@@ -1,5 +1,5 @@
 // DIET — bundled app (généré par build.js)
-// 2026-05-31T08:15:17.868Z
+// 2026-05-31T13:06:39.873Z
 
 
 // ──────────────────────────────────────────────
@@ -2735,7 +2735,14 @@ function renderWeek() {
 
   view.innerHTML = `
     <div class="week-header">
-      <div class="week-title-row"><div class="week-title">📆 Ma semaine</div><button class="week-settings" aria-label="Réglages"><svg viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></button></div>
+      <div class="masthead">
+        <div class="mast-left">
+          <div class="brand-word">Héb<span class="brand-accent">é</span></div>
+          <div class="brand-greek">jeunesse & vitalité · le carburant du corps</div>
+        </div>
+        <button class="week-settings" aria-label="Réglages"><svg viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></button>
+      </div>
+      <div class="week-subtitle">Ma semaine</div>
       <div class="week-toggle">
         <button class="wk-tab ${weekMode==='current'?'active':''}" data-mode="current">Cette semaine</button>
         <button class="wk-tab ${weekMode==='next'?'active':''}" data-mode="next">Semaine prochaine</button>
@@ -2746,7 +2753,7 @@ function renderWeek() {
     </div>
     <div class="week-days"></div>
     <div class="week-actions">
-      <button class="week-shop-btn">🛒 Générer la liste de courses</button>
+      <button class="week-shop-btn">Générer la liste de courses</button>
     </div>
   `;
 
@@ -2775,14 +2782,14 @@ function renderWeek() {
           <div class="wd-kcal ${over ? 'over' : ''}">
             ${Math.round(macros.kcal)} kcal
             <span class="wd-p">· ${Math.round(macros.protein)}g P</span>
-            ${over ? '<span class="wd-warn">⚠️ dépassé</span>' : ''}
+            ${over ? '<span class="wd-warn">dépassé</span>' : ''}
           </div>
           ${mbar(macros.kcal, targets.kcal, 'var(--accent)')}
           <div class="wd-meals">
-            ${mealLine('🥗', entry.meals.lunch)}
-            ${mealLine('🍽️', entry.meals.dinner)}
-            ${mealLine('🥦', entry.meals.sides)}
-            ${mealLine('🍫', entry.meals.sweet)}
+            ${mealLine('', entry.meals.lunch)}
+            ${mealLine('', entry.meals.dinner)}
+            ${mealLine('', entry.meals.sides)}
+            ${mealLine('', entry.meals.sweet)}
           </div>
         ` : `<div class="wd-empty">Vide — appuie pour planifier</div>`}
       </div>
@@ -2819,7 +2826,7 @@ function mealLine(emoji, items) {
     if (!r) return '';
     return r.name + (it.servings > 1 ? ` ×${it.servings}` : '');
   }).filter(Boolean).join(', ');
-  return `<div class="wd-meal-line"><span class="wd-meal-emoji">${emoji}</span> ${names}</div>`;
+  return `<div class="wd-meal-line">${names}</div>`;
 }
 
 
@@ -2831,10 +2838,10 @@ function mealLine(emoji, items) {
 
 
 const SLOTS = [
-  { key: 'lunch',  label: 'Déjeuner',        emoji: '🥗',  fn: getLunches },
-  { key: 'dinner', label: 'Dîner',            emoji: '🍽️',  fn: getDinners },
-  { key: 'sides',  label: 'Accompagnements',  emoji: '🥦',  fn: getSides  },
-  { key: 'sweet',  label: 'Dessert / Encas',  emoji: '🍫',  fn: getSweets },
+  { key: 'lunch',  label: 'Déjeuner',        emoji: '',  fn: getLunches },
+  { key: 'dinner', label: 'Dîner',            emoji: '',  fn: getDinners },
+  { key: 'sides',  label: 'Accompagnements',  emoji: '',  fn: getSides  },
+  { key: 'sweet',  label: 'Dessert / Encas',  emoji: '',  fn: getSweets },
 ];
 
 function save(entry) { saveEntry(entry); renderPlanner(); }
@@ -2895,7 +2902,7 @@ function renderPlanner() {
       <span class="kcal-pct ${over ? 'over' : ''}">${kcalPct}%</span>
     </div>
     ${mbar(macros.kcal, targets.kcal, 'var(--accent)')}
-    ${over ? `<div class="over-banner">⚠️ Limite dépassée de ${Math.round(macros.kcal - targets.kcal)} kcal</div>` : ''}
+    ${over ? `<div class="over-banner">Limite dépassée de ${Math.round(macros.kcal - targets.kcal)} kcal</div>` : ''}
     <div class="mini-macros">
       <div class="mini-macro"><span class="mm-val protein">${Math.round(macros.protein)}g</span><span class="mm-label">Protéines</span></div>
       <div class="mini-macro"><span class="mm-val carbs">${Math.round(macros.carbs)}g</span><span class="mm-label">Glucides</span></div>
@@ -2914,7 +2921,7 @@ function renderPlanner() {
     const slot = el('div', 'meal-slot');
     slot.innerHTML = `
       <div class="slot-hd">
-        <div class="slot-left"><span class="slot-emoji">${emoji}</span><span class="slot-label">${label}</span></div>
+        <div class="slot-left"><span class="slot-label">${label}</span></div>
         ${selected.length ? `<span class="slot-kcal">${Math.round(slotMacros.kcal)} kcal · ${Math.round(slotMacros.protein)}g P</span>` : ''}
       </div>
       <div class="slot-body">
@@ -2965,12 +2972,15 @@ function renderPlanner() {
 
 function openRecipePicker(slot) {
   const cfg = SLOTS.find(s => s.key === slot);
-  const allRecipes = cfg.fn();
-
-  function listHTML(query) {
+  let allRecipes = cfg.fn();
+  let query = '';
+  function sheetHTML() {
     const filtered = allRecipes.filter(r => r.name.toLowerCase().includes(query.toLowerCase()));
-    return filtered.length
-      ? filtered.map(r => `
+    return `
+      <div class="sheet-handle"></div>
+      <div class="sheet-search-wrap"><input class="sheet-search" id="sheet-q" placeholder="Rechercher..." value="${query}"></div>
+      <div class="sheet-list">
+        ${filtered.length ? filtered.map(r => `
           <div class="sheet-recipe" data-id="${r.id}">
             <span class="sheet-r-emoji">${r.emoji}</span>
             <div class="sheet-r-info">
@@ -2978,44 +2988,17 @@ function openRecipePicker(slot) {
               <div class="sheet-r-meta">${r.macros.kcal} kcal · ${r.macros.protein}g P · ${r.prepTime + r.cookTime} min</div>
             </div>
             <span class="sheet-r-add">+</span>
-          </div>`).join('')
-      : '<div style="color:var(--muted);text-align:center;padding:30px">Aucun résultat</div>';
+          </div>`).join('') : '<div style="color:var(--muted);text-align:center;padding:30px">Aucun résultat</div>'}
+      </div>`;
   }
-
-  // Overlay fixe qui ne dépend pas du viewport resize (clavier mobile)
-  const overlay = document.createElement('div');
-  overlay.className = 'overlay picker-overlay';
-  overlay.innerHTML = `
-    <div class="sheet picker-sheet" id="sheet">
-      <div class="sheet-handle"></div>
-      <div class="sheet-search-wrap">
-        <input class="sheet-search" id="sheet-q" placeholder="Rechercher..." autocomplete="off" inputmode="search">
-      </div>
-      <div class="sheet-list" id="sheet-list">${listHTML('')}</div>
-    </div>`;
-  document.body.appendChild(overlay);
-
-  const sheet = overlay.querySelector('#sheet');
-  const input = overlay.querySelector('#sheet-q');
-  const list  = overlay.querySelector('#sheet-list');
-
-  function bindRows() {
-    list.querySelectorAll('.sheet-recipe').forEach(row =>
-      row.addEventListener('click', () => { overlay.remove(); addMeal(slot, row.dataset.id); })
-    );
+  openSheet(sheetHTML());
+  function bind() {
+    const sheet = document.getElementById('sheet');
+    if (!sheet) return;
+    sheet.querySelector('#sheet-q')?.addEventListener('input', e => { query = e.target.value; sheet.innerHTML = sheetHTML(); bind(); });
+    sheet.querySelectorAll('.sheet-recipe').forEach(row => row.addEventListener('click', () => { closeSheet(); addMeal(slot, row.dataset.id); }));
   }
-  bindRows();
-
-  input.addEventListener('input', () => {
-    list.innerHTML = listHTML(input.value);
-    bindRows();
-  });
-
-  // Fermer si clic sur l'overlay (pas sur la sheet)
-  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
-
-  // Focus sans scroll, sans resize de la sheet
-  requestAnimationFrame(() => input.focus({ preventScroll: true }));
+  bind();
 }
 
 
@@ -3039,7 +3022,7 @@ function renderMacros() {
     <div class="macros-date">${formatDate(entry.date)}</div>
     <div class="macros-kcal-big ${over ? 'over' : ''}">${Math.round(macros.kcal)}</div>
     <div class="macros-kcal-sub">/ ${targets.kcal} kcal · ${Math.round((macros.kcal/targets.kcal)*100)}%</div>
-    ${over ? `<div class="over-banner">⚠️ Dépassement de ${Math.round(macros.kcal - targets.kcal)} kcal</div>` : ''}
+    ${over ? `<div class="over-banner">Dépassement de ${Math.round(macros.kcal - targets.kcal)} kcal</div>` : ''}
     ${mbar(macros.kcal, targets.kcal, 'var(--kcal)')}
     <div style="margin-top:20px">
       ${macroRow('Protéines', macros.protein, targets.protein, 'var(--protein)')}
@@ -3124,7 +3107,7 @@ function renderRecipeDetail(recipe, fromView = 'recipes') {
         <div class="detail-name">${recipe.name}</div>
         <div class="detail-meta">
           <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${recipe.prepTime + recipe.cookTime} min</span>
-          ${recipe.batch ? '<span class="detail-batch-tag">📦 Batch friendly</span>' : ''}
+          ${recipe.batch ? '<span class="detail-batch-tag">Batch</span>' : ''}
         </div>
       </div>
 
@@ -3157,7 +3140,7 @@ function renderRecipeDetail(recipe, fromView = 'recipes') {
         ${recipe.steps.map((s, i) => `<div class="step-row"><div class="step-num">${i+1}</div><div class="step-text">${s}</div></div>`).join('')}
       </div>
 
-      ${recipe.tip ? `<div class="detail-section"><div class="tip-box"><div class="tip-label">💡 Conseil</div>${recipe.tip}</div></div>` : ''}
+      ${recipe.tip ? `<div class="detail-section"><div class="tip-box"><div class="tip-label">Conseil</div>${recipe.tip}</div></div>` : ''}
 
       <div class="add-actions">
         <div class="section-hd" style="padding:8px 0">Ajouter au menu du jour sélectionné</div>
@@ -3166,10 +3149,10 @@ function renderRecipeDetail(recipe, fromView = 'recipes') {
 
     // Add-to-meal buttons
     const SLOT_MAP = {
-      dinner: { label: 'au dîner',          emoji: '🍽️' },
-      lunch:  { label: 'au déjeuner',        emoji: '🥗' },
-      sides:  { label: 'en accompagnement',  emoji: '🥦' },
-      sweet:  { label: 'en dessert / encas', emoji: '🍫' },
+      dinner: { label: 'au dîner' },
+      lunch:  { label: 'au déjeuner' },
+      sides:  { label: 'en accompagnement' },
+      sweet:  { label: 'en dessert / encas' },
     };
     const category = recipe.category === 'side' ? 'sides' : recipe.category;
     const slots = category === 'sweet' ? ['sweet']
@@ -3180,7 +3163,7 @@ function renderRecipeDetail(recipe, fromView = 'recipes') {
     slots.forEach(slot => {
       const cfg = SLOT_MAP[slot];
       const btn = el('button', 'add-action-btn',
-        `<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>${cfg.emoji} Ajouter ${cfg.label} (×${servings})`);
+        `<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Ajouter ${cfg.label} (×${servings})`);
       btn.addEventListener('click', () => {
         const entry = currentEntry();
         if (!entry.meals[slot]) entry.meals[slot] = [];
@@ -3211,10 +3194,10 @@ function renderRecipeDetail(recipe, fromView = 'recipes') {
 
 const FILTERS = [
   { key: 'all',    label: 'Tout'              },
-  { key: 'dinner', label: '🍽️ Dîner'          },
-  { key: 'lunch',  label: '🥗 Déjeuner'       },
-  { key: 'side',   label: '🥦 Accompagnements' },
-  { key: 'sweet',  label: '🍫 Desserts & Encas' },
+  { key: 'dinner', label: 'Dîner'              },
+  { key: 'lunch',  label: 'Déjeuner'           },
+  { key: 'side',   label: 'Accompagnements'    },
+  { key: 'sweet',  label: 'Desserts & Encas' },
 ];
 
 function renderRecipes() {
@@ -3225,7 +3208,7 @@ function renderRecipes() {
 
   const top = el('div', 'recipes-top');
   const search = el('input', 'search-bar');
-  search.placeholder = '🔍  Rechercher une recette…';
+  search.placeholder = 'Rechercher une recette…';
   search.value = state.searchQuery || '';
 
   const tabs = el('div', 'filter-tabs');
@@ -3261,7 +3244,7 @@ function renderRecipes() {
             <span>${r.macros.kcal} kcal</span>
             <span>${r.prepTime + r.cookTime} min</span>
           </div>
-          ${r.batch ? '<span class="rc-batch">📦 batch</span>' : ''}
+          ${r.batch ? '<span class="rc-batch">batch</span>' : ''}
         </div>
         <span class="rc-arrow">›</span>
       </div>`).join('') : '<div class="no-results">Aucune recette trouvée.</div>';
@@ -3319,8 +3302,6 @@ function buildList(dates) {
       (entry.meals[slot] || []).forEach(item => {
         const r = getById(item.id);
         if (!r) return;
-        // Exclure les menus cantine — rien à acheter
-        if (r.tags && r.tags.includes('cantine')) return;
         const s = item.servings || 1;
         r.ingredients.forEach(ing => {
           const key = ing.name.toLowerCase();
@@ -3367,7 +3348,7 @@ function renderShopping() {
 
     view.innerHTML = `
       <div class="shopping-header">
-        <div class="shopping-title">🛒 Liste de courses</div>
+        <div class="shopping-title">Liste de courses</div>
         ${rangeDates ? `
           <div class="shop-range-banner">${rangeLabel}
             <button class="shop-switch">Utiliser N jours</button>
@@ -3443,7 +3424,7 @@ function renderHistory() {
   app.querySelector('.view')?.remove();
 
   const view = el('div', 'view history-view');
-  view.innerHTML = '<div class="history-header"><div class="history-title">📅 Historique</div></div>';
+  view.innerHTML = '<div class="history-header"><div class="history-title">Historique</div></div>';
 
   const log = getLog().slice(-21).reverse();
   const { targets } = USER;
@@ -3471,7 +3452,7 @@ function renderHistory() {
     day.innerHTML = `
       <div class="hday-header">
         <div class="hday-date">${formatDate(entry.date)}</div>
-        <div class="hday-kcal ${over ? 'over' : ''}">${Math.round(macros.kcal)} kcal${over ? ' ⚠️' : ''}</div>
+        <div class="hday-kcal ${over ? 'over' : ''}">${Math.round(macros.kcal)} kcal${over ? ' · dépassé' : ''}</div>
       </div>
       <div class="hday-macros">
         <span class="hday-macro">P <span>${Math.round(macros.protein)}g</span></span>
@@ -3561,7 +3542,7 @@ function renderSettings() {
             const range = phaseRange(profile, p.id);
             return `
             <button class="proto-card ${p.id === protocolId ? 'active' : ''}" data-pid="${p.id}">
-              <div class="proto-emoji">${p.emoji}</div>
+              <div class="proto-num">${PROTOCOLS.indexOf(p)+1}</div>
               <div class="proto-name">${p.name}</div>
               <div class="proto-tagline">${p.tagline}</div>
               <div class="proto-range">${range}</div>
@@ -3569,7 +3550,7 @@ function renderSettings() {
             </button>`;
           }).join('')}
         </div>
-        <div class="proto-desc-box">${protocol.emoji} ${protocol.desc}</div>
+        <div class="proto-desc-box">${protocol.desc}</div>
       </div>
 
       <!-- PHASES -->
@@ -3596,8 +3577,8 @@ function renderSettings() {
         </div>
 
         <div class="phase-guide">
-          <div class="pg-row"><span class="pg-ic">🎬</span><div><div class="pg-title">Cette phase</div><div class="pg-text">${protocol.phases[phaseIdx].advice}</div></div></div>
-          <div class="pg-row"><span class="pg-ic">⏭️</span><div><div class="pg-title">Quand passer à la suite</div><div class="pg-text">${protocol.phases[phaseIdx].advance}</div></div></div>
+          <div class="pg-row"><div><div class="pg-title">Cette phase</div><div class="pg-text">${protocol.phases[phaseIdx].advice}</div></div></div>
+          <div class="pg-row"><div><div class="pg-title">Quand passer à la suite</div><div class="pg-text">${protocol.phases[phaseIdx].advance}</div></div></div>
         </div>
 
         <button class="apply-btn ${isComputed ? 'is-active' : ''}">

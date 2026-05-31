@@ -26,7 +26,7 @@ export function renderRecipeDetail(recipe, fromView = 'recipes') {
         <div class="detail-name">${recipe.name}</div>
         <div class="detail-meta">
           <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${recipe.prepTime + recipe.cookTime} min</span>
-          ${recipe.batch ? '<span class="detail-batch-tag">📦 Batch friendly</span>' : ''}
+          ${recipe.batch ? '<span class="detail-batch-tag">Batch</span>' : ''}
         </div>
       </div>
 
@@ -59,7 +59,7 @@ export function renderRecipeDetail(recipe, fromView = 'recipes') {
         ${recipe.steps.map((s, i) => `<div class="step-row"><div class="step-num">${i+1}</div><div class="step-text">${s}</div></div>`).join('')}
       </div>
 
-      ${recipe.tip ? `<div class="detail-section"><div class="tip-box"><div class="tip-label">💡 Conseil</div>${recipe.tip}</div></div>` : ''}
+      ${recipe.tip ? `<div class="detail-section"><div class="tip-box"><div class="tip-label">Conseil</div>${recipe.tip}</div></div>` : ''}
 
       <div class="add-actions">
         <div class="section-hd" style="padding:8px 0">Ajouter au menu du jour sélectionné</div>
@@ -68,10 +68,10 @@ export function renderRecipeDetail(recipe, fromView = 'recipes') {
 
     // Add-to-meal buttons
     const SLOT_MAP = {
-      dinner: { label: 'au dîner',          emoji: '🍽️' },
-      lunch:  { label: 'au déjeuner',        emoji: '🥗' },
-      sides:  { label: 'en accompagnement',  emoji: '🥦' },
-      sweet:  { label: 'en dessert / encas', emoji: '🍫' },
+      dinner: { label: 'au dîner' },
+      lunch:  { label: 'au déjeuner' },
+      sides:  { label: 'en accompagnement' },
+      sweet:  { label: 'en dessert / encas' },
     };
     const category = recipe.category === 'side' ? 'sides' : recipe.category;
     const slots = category === 'sweet' ? ['sweet']
@@ -82,7 +82,7 @@ export function renderRecipeDetail(recipe, fromView = 'recipes') {
     slots.forEach(slot => {
       const cfg = SLOT_MAP[slot];
       const btn = el('button', 'add-action-btn',
-        `<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>${cfg.emoji} Ajouter ${cfg.label} (×${servings})`);
+        `<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Ajouter ${cfg.label} (×${servings})`);
       btn.addEventListener('click', () => {
         const entry = currentEntry();
         if (!entry.meals[slot]) entry.meals[slot] = [];

@@ -60,7 +60,7 @@ export function renderSettings() {
             const range = phaseRange(profile, p.id);
             return `
             <button class="proto-card ${p.id === protocolId ? 'active' : ''}" data-pid="${p.id}">
-              <div class="proto-emoji">${p.emoji}</div>
+              <div class="proto-num">${PROTOCOLS.indexOf(p)+1}</div>
               <div class="proto-name">${p.name}</div>
               <div class="proto-tagline">${p.tagline}</div>
               <div class="proto-range">${range}</div>
@@ -68,7 +68,7 @@ export function renderSettings() {
             </button>`;
           }).join('')}
         </div>
-        <div class="proto-desc-box">${protocol.emoji} ${protocol.desc}</div>
+        <div class="proto-desc-box">${protocol.desc}</div>
       </div>
 
       <!-- PHASES -->
@@ -95,8 +95,8 @@ export function renderSettings() {
         </div>
 
         <div class="phase-guide">
-          <div class="pg-row"><span class="pg-ic">🎬</span><div><div class="pg-title">Cette phase</div><div class="pg-text">${protocol.phases[phaseIdx].advice}</div></div></div>
-          <div class="pg-row"><span class="pg-ic">⏭️</span><div><div class="pg-title">Quand passer à la suite</div><div class="pg-text">${protocol.phases[phaseIdx].advance}</div></div></div>
+          <div class="pg-row"><div><div class="pg-title">Cette phase</div><div class="pg-text">${protocol.phases[phaseIdx].advice}</div></div></div>
+          <div class="pg-row"><div><div class="pg-title">Quand passer à la suite</div><div class="pg-text">${protocol.phases[phaseIdx].advance}</div></div></div>
         </div>
 
         <button class="apply-btn ${isComputed ? 'is-active' : ''}">

@@ -19,7 +19,7 @@ export function renderMacros() {
     <div class="macros-date">${formatDate(entry.date)}</div>
     <div class="macros-kcal-big ${over ? 'over' : ''}">${Math.round(macros.kcal)}</div>
     <div class="macros-kcal-sub">/ ${targets.kcal} kcal · ${Math.round((macros.kcal/targets.kcal)*100)}%</div>
-    ${over ? `<div class="over-banner">⚠️ Dépassement de ${Math.round(macros.kcal - targets.kcal)} kcal</div>` : ''}
+    ${over ? `<div class="over-banner">Dépassement de ${Math.round(macros.kcal - targets.kcal)} kcal</div>` : ''}
     ${mbar(macros.kcal, targets.kcal, 'var(--kcal)')}
     <div style="margin-top:20px">
       ${macroRow('Protéines', macros.protein, targets.protein, 'var(--protein)')}

@@ -8,10 +8,10 @@ import { USER }                          from '../data/user.js';
 import { el, formatDate, mbar, scaledMacros, computeDayMacros, openSheet, closeSheet } from './utils.js';
 
 const SLOTS = [
-  { key: 'lunch',  label: 'Déjeuner',        emoji: '🥗',  fn: getLunches },
-  { key: 'dinner', label: 'Dîner',            emoji: '🍽️',  fn: getDinners },
-  { key: 'sides',  label: 'Accompagnements',  emoji: '🥦',  fn: getSides  },
-  { key: 'sweet',  label: 'Dessert / Encas',  emoji: '🍫',  fn: getSweets },
+  { key: 'lunch',  label: 'Déjeuner',        emoji: '',  fn: getLunches },
+  { key: 'dinner', label: 'Dîner',            emoji: '',  fn: getDinners },
+  { key: 'sides',  label: 'Accompagnements',  emoji: '',  fn: getSides  },
+  { key: 'sweet',  label: 'Dessert / Encas',  emoji: '',  fn: getSweets },
 ];
 
 function save(entry) { saveEntry(entry); renderPlanner(); }
@@ -72,7 +72,7 @@ export function renderPlanner() {
       <span class="kcal-pct ${over ? 'over' : ''}">${kcalPct}%</span>
     </div>
     ${mbar(macros.kcal, targets.kcal, 'var(--accent)')}
-    ${over ? `<div class="over-banner">⚠️ Limite dépassée de ${Math.round(macros.kcal - targets.kcal)} kcal</div>` : ''}
+    ${over ? `<div class="over-banner">Limite dépassée de ${Math.round(macros.kcal - targets.kcal)} kcal</div>` : ''}
     <div class="mini-macros">
       <div class="mini-macro"><span class="mm-val protein">${Math.round(macros.protein)}g</span><span class="mm-label">Protéines</span></div>
       <div class="mini-macro"><span class="mm-val carbs">${Math.round(macros.carbs)}g</span><span class="mm-label">Glucides</span></div>
@@ -91,7 +91,7 @@ export function renderPlanner() {
     const slot = el('div', 'meal-slot');
     slot.innerHTML = `
       <div class="slot-hd">
-        <div class="slot-left"><span class="slot-emoji">${emoji}</span><span class="slot-label">${label}</span></div>
+        <div class="slot-left"><span class="slot-label">${label}</span></div>
         ${selected.length ? `<span class="slot-kcal">${Math.round(slotMacros.kcal)} kcal · ${Math.round(slotMacros.protein)}g P</span>` : ''}
       </div>
       <div class="slot-body">

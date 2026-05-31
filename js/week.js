@@ -31,7 +31,14 @@ export function renderWeek() {
 
   view.innerHTML = `
     <div class="week-header">
-      <div class="week-title-row"><div class="week-title">📆 Ma semaine</div><button class="week-settings" aria-label="Réglages"><svg viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></button></div>
+      <div class="masthead">
+        <div class="mast-left">
+          <div class="brand-word">Héb<span class="brand-accent">é</span></div>
+          <div class="brand-greek">jeunesse & vitalité · le carburant du corps</div>
+        </div>
+        <button class="week-settings" aria-label="Réglages"><svg viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></button>
+      </div>
+      <div class="week-subtitle">Ma semaine</div>
       <div class="week-toggle">
         <button class="wk-tab ${weekMode==='current'?'active':''}" data-mode="current">Cette semaine</button>
         <button class="wk-tab ${weekMode==='next'?'active':''}" data-mode="next">Semaine prochaine</button>
@@ -42,7 +49,7 @@ export function renderWeek() {
     </div>
     <div class="week-days"></div>
     <div class="week-actions">
-      <button class="week-shop-btn">🛒 Générer la liste de courses</button>
+      <button class="week-shop-btn">Générer la liste de courses</button>
     </div>
   `;
 
@@ -71,14 +78,14 @@ export function renderWeek() {
           <div class="wd-kcal ${over ? 'over' : ''}">
             ${Math.round(macros.kcal)} kcal
             <span class="wd-p">· ${Math.round(macros.protein)}g P</span>
-            ${over ? '<span class="wd-warn">⚠️ dépassé</span>' : ''}
+            ${over ? '<span class="wd-warn">dépassé</span>' : ''}
           </div>
           ${mbar(macros.kcal, targets.kcal, 'var(--accent)')}
           <div class="wd-meals">
-            ${mealLine('🥗', entry.meals.lunch)}
-            ${mealLine('🍽️', entry.meals.dinner)}
-            ${mealLine('🥦', entry.meals.sides)}
-            ${mealLine('🍫', entry.meals.sweet)}
+            ${mealLine('', entry.meals.lunch)}
+            ${mealLine('', entry.meals.dinner)}
+            ${mealLine('', entry.meals.sides)}
+            ${mealLine('', entry.meals.sweet)}
           </div>
         ` : `<div class="wd-empty">Vide — appuie pour planifier</div>`}
       </div>
@@ -115,5 +122,5 @@ function mealLine(emoji, items) {
     if (!r) return '';
     return r.name + (it.servings > 1 ? ` ×${it.servings}` : '');
   }).filter(Boolean).join(', ');
-  return `<div class="wd-meal-line"><span class="wd-meal-emoji">${emoji}</span> ${names}</div>`;
+  return `<div class="wd-meal-line">${names}</div>`;
 }

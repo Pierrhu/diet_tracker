@@ -8,7 +8,7 @@ export function renderHistory() {
   app.querySelector('.view')?.remove();
 
   const view = el('div', 'view history-view');
-  view.innerHTML = '<div class="history-header"><div class="history-title">📅 Historique</div></div>';
+  view.innerHTML = '<div class="history-header"><div class="history-title">Historique</div></div>';
 
   const log = getLog().slice(-21).reverse();
   const { targets } = USER;
@@ -36,7 +36,7 @@ export function renderHistory() {
     day.innerHTML = `
       <div class="hday-header">
         <div class="hday-date">${formatDate(entry.date)}</div>
-        <div class="hday-kcal ${over ? 'over' : ''}">${Math.round(macros.kcal)} kcal${over ? ' ⚠️' : ''}</div>
+        <div class="hday-kcal ${over ? 'over' : ''}">${Math.round(macros.kcal)} kcal${over ? ' · dépassé' : ''}</div>
       </div>
       <div class="hday-macros">
         <span class="hday-macro">P <span>${Math.round(macros.protein)}g</span></span>
