@@ -3523,5 +3523,5 @@ function render() {
 
 window._nav = navigate;
 document.addEventListener('DOMContentLoaded', render);
-if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(() => {});
 
