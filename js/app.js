@@ -1509,6 +1509,167 @@ const RECIPES = [
     tags: ['légumes', 'batch', 'méditerranéen'],
   },
 
+  {
+    id: 'S11',
+    name: 'Pâtes complètes ail-huile-persil',
+    category: 'side',
+    emoji: '🍝',
+    prepTime: 2,
+    cookTime: 10,
+    batch: false,
+    macros: { kcal: 320, protein: 11, carbs: 58, fat: 7 },
+    ingredients: [
+      { name: 'Pâtes complètes (poids sec)', qty: 80, unit: 'g', kcal: 272, protein: 10, carbs: 54, fat: 1.6 },
+      { name: 'Huile d\'olive', qty: 8, unit: 'g', kcal: 72, protein: 0, carbs: 0, fat: 8 },
+      { name: 'Ail', qty: 2, unit: 'gousses', kcal: 8, protein: 0.3, carbs: 1.8, fat: 0.1 },
+      { name: 'Persil frais', qty: 5, unit: 'g', kcal: 2, protein: 0.2, carbs: 0.3, fat: 0.1 },
+    ],
+    steps: [
+      'Cuire les pâtes al dente selon le paquet.',
+      'Faire revenir l\'ail émincé dans l\'huile d\'olive 1 min sans brûler.',
+      'Égoutter les pâtes (garder un peu d\'eau de cuisson), mélanger avec l\'ail et le persil.',
+    ],
+    tip: 'Ajouter une poignée de parmesan ou des flocons de piment pour varier.',
+    tags: ['féculents', 'rapide'],
+  },
+
+  {
+    id: 'S12',
+    name: 'Pommes de terre vapeur',
+    category: 'side',
+    emoji: '🥔',
+    prepTime: 5,
+    cookTime: 20,
+    batch: true,
+    macros: { kcal: 175, protein: 4, carbs: 38, fat: 0.5 },
+    ingredients: [
+      { name: 'Pommes de terre', qty: 250, unit: 'g', kcal: 175, protein: 4, carbs: 38, fat: 0.5 },
+    ],
+    steps: [
+      'Laver les pommes de terre. Les mettre entières dans le panier vapeur.',
+      'Cuire 20 min à la vapeur (vérifier la cuisson avec un couteau).',
+      'Servir nature, avec une noisette de beurre ou de fromage blanc.',
+    ],
+    tip: 'Base parfaite pour un repas équilibré. En batch : cuire 1 kg, garder au frigo 4 jours.',
+    tags: ['féculents', 'batch', 'simple'],
+  },
+
+  {
+    id: 'S13',
+    name: 'Riz basmati',
+    category: 'side',
+    emoji: '🍚',
+    prepTime: 2,
+    cookTime: 12,
+    batch: true,
+    macros: { kcal: 260, protein: 5, carbs: 57, fat: 0.5 },
+    ingredients: [
+      { name: 'Riz basmati (poids sec)', qty: 70, unit: 'g', kcal: 252, protein: 5, carbs: 56, fat: 0.5 },
+      { name: 'Sel', qty: 1, unit: 'pincée', kcal: 0, protein: 0, carbs: 0, fat: 0 },
+    ],
+    steps: [
+      'Rincer le riz jusqu\'à l\'eau claire.',
+      'Cuire dans 2x son volume d\'eau salée, couvercle, 12 min.',
+      'Laisser reposer 5 min hors du feu avant de servir.',
+    ],
+    tip: 'Batch : cuire 300g en une fois, se garde 4 jours au frigo.',
+    tags: ['féculents', 'batch'],
+  },
+
+  {
+    id: 'S14',
+    name: 'Patate douce rôtie épices',
+    category: 'side',
+    emoji: '🍠',
+    prepTime: 5,
+    cookTime: 25,
+    batch: true,
+    macros: { kcal: 195, protein: 3, carbs: 40, fat: 4 },
+    ingredients: [
+      { name: 'Patate douce', qty: 200, unit: 'g', kcal: 172, protein: 3, carbs: 38, fat: 0.3 },
+      { name: 'Huile d\'olive', qty: 5, unit: 'g', kcal: 45, protein: 0, carbs: 0, fat: 5 },
+      { name: 'Cumin + paprika', qty: 2, unit: 'g', kcal: 6, protein: 0.3, carbs: 1, fat: 0.3 },
+    ],
+    steps: [
+      'Préchauffer le four à 200°C.',
+      'Couper la patate douce en cubes de 2 cm. Assaisonner huile + épices + sel.',
+      'Rôtir 25 min en retournant à mi-cuisson.',
+    ],
+    tip: 'Excellent avec du poulet ou du poisson. Très rassasiant.',
+    tags: ['féculents', 'batch', 'four'],
+  },
+
+  {
+    id: 'S15',
+    name: 'Lentilles corail à la tomate',
+    category: 'side',
+    emoji: '🫘',
+    prepTime: 5,
+    cookTime: 20,
+    batch: true,
+    macros: { kcal: 230, protein: 14, carbs: 38, fat: 3 },
+    ingredients: [
+      { name: 'Lentilles corail (poids sec)', qty: 70, unit: 'g', kcal: 210, protein: 13, carbs: 36, fat: 1 },
+      { name: 'Tomates concassées', qty: 100, unit: 'g', kcal: 20, protein: 1, carbs: 4, fat: 0.2 },
+      { name: 'Oignon', qty: 50, unit: 'g', kcal: 20, protein: 0.6, carbs: 4, fat: 0.1 },
+      { name: 'Huile d\'olive', qty: 5, unit: 'g', kcal: 45, protein: 0, carbs: 0, fat: 5 },
+      { name: 'Cumin + curcuma', qty: 2, unit: 'g', kcal: 7, protein: 0.3, carbs: 1.2, fat: 0.3 },
+    ],
+    steps: [
+      'Faire revenir l\'oignon émincé dans l\'huile 3 min.',
+      'Ajouter les épices 30 sec, puis les lentilles rincées et les tomates.',
+      'Couvrir d\'eau (2x le volume des lentilles), cuire 15-18 min.',
+    ],
+    tip: 'Les lentilles corail n\'ont pas besoin de trempage et cuisent très vite. Riches en protéines végétales.',
+    tags: ['féculents', 'légumineuses', 'batch'],
+  },
+
+  {
+    id: 'S16',
+    name: 'Boulgour aux herbes',
+    category: 'side',
+    emoji: '🌾',
+    prepTime: 2,
+    cookTime: 12,
+    batch: true,
+    macros: { kcal: 265, protein: 8, carbs: 52, fat: 3 },
+    ingredients: [
+      { name: 'Boulgour (poids sec)', qty: 70, unit: 'g', kcal: 238, protein: 8, carbs: 48, fat: 1 },
+      { name: 'Huile d\'olive', qty: 5, unit: 'g', kcal: 45, protein: 0, carbs: 0, fat: 5 },
+      { name: 'Menthe + persil', qty: 5, unit: 'g', kcal: 2, protein: 0.3, carbs: 0.5, fat: 0.1 },
+    ],
+    steps: [
+      'Faire bouillir 140 ml d\'eau salée.',
+      'Verser le boulgour, couvrir, éteindre le feu. Laisser gonfler 10-12 min.',
+      'Égrainer à la fourchette, ajouter huile + herbes.',
+    ],
+    tip: 'Alternative légère au riz. Parfait en taboulé ou en accompagnement chaud.',
+    tags: ['féculents', 'rapide', 'batch'],
+  },
+
+  {
+    id: 'S17',
+    name: 'Pâtes orzo ricotta-épinards',
+    category: 'side',
+    emoji: '🍝',
+    prepTime: 5,
+    cookTime: 10,
+    batch: false,
+    macros: { kcal: 340, protein: 14, carbs: 50, fat: 9 },
+    ingredients: [
+      { name: 'Orzo (poids sec)', qty: 70, unit: 'g', kcal: 252, protein: 9, carbs: 48, fat: 1.5 },
+      { name: 'Ricotta', qty: 40, unit: 'g', kcal: 60, protein: 3, carbs: 1, fat: 5 },
+      { name: 'Épinards frais', qty: 50, unit: 'g', kcal: 12, protein: 1.5, carbs: 1.5, fat: 0.3 },
+      { name: 'Huile d\'olive', qty: 5, unit: 'g', kcal: 45, protein: 0, carbs: 0, fat: 5 },
+    ],
+    steps: [
+      'Cuire l\'orzo al dente dans de l\'eau salée.',
+      'Dans la dernière minute, ajouter les épinards directement dans l\'eau.',
+      'Égoutter, mélanger avec ricotta + huile + sel + poivre.',
+    ],
+    tip: 'L\'orzo prend la forme d\'un risotto crémeux mais se prépare en 10 min.',
+    tags: ['féculents', 'crémeux'],
+  },
 
   {
     id: 'SW01', name: 'Mousse au chocolat protéinée', category: 'sweet', emoji: '🍫',
@@ -2805,14 +2966,11 @@ function renderPlanner() {
 function openRecipePicker(slot) {
   const cfg = SLOTS.find(s => s.key === slot);
   let allRecipes = cfg.fn();
-  let query = '';
-  function sheetHTML() {
+
+  function listHTML(query) {
     const filtered = allRecipes.filter(r => r.name.toLowerCase().includes(query.toLowerCase()));
-    return `
-      <div class="sheet-handle"></div>
-      <div class="sheet-search-wrap"><input class="sheet-search" id="sheet-q" placeholder="Rechercher..." value="${query}"></div>
-      <div class="sheet-list">
-        ${filtered.length ? filtered.map(r => `
+    return filtered.length
+      ? filtered.map(r => `
           <div class="sheet-recipe" data-id="${r.id}">
             <span class="sheet-r-emoji">${r.emoji}</span>
             <div class="sheet-r-info">
@@ -2820,17 +2978,36 @@ function openRecipePicker(slot) {
               <div class="sheet-r-meta">${r.macros.kcal} kcal · ${r.macros.protein}g P · ${r.prepTime + r.cookTime} min</div>
             </div>
             <span class="sheet-r-add">+</span>
-          </div>`).join('') : '<div style="color:var(--muted);text-align:center;padding:30px">Aucun résultat</div>'}
-      </div>`;
+          </div>`).join('')
+      : '<div style="color:var(--muted);text-align:center;padding:30px">Aucun résultat</div>';
   }
-  openSheet(sheetHTML());
-  function bind() {
-    const sheet = document.getElementById('sheet');
-    if (!sheet) return;
-    sheet.querySelector('#sheet-q')?.addEventListener('input', e => { query = e.target.value; sheet.innerHTML = sheetHTML(); bind(); });
-    sheet.querySelectorAll('.sheet-recipe').forEach(row => row.addEventListener('click', () => { closeSheet(); addMeal(slot, row.dataset.id); }));
+
+  openSheet(`
+    <div class="sheet-handle"></div>
+    <div class="sheet-search-wrap"><input class="sheet-search" id="sheet-q" placeholder="Rechercher..." autocomplete="off"></div>
+    <div class="sheet-list" id="sheet-list">${listHTML('')}</div>
+  `);
+
+  const sheet = document.getElementById('sheet');
+  if (!sheet) return;
+
+  const input = sheet.querySelector('#sheet-q');
+  const list  = sheet.querySelector('#sheet-list');
+
+  function bindRows() {
+    list.querySelectorAll('.sheet-recipe').forEach(row =>
+      row.addEventListener('click', () => { closeSheet(); addMeal(slot, row.dataset.id); })
+    );
   }
-  bind();
+  bindRows();
+
+  input.addEventListener('input', () => {
+    list.innerHTML = listHTML(input.value);
+    bindRows();
+  });
+
+  // Focus auto sans déclencher de scroll
+  requestAnimationFrame(() => input.focus({ preventScroll: true }));
 }
 
 
