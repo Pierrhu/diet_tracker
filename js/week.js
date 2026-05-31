@@ -77,7 +77,7 @@ export function renderWeek() {
         ${totalItems ? `
           <div class="wd-kcal ${over ? 'over' : ''}">
             ${Math.round(macros.kcal)} kcal
-            <span class="wd-p">· ${Math.round(macros.protein)}g P</span>
+            <span class="wd-prot ${macros.protein >= targets.protein ? 'ok' : (macros.protein >= targets.protein*0.8 ? 'close' : 'low')}">${Math.round(macros.protein)}g P${macros.protein >= targets.protein ? ' ✓' : ''}</span>
             ${over ? '<span class="wd-warn">dépassé</span>' : ''}
           </div>
           ${mbar(macros.kcal, targets.kcal, 'var(--accent)')}

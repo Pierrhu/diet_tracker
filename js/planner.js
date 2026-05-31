@@ -74,7 +74,11 @@ export function renderPlanner() {
     ${mbar(macros.kcal, targets.kcal, 'var(--accent)')}
     ${over ? `<div class="over-banner">Limite dépassée de ${Math.round(macros.kcal - targets.kcal)} kcal</div>` : ''}
     <div class="mini-macros">
-      <div class="mini-macro"><span class="mm-val protein">${Math.round(macros.protein)}g</span><span class="mm-label">Protéines</span></div>
+      <div class="mini-macro protein-track ${macros.protein >= targets.protein ? 'reached' : (macros.protein >= targets.protein*0.8 ? 'close' : 'low')}">
+        <span class="mm-val protein">${Math.round(macros.protein)}<span class="mm-target">/${targets.protein}g</span></span>
+        <span class="mm-label">Protéines ${macros.protein >= targets.protein ? '✓' : ''}</span>
+        <div class="mm-bar"><div class="mm-bar-fill" style="width:${Math.min((macros.protein/targets.protein)*100,100)}%"></div></div>
+      </div>
       <div class="mini-macro"><span class="mm-val carbs">${Math.round(macros.carbs)}g</span><span class="mm-label">Glucides</span></div>
       <div class="mini-macro"><span class="mm-val fat">${Math.round(macros.fat)}g</span><span class="mm-label">Lipides</span></div>
     </div>`;

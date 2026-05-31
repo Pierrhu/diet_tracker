@@ -1,5 +1,5 @@
 // DIET — bundled app (généré par build.js)
-// 2026-05-31T13:06:39.873Z
+// 2026-05-31T13:34:49.484Z
 
 
 // ──────────────────────────────────────────────
@@ -2781,7 +2781,7 @@ function renderWeek() {
         ${totalItems ? `
           <div class="wd-kcal ${over ? 'over' : ''}">
             ${Math.round(macros.kcal)} kcal
-            <span class="wd-p">· ${Math.round(macros.protein)}g P</span>
+            <span class="wd-prot ${macros.protein >= targets.protein ? 'ok' : (macros.protein >= targets.protein*0.8 ? 'close' : 'low')}">${Math.round(macros.protein)}g P${macros.protein >= targets.protein ? ' ✓' : ''}</span>
             ${over ? '<span class="wd-warn">dépassé</span>' : ''}
           </div>
           ${mbar(macros.kcal, targets.kcal, 'var(--accent)')}
@@ -2904,7 +2904,11 @@ function renderPlanner() {
     ${mbar(macros.kcal, targets.kcal, 'var(--accent)')}
     ${over ? `<div class="over-banner">Limite dépassée de ${Math.round(macros.kcal - targets.kcal)} kcal</div>` : ''}
     <div class="mini-macros">
-      <div class="mini-macro"><span class="mm-val protein">${Math.round(macros.protein)}g</span><span class="mm-label">Protéines</span></div>
+      <div class="mini-macro protein-track ${macros.protein >= targets.protein ? 'reached' : (macros.protein >= targets.protein*0.8 ? 'close' : 'low')}">
+        <span class="mm-val protein">${Math.round(macros.protein)}<span class="mm-target">/${targets.protein}g</span></span>
+        <span class="mm-label">Protéines ${macros.protein >= targets.protein ? '✓' : ''}</span>
+        <div class="mm-bar"><div class="mm-bar-fill" style="width:${Math.min((macros.protein/targets.protein)*100,100)}%"></div></div>
+      </div>
       <div class="mini-macro"><span class="mm-val carbs">${Math.round(macros.carbs)}g</span><span class="mm-label">Glucides</span></div>
       <div class="mini-macro"><span class="mm-val fat">${Math.round(macros.fat)}g</span><span class="mm-label">Lipides</span></div>
     </div>`;
@@ -3370,18 +3374,20 @@ function renderShopping() {
           list.sort((a,b)=>a.name.localeCompare(b.name,'fr'));
           return `
             <div class="shop-cat-title">${c.name}</div>
+            <div class="shop-group">
             ${list.map(item => {
               const key = item.name.toLowerCase();
               const isChecked = checked.includes(key);
               const qty = Math.round(item.qty * 10) / 10;
-              return `<div class="shop-item ${isChecked ? 'done' : ''}">
-                <div class="shop-check ${isChecked ? 'checked' : ''}" data-key="${key}"></div>
+              return `<div class="shop-item ${isChecked ? 'done' : ''}" data-key="${key}">
+                <div class="shop-check ${isChecked ? 'checked' : ''}"></div>
                 <div class="shop-info">
                   <div class="shop-name">${item.name}</div>
                   <div class="shop-qty">${qty} ${item.unit}</div>
                 </div>
               </div>`;
-            }).join('')}`;
+            }).join('')}
+            </div>`;
         }).join('') : `<div class="empty-shop">Aucun repas planifié.<br><br>Planifie ta semaine dans <strong>Semaine</strong>.</div>`}
       </div>
     `;
@@ -3400,8 +3406,8 @@ function renderShopping() {
     view.querySelector('.clear-btn')?.addEventListener('click', () => {
       clearChecked(); checked = []; app.querySelector('.view')?.remove(); render();
     });
-    view.querySelectorAll('.shop-check').forEach(box => box.addEventListener('click', () => {
-      const key = box.dataset.key;
+    view.querySelectorAll('.shop-item').forEach(row => row.addEventListener('click', () => {
+      const key = row.dataset.key;
       const idx = checked.indexOf(key);
       if (idx > -1) checked.splice(idx, 1); else checked.push(key);
       saveChecked(checked);

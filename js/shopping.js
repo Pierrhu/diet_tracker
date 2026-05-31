@@ -104,18 +104,20 @@ export function renderShopping() {
           list.sort((a,b)=>a.name.localeCompare(b.name,'fr'));
           return `
             <div class="shop-cat-title">${c.name}</div>
+            <div class="shop-group">
             ${list.map(item => {
               const key = item.name.toLowerCase();
               const isChecked = checked.includes(key);
               const qty = Math.round(item.qty * 10) / 10;
-              return `<div class="shop-item ${isChecked ? 'done' : ''}">
-                <div class="shop-check ${isChecked ? 'checked' : ''}" data-key="${key}"></div>
+              return `<div class="shop-item ${isChecked ? 'done' : ''}" data-key="${key}">
+                <div class="shop-check ${isChecked ? 'checked' : ''}"></div>
                 <div class="shop-info">
                   <div class="shop-name">${item.name}</div>
                   <div class="shop-qty">${qty} ${item.unit}</div>
                 </div>
               </div>`;
-            }).join('')}`;
+            }).join('')}
+            </div>`;
         }).join('') : `<div class="empty-shop">Aucun repas planifié.<br><br>Planifie ta semaine dans <strong>Semaine</strong>.</div>`}
       </div>
     `;
@@ -134,8 +136,8 @@ export function renderShopping() {
     view.querySelector('.clear-btn')?.addEventListener('click', () => {
       clearChecked(); checked = []; app.querySelector('.view')?.remove(); render();
     });
-    view.querySelectorAll('.shop-check').forEach(box => box.addEventListener('click', () => {
-      const key = box.dataset.key;
+    view.querySelectorAll('.shop-item').forEach(row => row.addEventListener('click', () => {
+      const key = row.dataset.key;
       const idx = checked.indexOf(key);
       if (idx > -1) checked.splice(idx, 1); else checked.push(key);
       saveChecked(checked);
