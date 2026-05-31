@@ -2965,7 +2965,7 @@ function renderPlanner() {
 
 function openRecipePicker(slot) {
   const cfg = SLOTS.find(s => s.key === slot);
-  let allRecipes = cfg.fn();
+  const allRecipes = cfg.fn();
 
   function listHTML(query) {
     const filtered = allRecipes.filter(r => r.name.toLowerCase().includes(query.toLowerCase()));
@@ -2982,21 +2982,26 @@ function openRecipePicker(slot) {
       : '<div style="color:var(--muted);text-align:center;padding:30px">Aucun résultat</div>';
   }
 
-  openSheet(`
-    <div class="sheet-handle"></div>
-    <div class="sheet-search-wrap"><input class="sheet-search" id="sheet-q" placeholder="Rechercher..." autocomplete="off"></div>
-    <div class="sheet-list" id="sheet-list">${listHTML('')}</div>
-  `);
+  // Overlay fixe qui ne dépend pas du viewport resize (clavier mobile)
+  const overlay = document.createElement('div');
+  overlay.className = 'overlay picker-overlay';
+  overlay.innerHTML = `
+    <div class="sheet picker-sheet" id="sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-search-wrap">
+        <input class="sheet-search" id="sheet-q" placeholder="Rechercher..." autocomplete="off" inputmode="search">
+      </div>
+      <div class="sheet-list" id="sheet-list">${listHTML('')}</div>
+    </div>`;
+  document.body.appendChild(overlay);
 
-  const sheet = document.getElementById('sheet');
-  if (!sheet) return;
-
-  const input = sheet.querySelector('#sheet-q');
-  const list  = sheet.querySelector('#sheet-list');
+  const sheet = overlay.querySelector('#sheet');
+  const input = overlay.querySelector('#sheet-q');
+  const list  = overlay.querySelector('#sheet-list');
 
   function bindRows() {
     list.querySelectorAll('.sheet-recipe').forEach(row =>
-      row.addEventListener('click', () => { closeSheet(); addMeal(slot, row.dataset.id); })
+      row.addEventListener('click', () => { overlay.remove(); addMeal(slot, row.dataset.id); })
     );
   }
   bindRows();
@@ -3006,7 +3011,10 @@ function openRecipePicker(slot) {
     bindRows();
   });
 
-  // Focus auto sans déclencher de scroll
+  // Fermer si clic sur l'overlay (pas sur la sheet)
+  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+
+  // Focus sans scroll, sans resize de la sheet
   requestAnimationFrame(() => input.focus({ preventScroll: true }));
 }
 
@@ -3311,6 +3319,8 @@ function buildList(dates) {
       (entry.meals[slot] || []).forEach(item => {
         const r = getById(item.id);
         if (!r) return;
+        // Exclure les menus cantine — rien à acheter
+        if (r.tags && r.tags.includes('cantine')) return;
         const s = item.servings || 1;
         r.ingredients.forEach(ing => {
           const key = ing.name.toLowerCase();
