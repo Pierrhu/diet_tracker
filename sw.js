@@ -1,4 +1,4 @@
-const CACHE = 'diet-v9';
+const CACHE = 'hebe-v2';
 const ASSETS = [
   './',
   './index.html',
@@ -9,6 +9,10 @@ const ASSETS = [
   './data/user.js',
   './data/log.js',
   './data/calculator.js',
+  './icon-192.png',
+  './icon-512.png',
+  './icon-192-maskable.png',
+  './icon-512-maskable.png',
 ];
 
 self.addEventListener('install', e => {
