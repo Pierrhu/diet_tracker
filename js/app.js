@@ -1,5 +1,5 @@
 // DIET — bundled app (généré par build.js)
-// 2026-05-31T13:34:49.484Z
+// 2026-05-31T13:50:04.714Z
 
 
 // ──────────────────────────────────────────────
@@ -2841,7 +2841,7 @@ const SLOTS = [
   { key: 'lunch',  label: 'Déjeuner',        emoji: '',  fn: getLunches },
   { key: 'dinner', label: 'Dîner',            emoji: '',  fn: getDinners },
   { key: 'sides',  label: 'Accompagnements',  emoji: '',  fn: getSides  },
-  { key: 'sweet',  label: 'Dessert / Encas',  emoji: '',  fn: getSweets },
+  { key: 'sweet',  label: 'Dessert',          emoji: '',  fn: getSweets },
 ];
 
 function save(entry) { saveEntry(entry); renderPlanner(); }
@@ -2925,7 +2925,7 @@ function renderPlanner() {
     const slot = el('div', 'meal-slot');
     slot.innerHTML = `
       <div class="slot-hd">
-        <div class="slot-left"><span class="slot-label">${label}</span></div>
+        <div class="slot-left"><span class="slot-label slot-${key}">${label}</span></div>
         ${selected.length ? `<span class="slot-kcal">${Math.round(slotMacros.kcal)} kcal · ${Math.round(slotMacros.protein)}g P</span>` : ''}
       </div>
       <div class="slot-body">
@@ -2978,31 +2978,41 @@ function openRecipePicker(slot) {
   const cfg = SLOTS.find(s => s.key === slot);
   let allRecipes = cfg.fn();
   let query = '';
-  function sheetHTML() {
+
+  function listHTML() {
     const filtered = allRecipes.filter(r => r.name.toLowerCase().includes(query.toLowerCase()));
-    return `
-      <div class="sheet-handle"></div>
-      <div class="sheet-search-wrap"><input class="sheet-search" id="sheet-q" placeholder="Rechercher..." value="${query}"></div>
-      <div class="sheet-list">
-        ${filtered.length ? filtered.map(r => `
-          <div class="sheet-recipe" data-id="${r.id}">
-            <span class="sheet-r-emoji">${r.emoji}</span>
-            <div class="sheet-r-info">
-              <div class="sheet-r-name">${r.name}</div>
-              <div class="sheet-r-meta">${r.macros.kcal} kcal · ${r.macros.protein}g P · ${r.prepTime + r.cookTime} min</div>
-            </div>
-            <span class="sheet-r-add">+</span>
-          </div>`).join('') : '<div style="color:var(--muted);text-align:center;padding:30px">Aucun résultat</div>'}
-      </div>`;
+    return filtered.length ? filtered.map(r => `
+      <div class="sheet-recipe" data-id="${r.id}">
+        <span class="sheet-r-emoji">${r.emoji}</span>
+        <div class="sheet-r-info">
+          <div class="sheet-r-name">${r.name}</div>
+          <div class="sheet-r-meta">${r.macros.kcal} kcal · ${r.macros.protein}g P · ${r.prepTime + r.cookTime} min</div>
+        </div>
+        <span class="sheet-r-add">+</span>
+      </div>`).join('') : '<div style="color:var(--muted);text-align:center;padding:30px">Aucun résultat</div>';
   }
-  openSheet(sheetHTML());
-  function bind() {
-    const sheet = document.getElementById('sheet');
-    if (!sheet) return;
-    sheet.querySelector('#sheet-q')?.addEventListener('input', e => { query = e.target.value; sheet.innerHTML = sheetHTML(); bind(); });
-    sheet.querySelectorAll('.sheet-recipe').forEach(row => row.addEventListener('click', () => { closeSheet(); addMeal(slot, row.dataset.id); }));
+
+  openSheet(`
+    <div class="sheet-handle"></div>
+    <div class="sheet-search-wrap"><input class="sheet-search" id="sheet-q" placeholder="Rechercher..." autocomplete="off"></div>
+    <div class="sheet-list" id="sheet-list">${listHTML()}</div>
+  `);
+
+  const sheet = document.getElementById('sheet');
+  if (!sheet) return;
+  const input = sheet.querySelector('#sheet-q');
+  const listEl = sheet.querySelector('#sheet-list');
+
+  function refreshList() {
+    listEl.innerHTML = listHTML();
+    listEl.querySelectorAll('.sheet-recipe').forEach(row =>
+      row.addEventListener('click', () => { closeSheet(); addMeal(slot, row.dataset.id); })
+    );
   }
-  bind();
+
+  // Re-render ONLY the list on input — the input itself is never recreated, so focus stays.
+  input.addEventListener('input', e => { query = e.target.value; refreshList(); });
+  refreshList();
 }
 
 
@@ -3201,7 +3211,7 @@ const FILTERS = [
   { key: 'dinner', label: 'Dîner'              },
   { key: 'lunch',  label: 'Déjeuner'           },
   { key: 'side',   label: 'Accompagnements'    },
-  { key: 'sweet',  label: 'Desserts & Encas' },
+  { key: 'sweet',  label: 'Desserts' },
 ];
 
 function renderRecipes() {

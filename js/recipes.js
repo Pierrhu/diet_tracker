@@ -8,7 +8,7 @@ const FILTERS = [
   { key: 'dinner', label: 'Dîner'              },
   { key: 'lunch',  label: 'Déjeuner'           },
   { key: 'side',   label: 'Accompagnements'    },
-  { key: 'sweet',  label: 'Desserts & Encas' },
+  { key: 'sweet',  label: 'Desserts' },
 ];
 
 export function renderRecipes() {
