@@ -11,7 +11,9 @@ const EMPTY_MEALS = () => ({ lunch: [], dinner: [], sides: [], sweet: [] });
 function normalizeItem(item) {
   // Ancien format : string → { id, servings:1 }
   if (typeof item === 'string') return { id: item, servings: 1 };
-  return { id: item.id, servings: item.servings || 1 };
+  const out = { id: item.id, servings: item.servings || 1 };
+  if (item.overrides) out.overrides = item.overrides; // quantités d'ingrédients ajustées
+  return out;
 }
 
 function normalizeEntry(entry) {
