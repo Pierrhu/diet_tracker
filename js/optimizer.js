@@ -4,12 +4,13 @@
 
 import { getById } from '../data/recipes.js';
 
-const CARB_WORDS = ['riz','pâte','pate','quinoa','semoule','boulghour','boulgour','flocon','avoine',
-  'pain','tortilla','nouille','patate','pomme de terre','maïs','mais','orzo','blé','ble','couscous',
-  'polenta','gnocchi','miel','sucre','banane','dattes','datte'];
+// Leviers PROTÉINES : viandes & poissons principaux (pas les laitages/œufs/sauces).
 const PROT_WORDS = ['poulet','boeuf','bœuf','steak','dinde','porc','veau','thon','saumon','colin',
-  'merlu','cabillaud','poisson','crevette','fromage blanc','skyr','yaourt','whey','protéine','proteine',
-  'jambon','bacon','tofu','tempeh','feta','ricotta','mozzarella','blanc de poulet'];
+  'merlu','cabillaud','crevette','merguez','poisson'];
+// Leviers GLUCIDES : féculents principaux uniquement (pas miel/banane/sucre).
+const CARB_WORDS = ['riz','pâte','pate','quinoa','semoule','boulghour','boulgour','nouille',
+  'patate douce','pomme de terre','orzo','couscous','tortilla','pain complet'];
+// Légumineuses = protéine + glucide à la fois.
 const BOTH_WORDS = ['lentille','pois chiche','haricot rouge','haricot blanc'];
 
 const norm = s => s.toLowerCase();
@@ -17,11 +18,19 @@ const norm = s => s.toLowerCase();
 export function classifyIngredient(name) {
   const n = norm(name);
   if (BOTH_WORDS.some(w => n.includes(w))) return 'both';
-  const isCarb = CARB_WORDS.some(w => n.includes(w));
   const isProt = PROT_WORDS.some(w => n.includes(w));
   if (isProt) return 'protein';
+  const isCarb = CARB_WORDS.some(w => n.includes(w));
   if (isCarb) return 'carb';
   return 'fixed';
+}
+
+// Arrondit une quantité à un palier pratique pour le quotidien.
+function snapQty(grams, countable) {
+  if (countable) return Math.max(1, Math.round(grams));
+  if (grams >= 200) return Math.round(grams / 25) * 25;  // gros : pas de 25g
+  if (grams >= 60)  return Math.round(grams / 10) * 10;  // moyen : pas de 10g
+  return Math.round(grams / 5) * 5;                       // petit : pas de 5g
 }
 
 // Les ingrédients "comptables" (œufs, pièces) ne doivent pas exploser
@@ -72,8 +81,8 @@ export function optimizeDay(items, targets) {
           levers.push({
             ref: ov, idx, type: cls,
             // bornes : comptables limités (ex. œufs 1–6×base), sinon 0.3×–3.5×
-            min: countable ? ing.qty : Math.max(10, ing.qty * 0.3),
-            max: countable ? ing.qty * 2 : ing.qty * 3.5,
+            min: countable ? ing.qty : Math.max(20, ing.qty * 0.5),
+            max: countable ? ing.qty * 2 : ing.qty * 2.2,
             countable,
             base: ing.qty,
           });
@@ -145,6 +154,19 @@ export function optimizeDay(items, targets) {
     lastCost = nowCost;
   }
 
-  work.forEach(it => { if (it.overrides) Object.keys(it.overrides).forEach(k => it.overrides[k] = Math.round(it.overrides[k])); });
+  // Arrondir à des quantités pratiques. On ne touche qu'aux leviers (les autres gardent leur valeur d'origine).
+  const leverKeys = new Set(levers.map(l => l.ref === undefined ? null : l));
+  work.forEach((it, wi) => {
+    if (!it.overrides) return;
+    const r = getById(it.id);
+    Object.keys(it.overrides).forEach(k => {
+      const idx = +k;
+      const ing = r.ingredients[idx];
+      const cls = classifyIngredient(ing.name);
+      const countable = isCountable(ing.unit);
+      if (cls !== "fixed") it.overrides[k] = snapQty(it.overrides[k], countable);
+      else it.overrides[k] = Math.round(it.overrides[k]);
+    });
+  });
   return work;
 }

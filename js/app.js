@@ -1,5 +1,5 @@
 // DIET — bundled app (généré par build.js)
-// 2026-05-31T14:38:44.171Z
+// 2026-06-01T14:24:27.832Z
 
 
 // ──────────────────────────────────────────────
@@ -2298,6 +2298,119 @@ const RECIPES = [
     tip: 'Encas parfait avant ou après la salle. Se conservent 1 semaine au frigo, 1 mois au congélo. Macros pour 3 boules.',
     tags: ['encas', '0-cuisson', 'batch', 'pré-workout'],
   },
+  {
+    id: 'SW20', name: 'Bol fromage blanc, avoine & beurre de cacahuète', category: 'sweet', emoji: '🥣',
+    prepTime: 3, cookTime: 0, batch: false,
+    macros: { kcal: 560, protein: 48, carbs: 52, fat: 17 },
+    ingredients: [
+      { name: 'Fromage blanc 0%', qty: 300, unit: 'g', kcal: 135, protein: 24, carbs: 12, fat: 0 },
+      { name: 'Whey vanille', qty: 25, unit: 'g', kcal: 95, protein: 20, carbs: 2.5, fat: 1.5 },
+      { name: 'Flocons d\'avoine', qty: 50, unit: 'g', kcal: 190, protein: 6.5, carbs: 32, fat: 3.5 },
+      { name: 'Beurre de cacahuète', qty: 18, unit: 'g', kcal: 108, protein: 4.2, carbs: 3.6, fat: 9 },
+      { name: 'Miel', qty: 10, unit: 'g', kcal: 30, protein: 0, carbs: 8.1, fat: 0 },
+    ],
+    steps: [
+      'Verser le fromage blanc dans un bol.',
+      'Ajouter la whey, mélanger jusqu\'à dissolution.',
+      'Incorporer les flocons d\'avoine.',
+      'Terminer par le beurre de cacahuète et un filet de miel.',
+    ],
+    tip: 'LE bol express en rentrant : 30 secondes à assembler, 48g de protéines. Laisse reposer 5 min si tu préfères les flocons moelleux, ou mange direct pour le croquant.',
+    tags: ['encas', '0-cuisson', 'rapide', 'high-protein'],
+  },
+  {
+    id: 'SW21', name: 'Skyr banane-cacahuète', category: 'sweet', emoji: '🍌',
+    prepTime: 3, cookTime: 0, batch: false,
+    macros: { kcal: 480, protein: 38, carbs: 50, fat: 14 },
+    ingredients: [
+      { name: 'Skyr', qty: 250, unit: 'g', kcal: 158, protein: 27.5, carbs: 10, fat: 0.5 },
+      { name: 'Banane mûre', qty: 120, unit: 'g', kcal: 107, protein: 1.3, carbs: 27, fat: 0.4 },
+      { name: 'Beurre de cacahuète', qty: 20, unit: 'g', kcal: 120, protein: 4.7, carbs: 4, fat: 10 },
+      { name: 'Flocons d\'avoine', qty: 25, unit: 'g', kcal: 95, protein: 3.3, carbs: 16, fat: 1.8 },
+    ],
+    steps: [
+      'Écraser la banane à la fourchette dans le bol.',
+      'Ajouter le skyr et mélanger.',
+      'Garnir de flocons et d\'une cuillère de beurre de cacahuète.',
+    ],
+    tip: 'La banane bien mûre sucre naturellement, pas besoin de miel. Parfait après l\'entraînement.',
+    tags: ['encas', '0-cuisson', 'rapide', 'post-workout'],
+  },
+  {
+    id: 'SW22', name: 'Toasts beurre de cacahuète-banane', category: 'sweet', emoji: '🍞',
+    prepTime: 4, cookTime: 0, batch: false,
+    macros: { kcal: 520, protein: 20, carbs: 62, fat: 22 },
+    ingredients: [
+      { name: 'Pain complet', qty: 80, unit: 'g', kcal: 184, protein: 7.2, carbs: 32, fat: 2.4 },
+      { name: 'Beurre de cacahuète', qty: 30, unit: 'g', kcal: 180, protein: 7, carbs: 6, fat: 15 },
+      { name: 'Banane mûre', qty: 120, unit: 'g', kcal: 107, protein: 1.3, carbs: 27, fat: 0.4 },
+      { name: 'Miel', qty: 10, unit: 'g', kcal: 30, protein: 0, carbs: 8.1, fat: 0 },
+    ],
+    steps: [
+      'Toaster le pain (ou pas, selon l\'envie).',
+      'Étaler le beurre de cacahuète.',
+      'Disposer les rondelles de banane, filet de miel.',
+    ],
+    tip: 'Calories faciles et rassasiantes. Pour plus de protéines, ajoute une tranche de blanc de dinde à part.',
+    tags: ['encas', '0-cuisson', 'rapide'],
+  },
+  {
+    id: 'SW23', name: 'Shake masse whey-avoine-cacahuète', category: 'sweet', emoji: '🥤',
+    prepTime: 3, cookTime: 0, batch: false,
+    macros: { kcal: 620, protein: 45, carbs: 65, fat: 18 },
+    ingredients: [
+      { name: 'Lait écrémé', qty: 300, unit: 'ml', kcal: 105, protein: 10.2, carbs: 15, fat: 0.3 },
+      { name: 'Whey vanille', qty: 30, unit: 'g', kcal: 114, protein: 24, carbs: 3, fat: 1.8 },
+      { name: 'Flocons d\'avoine', qty: 50, unit: 'g', kcal: 190, protein: 6.5, carbs: 32, fat: 3.5 },
+      { name: 'Beurre de cacahuète', qty: 20, unit: 'g', kcal: 120, protein: 4.7, carbs: 4, fat: 10 },
+      { name: 'Banane mûre', qty: 100, unit: 'g', kcal: 89, protein: 1.1, carbs: 23, fat: 0.3 },
+    ],
+    steps: [
+      'Mettre tous les ingrédients dans un blender.',
+      'Mixer 30 secondes jusqu\'à consistance lisse.',
+      'Boire frais.',
+    ],
+    tip: 'Le shake prise de masse rapide : 620 kcal et 45g de protéines à boire. Idéal si tu as du mal à manger assez de solide.',
+    tags: ['encas', '0-cuisson', 'rapide', 'high-protein', 'post-workout'],
+  },
+  {
+    id: 'SW24', name: 'Fromage blanc protéiné aux fruits rouges', category: 'sweet', emoji: '🫐',
+    prepTime: 2, cookTime: 0, batch: false,
+    macros: { kcal: 320, protein: 44, carbs: 26, fat: 3 },
+    ingredients: [
+      { name: 'Fromage blanc 0%', qty: 300, unit: 'g', kcal: 135, protein: 24, carbs: 12, fat: 0 },
+      { name: 'Whey vanille', qty: 30, unit: 'g', kcal: 114, protein: 24, carbs: 3, fat: 1.8 },
+      { name: 'Fruits rouges surgelés', qty: 100, unit: 'g', kcal: 45, protein: 1, carbs: 9, fat: 0.4 },
+      { name: 'Miel', qty: 8, unit: 'g', kcal: 24, protein: 0, carbs: 6.5, fat: 0 },
+    ],
+    steps: [
+      'Mélanger fromage blanc et whey.',
+      'Ajouter les fruits rouges (encore un peu congelés c\'est top).',
+      'Filet de miel si besoin.',
+    ],
+    tip: 'Très haute teneur en protéines, peu de calories : parfait les jours où il te reste surtout des protéines à atteindre.',
+    tags: ['encas', '0-cuisson', 'rapide', 'high-protein'],
+  },
+  {
+    id: 'SW25', name: 'Overnight oats cacahuète-chocolat', category: 'sweet', emoji: '🥜',
+    prepTime: 5, cookTime: 0, batch: true,
+    macros: { kcal: 540, protein: 38, carbs: 56, fat: 17 },
+    ingredients: [
+      { name: 'Flocons d\'avoine', qty: 60, unit: 'g', kcal: 228, protein: 7.8, carbs: 38.4, fat: 4.2 },
+      { name: 'Fromage blanc 0%', qty: 200, unit: 'g', kcal: 90, protein: 16, carbs: 8, fat: 0 },
+      { name: 'Whey chocolat', qty: 25, unit: 'g', kcal: 95, protein: 20, carbs: 2.5, fat: 1.5 },
+      { name: 'Beurre de cacahuète', qty: 18, unit: 'g', kcal: 108, protein: 4.2, carbs: 3.6, fat: 9 },
+      { name: 'Lait écrémé', qty: 80, unit: 'ml', kcal: 28, protein: 2.7, carbs: 4, fat: 0.1 },
+    ],
+    steps: [
+      'Mélanger flocons, fromage blanc, whey et lait dans un bocal.',
+      'Ajouter le beurre de cacahuète.',
+      'Fermer et laisser une nuit au frigo.',
+      'Manger froid au réveil ou en rentrant.',
+    ],
+    tip: 'À préparer la veille : tu en fais 3-4 bocaux d\'un coup pour la semaine. Le meilleur encas zéro effort.',
+    tags: ['encas', '0-cuisson', 'batch', 'high-protein'],
+  },
 ];
 
 // ─────────────────────────────────────────────────────────────
@@ -2681,12 +2794,13 @@ function closeSheet() {
 // Leviers : féculents (glucides) + sources de protéines. Le reste reste fixe.
 
 
-const CARB_WORDS = ['riz','pâte','pate','quinoa','semoule','boulghour','boulgour','flocon','avoine',
-  'pain','tortilla','nouille','patate','pomme de terre','maïs','mais','orzo','blé','ble','couscous',
-  'polenta','gnocchi','miel','sucre','banane','dattes','datte'];
+// Leviers PROTÉINES : viandes & poissons principaux (pas les laitages/œufs/sauces).
 const PROT_WORDS = ['poulet','boeuf','bœuf','steak','dinde','porc','veau','thon','saumon','colin',
-  'merlu','cabillaud','poisson','crevette','fromage blanc','skyr','yaourt','whey','protéine','proteine',
-  'jambon','bacon','tofu','tempeh','feta','ricotta','mozzarella','blanc de poulet'];
+  'merlu','cabillaud','crevette','merguez','poisson'];
+// Leviers GLUCIDES : féculents principaux uniquement (pas miel/banane/sucre).
+const CARB_WORDS = ['riz','pâte','pate','quinoa','semoule','boulghour','boulgour','nouille',
+  'patate douce','pomme de terre','orzo','couscous','tortilla','pain complet'];
+// Légumineuses = protéine + glucide à la fois.
 const BOTH_WORDS = ['lentille','pois chiche','haricot rouge','haricot blanc'];
 
 const norm = s => s.toLowerCase();
@@ -2694,11 +2808,19 @@ const norm = s => s.toLowerCase();
 function classifyIngredient(name) {
   const n = norm(name);
   if (BOTH_WORDS.some(w => n.includes(w))) return 'both';
-  const isCarb = CARB_WORDS.some(w => n.includes(w));
   const isProt = PROT_WORDS.some(w => n.includes(w));
   if (isProt) return 'protein';
+  const isCarb = CARB_WORDS.some(w => n.includes(w));
   if (isCarb) return 'carb';
   return 'fixed';
+}
+
+// Arrondit une quantité à un palier pratique pour le quotidien.
+function snapQty(grams, countable) {
+  if (countable) return Math.max(1, Math.round(grams));
+  if (grams >= 200) return Math.round(grams / 25) * 25;  // gros : pas de 25g
+  if (grams >= 60)  return Math.round(grams / 10) * 10;  // moyen : pas de 10g
+  return Math.round(grams / 5) * 5;                       // petit : pas de 5g
 }
 
 // Les ingrédients "comptables" (œufs, pièces) ne doivent pas exploser
@@ -2749,8 +2871,8 @@ function optimizeDay(items, targets) {
           levers.push({
             ref: ov, idx, type: cls,
             // bornes : comptables limités (ex. œufs 1–6×base), sinon 0.3×–3.5×
-            min: countable ? ing.qty : Math.max(10, ing.qty * 0.3),
-            max: countable ? ing.qty * 2 : ing.qty * 3.5,
+            min: countable ? ing.qty : Math.max(20, ing.qty * 0.5),
+            max: countable ? ing.qty * 2 : ing.qty * 2.2,
             countable,
             base: ing.qty,
           });
@@ -2822,7 +2944,20 @@ function optimizeDay(items, targets) {
     lastCost = nowCost;
   }
 
-  work.forEach(it => { if (it.overrides) Object.keys(it.overrides).forEach(k => it.overrides[k] = Math.round(it.overrides[k])); });
+  // Arrondir à des quantités pratiques. On ne touche qu'aux leviers (les autres gardent leur valeur d'origine).
+  const leverKeys = new Set(levers.map(l => l.ref === undefined ? null : l));
+  work.forEach((it, wi) => {
+    if (!it.overrides) return;
+    const r = getById(it.id);
+    Object.keys(it.overrides).forEach(k => {
+      const idx = +k;
+      const ing = r.ingredients[idx];
+      const cls = classifyIngredient(ing.name);
+      const countable = isCountable(ing.unit);
+      if (cls !== "fixed") it.overrides[k] = snapQty(it.overrides[k], countable);
+      else it.overrides[k] = Math.round(it.overrides[k]);
+    });
+  });
   return work;
 }
 
@@ -3583,6 +3718,52 @@ const CATEGORIES = [
   { name: 'Épicerie & Autres', match: [] },
 ];
 
+// Regroupe les variantes d'un même produit en un seul nom canonique,
+// pour éviter les doublons dans la liste de courses (poulet / poulet cuit / poulet émincé…).
+// On ne fusionne que des produits réellement identiques à l'achat.
+const CANON = [
+  { rx: /poulet/i,                       name: 'Blanc de poulet',               unit: 'g' },
+  { rx: /thon/i,                         name: 'Thon au naturel',               unit: 'g' },
+  { rx: /\bdinde\b/i,                    name: 'Blanc de dinde',                unit: 'g' },
+  { rx: /^oeufs?( durs| poch)?$|^oeuf$/i,name: 'Oeufs',                         unit: 'pièces' },
+  { rx: /blancs? d'?oeuf/i,              name: "Blancs d'oeuf",                 unit: 'g' },
+  { rx: /^p[âa]tes/i,                    name: 'Pâtes',                         unit: 'g' },
+  { rx: /^riz/i,                         name: 'Riz',                           unit: 'g' },
+  { rx: /boulgh?our|boulgour/i,          name: 'Boulghour',                     unit: 'g' },
+  { rx: /quinoa/i,                       name: 'Quinoa',                        unit: 'g' },
+  { rx: /^orzo/i,                        name: 'Orzo',                          unit: 'g' },
+  { rx: /lentilles corail/i,            name: 'Lentilles corail',             unit: 'g' },
+  { rx: /lentilles vertes/i,            name: 'Lentilles vertes',             unit: 'g' },
+  { rx: /pois chiches/i,                name: 'Pois chiches',                  unit: 'g' },
+  { rx: /haricots rouges/i,             name: 'Haricots rouges',              unit: 'g' },
+  { rx: /haricots blancs/i,             name: 'Haricots blancs',              unit: 'g' },
+  { rx: /haricots verts/i,              name: 'Haricots verts',               unit: 'g' },
+  { rx: /^[ée]pinards/i,                name: 'Épinards',                      unit: 'g' },
+  { rx: /fromage blanc/i,               name: 'Fromage blanc 0%',              unit: 'g' },
+  { rx: /^courgettes?/i,                name: 'Courgettes',                    unit: 'g' },
+  { rx: /^carottes?( r[âa]p[ée]e?)?$/i, name: 'Carottes',                      unit: 'g' },
+  { rx: /^tomates cerise/i,             name: 'Tomates cerise',                unit: 'g' },
+  { rx: /^tomates concass/i,            name: 'Tomates concassées',            unit: 'g' },
+  { rx: /^tomates$/i,                   name: 'Tomates',                       unit: 'g' },
+  { rx: /^poivrons?/i,                  name: 'Poivron',                       unit: 'g' },
+  { rx: /flocons d'?avoine/i,           name: "Flocons d'avoine",              unit: 'g' },
+  { rx: /beurre de cacahu/i,            name: 'Beurre de cacahuète',           unit: 'g' },
+  { rx: /pain complet/i,                name: 'Pain complet',                  unit: 'g' },
+  { rx: /fruits rouges/i,               name: 'Fruits rouges',                 unit: 'g' },
+  { rx: /^citron vert/i,                name: 'Citron vert',                   unit: 'pièces' },
+  { rx: /^citron/i,                     name: 'Citron',                        unit: 'pièces' },
+  { rx: /^oignon rouge/i,               name: 'Oignon rouge',                  unit: 'g' },
+  { rx: /^oignon/i,                     name: 'Oignon',                        unit: 'g' },
+];
+
+// Renvoie {name, unit} canonique pour un ingrédient, ou null si on garde tel quel.
+function canonical(ingName) {
+  for (const c of CANON) {
+    if (c.rx.test(ingName)) return { name: c.name, unit: c.unit };
+  }
+  return null;
+}
+
 function categorize(name) {
   const n = name.toLowerCase();
   for (const cat of CATEGORIES) {
@@ -3604,10 +3785,14 @@ function buildList(dates) {
         const s = item.servings || 1;
         const ov = item.overrides;
         r.ingredients.forEach((ing, idx) => {
-          const key = ing.name.toLowerCase();
-          if (!map[key]) map[key] = { name: ing.name, qty: 0, unit: ing.unit, cat: categorize(ing.name) };
-          // quantité réelle : override en grammes si présent, sinon qty × portions
-          map[key].qty += (ov && ov[idx] != null) ? ov[idx] : ing.qty * s;
+          const qty = (ov && ov[idx] != null) ? ov[idx] : ing.qty * s;
+          const canon = canonical(ing.name);
+          // On ne fusionne que si l'unité de la recette correspond à l'unité canonique
+          const useCanon = canon && canon.unit === ing.unit;
+          const displayName = useCanon ? canon.name : ing.name;
+          const key = displayName.toLowerCase();
+          if (!map[key]) map[key] = { name: displayName, qty: 0, unit: ing.unit, cat: categorize(displayName) };
+          map[key].qty += qty;
         });
       });
     });

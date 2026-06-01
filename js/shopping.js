@@ -20,6 +20,52 @@ const CATEGORIES = [
   { name: 'Épicerie & Autres', match: [] },
 ];
 
+// Regroupe les variantes d'un même produit en un seul nom canonique,
+// pour éviter les doublons dans la liste de courses (poulet / poulet cuit / poulet émincé…).
+// On ne fusionne que des produits réellement identiques à l'achat.
+const CANON = [
+  { rx: /poulet/i,                       name: 'Blanc de poulet',               unit: 'g' },
+  { rx: /thon/i,                         name: 'Thon au naturel',               unit: 'g' },
+  { rx: /\bdinde\b/i,                    name: 'Blanc de dinde',                unit: 'g' },
+  { rx: /^oeufs?( durs| poch)?$|^oeuf$/i,name: 'Oeufs',                         unit: 'pièces' },
+  { rx: /blancs? d'?oeuf/i,              name: "Blancs d'oeuf",                 unit: 'g' },
+  { rx: /^p[âa]tes/i,                    name: 'Pâtes',                         unit: 'g' },
+  { rx: /^riz/i,                         name: 'Riz',                           unit: 'g' },
+  { rx: /boulgh?our|boulgour/i,          name: 'Boulghour',                     unit: 'g' },
+  { rx: /quinoa/i,                       name: 'Quinoa',                        unit: 'g' },
+  { rx: /^orzo/i,                        name: 'Orzo',                          unit: 'g' },
+  { rx: /lentilles corail/i,            name: 'Lentilles corail',             unit: 'g' },
+  { rx: /lentilles vertes/i,            name: 'Lentilles vertes',             unit: 'g' },
+  { rx: /pois chiches/i,                name: 'Pois chiches',                  unit: 'g' },
+  { rx: /haricots rouges/i,             name: 'Haricots rouges',              unit: 'g' },
+  { rx: /haricots blancs/i,             name: 'Haricots blancs',              unit: 'g' },
+  { rx: /haricots verts/i,              name: 'Haricots verts',               unit: 'g' },
+  { rx: /^[ée]pinards/i,                name: 'Épinards',                      unit: 'g' },
+  { rx: /fromage blanc/i,               name: 'Fromage blanc 0%',              unit: 'g' },
+  { rx: /^courgettes?/i,                name: 'Courgettes',                    unit: 'g' },
+  { rx: /^carottes?( r[âa]p[ée]e?)?$/i, name: 'Carottes',                      unit: 'g' },
+  { rx: /^tomates cerise/i,             name: 'Tomates cerise',                unit: 'g' },
+  { rx: /^tomates concass/i,            name: 'Tomates concassées',            unit: 'g' },
+  { rx: /^tomates$/i,                   name: 'Tomates',                       unit: 'g' },
+  { rx: /^poivrons?/i,                  name: 'Poivron',                       unit: 'g' },
+  { rx: /flocons d'?avoine/i,           name: "Flocons d'avoine",              unit: 'g' },
+  { rx: /beurre de cacahu/i,            name: 'Beurre de cacahuète',           unit: 'g' },
+  { rx: /pain complet/i,                name: 'Pain complet',                  unit: 'g' },
+  { rx: /fruits rouges/i,               name: 'Fruits rouges',                 unit: 'g' },
+  { rx: /^citron vert/i,                name: 'Citron vert',                   unit: 'pièces' },
+  { rx: /^citron/i,                     name: 'Citron',                        unit: 'pièces' },
+  { rx: /^oignon rouge/i,               name: 'Oignon rouge',                  unit: 'g' },
+  { rx: /^oignon/i,                     name: 'Oignon',                        unit: 'g' },
+];
+
+// Renvoie {name, unit} canonique pour un ingrédient, ou null si on garde tel quel.
+function canonical(ingName) {
+  for (const c of CANON) {
+    if (c.rx.test(ingName)) return { name: c.name, unit: c.unit };
+  }
+  return null;
+}
+
 function categorize(name) {
   const n = name.toLowerCase();
   for (const cat of CATEGORIES) {
@@ -41,10 +87,14 @@ function buildList(dates) {
         const s = item.servings || 1;
         const ov = item.overrides;
         r.ingredients.forEach((ing, idx) => {
-          const key = ing.name.toLowerCase();
-          if (!map[key]) map[key] = { name: ing.name, qty: 0, unit: ing.unit, cat: categorize(ing.name) };
-          // quantité réelle : override en grammes si présent, sinon qty × portions
-          map[key].qty += (ov && ov[idx] != null) ? ov[idx] : ing.qty * s;
+          const qty = (ov && ov[idx] != null) ? ov[idx] : ing.qty * s;
+          const canon = canonical(ing.name);
+          // On ne fusionne que si l'unité de la recette correspond à l'unité canonique
+          const useCanon = canon && canon.unit === ing.unit;
+          const displayName = useCanon ? canon.name : ing.name;
+          const key = displayName.toLowerCase();
+          if (!map[key]) map[key] = { name: displayName, qty: 0, unit: ing.unit, cat: categorize(displayName) };
+          map[key].qty += qty;
         });
       });
     });
