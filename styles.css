@@ -1254,6 +1254,7 @@ input, .serv-input, .field-input, .mrow-input, .pcell-input, .sheet-search {
 /* ═══════════════════════════════════════════════════
    HÉBÉ — points colorés par catégorie de repas
 ═══════════════════════════════════════════════════ */
+.slot-label.slot-starter::before { background: #8FB39E; }  /* entrée — sauge clair */
 .slot-label.slot-lunch::before  { background: #6BA292; }  /* déjeuner — vert */
 .slot-label.slot-dinner::before { background: #C98B6B; }  /* dîner — terracotta */
 .slot-label.slot-sides::before  { background: #D9A865; }  /* accompagnements — ambre */
@@ -1305,3 +1306,278 @@ input, .serv-input, .field-input, .mrow-input, .pcell-input, .sheet-search {
 .ing-edit-input:focus { border-color: var(--sage); }
 .ing-edit-unit { font-size: 11px; color: var(--muted2); width: 30px; }
 .ing-editor-done { width: 100%; margin-top: 14px; background: var(--sage); color: #fff; border: none; border-radius: var(--radius-s); padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer; }
+
+/* ═══════════════════════════════════════════════════
+   HÉBÉ — générateur de semaine (accueil)
+═══════════════════════════════════════════════════ */
+.gen-card {
+  margin: 6px 16px 18px; padding: 22px 18px;
+  background: linear-gradient(150deg, var(--sage-bg) 0%, var(--s1) 70%);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.gen-title { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500; line-height: 1.15; }
+.gen-sub { font-size: 13px; color: var(--muted2); margin: 6px 0 18px; line-height: 1.5; }
+.gen-cantine {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--s1); border: 1px solid var(--border);
+  border-radius: var(--radius-s); padding: 12px 16px; margin-bottom: 14px;
+}
+.gen-cantine-label { font-size: 14px; font-weight: 500; }
+.cantine-stepper { display: flex; align-items: center; gap: 12px; background: var(--s2); border-radius: 99px; padding: 4px; }
+.cant-btn { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border); background: var(--s1); color: var(--sage-d); font-size: 18px; cursor: pointer; }
+.cant-btn:active { background: var(--sage); color: #fff; }
+.cant-val { font-size: 17px; font-weight: 700; min-width: 22px; text-align: center; }
+.generate-btn {
+  width: 100%; background: var(--sage); color: #fff; border: none;
+  border-radius: var(--radius-s); padding: 15px; font-size: 15px; font-weight: 600;
+  font-family: 'Outfit', sans-serif; cursor: pointer;
+  box-shadow: 0 8px 22px rgba(124,152,133,0.3); letter-spacing: 0.02em;
+}
+.generate-btn:active { background: var(--sage-d); transform: scale(.99); }
+.generate-btn:disabled { opacity: 0.7; }
+
+/* Cantine — toggles jours Lun-Dim */
+.cantine-days { display: flex; gap: 5px; }
+.cant-day {
+  width: 32px; height: 32px; border-radius: 9px; border: 1px solid var(--border);
+  background: var(--s2); color: var(--muted2); font-size: 13px; font-weight: 600; cursor: pointer;
+  font-family: 'Outfit', sans-serif; transition: all .12s;
+}
+.cant-day.on { background: var(--sage); color: #fff; border-color: var(--sage); }
+.cant-day:active { transform: scale(.92); }
+.gen-cantine { flex-wrap: wrap; gap: 10px; }
+
+/* ═══════════════════════════════════════════════════
+   HÉBÉ — page batch cooking
+═══════════════════════════════════════════════════ */
+.week-actions { display: flex; flex-direction: column; gap: 10px; margin: 4px 16px 20px; }
+.week-batch-btn, .week-shop-btn {
+  width: 100%; padding: 14px; border-radius: var(--radius-s); font-size: 15px; font-weight: 600;
+  font-family: 'Outfit', sans-serif; cursor: pointer; border: none;
+}
+.week-batch-btn { background: var(--sage-d); color: #fff; box-shadow: 0 6px 18px rgba(94,122,103,0.3); }
+.week-shop-btn { background: var(--s1); color: var(--sage-d); border: 1.5px solid var(--sage) !important; }
+.week-batch-btn:active, .week-shop-btn:active { transform: scale(.99); }
+
+.batch-header { display: flex; align-items: center; gap: 10px; padding: 20px 16px 6px; }
+.batch-back { background: none; border: none; color: var(--sage-d); font-size: 15px; font-weight: 600; cursor: pointer; padding: 0; }
+.batch-view .page-title { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 500; margin: 0; }
+
+.batch-hero {
+  margin: 8px 16px 20px; padding: 22px 18px; text-align: center;
+  background: linear-gradient(150deg, var(--sage-bg) 0%, var(--s1) 70%);
+  border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.batch-hero-time { font-family: 'Fraunces', serif; font-size: 44px; font-weight: 500; color: var(--sage-d); line-height: 1; }
+.batch-hero-sub { font-size: 14px; color: var(--text-2); margin-top: 8px; line-height: 1.5; }
+
+.batch-section-title {
+  font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--sage-d); margin: 24px 20px 12px;
+}
+
+/* Timeline */
+.batch-timeline { margin: 0 16px; }
+.bt-step { display: flex; gap: 14px; }
+.bt-rail { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+.bt-dot {
+  width: 38px; height: 38px; border-radius: 50%; background: var(--s1); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; z-index: 1;
+}
+.bt-dot.oven, .bt-dot.airfryer { background: #FBEEE6; } .bt-dot.cut { background: var(--sage-bg); }
+.bt-dot.stove { background: #FBF3E0; } .bt-dot.stove2 { background: #F0EAD8; } .bt-dot.wait { background: var(--s3); }
+.bt-dot.pack, .bt-dot.assemble, .bt-dot.prep { background: var(--sage-bg); }
+.bt-line { width: 2px; flex: 1; background: var(--border); margin: 2px 0; min-height: 16px; }
+.bt-body { flex: 1; padding-bottom: 18px; }
+.bt-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.bt-title { font-size: 15px; font-weight: 600; color: var(--text); }
+.bt-mins { font-size: 12px; font-weight: 600; color: var(--sage-d); background: var(--sage-bg); padding: 2px 9px; border-radius: 99px; white-space: nowrap; }
+.bt-detail { font-size: 13px; color: var(--muted2); margin-top: 4px; line-height: 1.5; }
+
+/* Tâches groupées */
+.batch-group { margin: 0 16px 12px; background: var(--s1); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+.bg-title { font-size: 14px; font-weight: 600; padding: 13px 16px; border-bottom: 1px solid var(--s3); }
+.bg-row { display: flex; justify-content: space-between; gap: 10px; padding: 10px 16px; }
+.bg-row + .bg-row { border-top: 1px solid var(--s3); }
+.bg-name { font-size: 14px; }
+.bg-qty { font-size: 13px; color: var(--sage-d); font-weight: 600; white-space: nowrap; }
+.batch-empty { text-align: center; color: var(--muted2); padding: 50px 30px; line-height: 1.6; }
+
+/* ═══════════════════════════════════════════════════
+   HÉBÉ — fiches recettes de la semaine
+═══════════════════════════════════════════════════ */
+.batch-intro { font-size: 13px; color: var(--muted2); margin: 0 16px 16px; line-height: 1.5; }
+.bc-recipe {
+  margin: 0 16px 16px; background: var(--s1); border: 1px solid var(--border);
+  border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; padding: 16px 18px 18px;
+}
+.bc-recipe-hd { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.bc-emoji { font-size: 30px; }
+.bc-name { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 500; line-height: 1.2; }
+.bc-meta { font-size: 12px; color: var(--sage-d); font-weight: 600; margin-top: 3px; }
+.bc-block-title {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--sage-d); margin: 14px 0 8px;
+}
+.bc-ings { background: var(--sage-bg); border-radius: var(--radius-s); padding: 4px 12px; }
+.bc-ing { display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; font-size: 14px; }
+.bc-ing + .bc-ing { border-top: 1px solid rgba(124,152,133,0.18); }
+.bc-ing-q { color: var(--sage-d); font-weight: 600; white-space: nowrap; }
+.bc-steps { display: flex; flex-direction: column; gap: 10px; }
+.bc-step { display: flex; gap: 10px; font-size: 14px; line-height: 1.5; }
+.bc-step-n {
+  flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: var(--sage); color: #fff;
+  font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+}
+.bc-tip { margin-top: 14px; padding: 12px 14px; background: var(--s2); border-radius: var(--radius-s); font-size: 13px; color: var(--text-2); line-height: 1.5; border-left: 3px solid var(--sage-l); }
+
+/* ═══════════════════════════════════════════════════
+   HÉBÉ — tuiles d'action Semaine (visuelles, sans emoji)
+═══════════════════════════════════════════════════ */
+.week-tiles { display: flex; gap: 12px; margin: 6px 16px 22px; }
+.week-tile {
+  flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
+  padding: 18px 16px; border-radius: var(--radius); cursor: pointer;
+  border: 1px solid var(--border); background: var(--s1);
+  box-shadow: var(--shadow); transition: transform .12s, box-shadow .12s;
+  text-align: left; position: relative; overflow: hidden;
+}
+.week-tile:active { transform: scale(.97); }
+.tile-ic {
+  width: 46px; height: 46px; border-radius: 13px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 10px;
+}
+.tile-ic svg { width: 26px; height: 26px; }
+.tile-label { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 500; color: var(--text); line-height: 1; }
+.tile-sub { font-size: 12px; color: var(--muted2); }
+
+/* Recettes : fond sauge clair, icône sauge foncé */
+.tile-recipes .tile-ic { background: var(--sage-bg); color: var(--sage-d); }
+/* Courses : fond crème ambré, icône terracotta */
+.tile-shop .tile-ic { background: #F6EEE2; color: var(--fat); }
+
+/* décor : grand chiffre/teinte de fond subtil */
+.week-tile::after {
+  content: ''; position: absolute; right: -20px; bottom: -20px;
+  width: 70px; height: 70px; border-radius: 50%;
+  background: var(--sage-bg); opacity: .35; z-index: 0;
+}
+.tile-shop::after { background: #F6EEE2; opacity: .5; }
+.week-tile > * { position: relative; z-index: 1; }
+
+/* ═══════════════════════════════════════════════════
+   HÉBÉ — cohérence visuelle globale (sobre & soignée)
+═══════════════════════════════════════════════════ */
+/* Boutons retour unifiés */
+.batch-back, .detail-back {
+  display: inline-flex; align-items: center; gap: 3px;
+  background: none; border: none; color: var(--sage-d);
+  font-size: 14px; font-weight: 600; cursor: pointer; padding: 6px 0;
+}
+.batch-back:active, .detail-back:active { opacity: .6; }
+
+/* Titres de page : Fraunces, généreux */
+.page-title, .shopping-title, .macros-view .macros-date {
+  font-family: 'Fraunces', serif; font-weight: 500; letter-spacing: -0.01em;
+}
+
+/* Intro de page : discrète */
+.batch-intro { font-size: 12.5px; color: var(--muted2); letter-spacing: 0.01em; }
+
+/* Boutons primaires cohérents (génération, optimiser, terminé…) : même grammaire */
+.generate-btn, .optimize-btn, .ing-editor-done, .apply-btn {
+  font-family: 'Outfit', sans-serif; letter-spacing: 0.01em;
+}
+
+/* Cartes : ombre douce homogène partout */
+.week-day, .meal-slot, .macros-hero, .settings-card, .target-card,
+.phase-guide, .proto-card, .set-hero, .bc-recipe, .shop-group, .gen-card,
+.planner-header, .week-tile {
+  box-shadow: 0 4px 20px rgba(94,122,103,0.07) !important;
+}
+
+/* Transitions douces sur les éléments tappables */
+.week-day, .meal-slot, .proto-card, .recipe-card, .shop-item, .bc-recipe {
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.week-day:active, .recipe-card:active { transform: scale(.99); }
+
+/* ═══════════════════════════════════════════════════
+   HÉBÉ — slider de recettes (swipe)
+═══════════════════════════════════════════════════ */
+.bc-progress { display: flex; align-items: center; justify-content: space-between; margin: 0 16px 12px; }
+.bc-counter { font-size: 13px; color: var(--muted2); font-weight: 600; }
+.bc-cur { color: var(--sage-d); }
+.bc-dots { display: flex; gap: 6px; }
+.bc-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border-2); transition: all .2s; }
+.bc-dot.on { background: var(--sage); width: 20px; border-radius: 4px; }
+
+.bc-slider { overflow: hidden; }
+.bc-track { display: flex; transition: transform .3s cubic-bezier(.4,0,.2,1); }
+.bc-slide { min-width: 100%; box-sizing: border-box; }
+.bc-slide .bc-recipe { margin: 0 16px; }
+
+.bc-nav { display: flex; justify-content: center; gap: 16px; margin: 16px 0 8px; }
+.bc-arrow {
+  width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--border);
+  background: var(--s1); color: var(--sage-d); font-size: 22px; cursor: pointer;
+  box-shadow: var(--shadow); display: flex; align-items: center; justify-content: center;
+  transition: all .12s;
+}
+.bc-arrow:active { background: var(--sage); color: #fff; transform: scale(.94); }
+.bc-arrow:disabled { opacity: .35; cursor: default; box-shadow: none; }
+
+/* ═══════════════════════════════════════════════════
+   HÉBÉ — Courses : progression + pastilles de rayon
+═══════════════════════════════════════════════════ */
+.shop-progress { height: 6px; border-radius: 99px; background: var(--s3); margin-top: 12px; overflow: hidden; }
+.shop-progress-fill { height: 100%; border-radius: 99px; background: var(--sage); transition: width .3s ease; }
+
+.shop-cat-title { display: flex; align-items: center; gap: 8px; }
+.cat-dot { width: 9px; height: 9px; border-radius: 3px; flex-shrink: 0; }
+.cat-0 { background: #C98B6B; }  /* Viandes & poisson — terracotta */
+.cat-1 { background: #6BA292; }  /* Œufs & laitages — vert */
+.cat-2 { background: #8FB39E; }  /* Légumes & fruits — sauge */
+.cat-3 { background: #D9A865; }  /* Féculents — ambre */
+.cat-4 { background: #B08BB0; }  /* Épicerie — mauve */
+
+/* Bandeau de plage : un peu plus présent */
+.shop-range-banner { display: flex; align-items: center; justify-content: space-between; font-weight: 600; color: var(--sage-d); }
+.shop-switch { background: none; border: none; color: var(--muted2); font-size: 12px; text-decoration: underline; cursor: pointer; }
+
+/* Conservation dans les fiches recettes */
+.bc-conserv { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+.bc-conserv-item {
+  font-size: 12px; color: var(--text-2); background: var(--s2);
+  padding: 5px 10px; border-radius: 99px; display: inline-flex; align-items: center; gap: 5px;
+}
+.bc-conserv-item strong { color: var(--sage-d); font-weight: 600; }
+.bc-conserv-ic { font-size: 12px; }
+
+/* ═══════════════════════════════════════════════════
+   HÉBÉ — blocs de catégories Courses (esthétiques)
+═══════════════════════════════════════════════════ */
+.shop-cat {
+  margin: 0 16px 16px; border-radius: var(--radius); overflow: hidden;
+  background: var(--s1); border: 1px solid var(--border);
+  box-shadow: 0 4px 20px rgba(94,122,103,0.07);
+}
+.shop-cat-head {
+  display: flex; align-items: center; gap: 10px; padding: 13px 16px;
+  font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 13px;
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+.shop-cat-ic { width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; }
+.shop-cat-ic svg { width: 22px; height: 22px; }
+.shop-cat-name { flex: 1; }
+.shop-cat-count { font-size: 12px; font-weight: 600; letter-spacing: 0; opacity: .7; text-transform: none; }
+.shop-cat .shop-group { background: var(--s1); padding: 0; box-shadow: none; border: none; margin: 0; border-radius: 0; }
+
+/* Bandeaux colorés par rayon (teintes douces) */
+.cat-c-0 .shop-cat-head { background: #FaF0EA; color: #B5704F; }   /* Viandes — terracotta */
+.cat-c-1 .shop-cat-head { background: #EAF3EF; color: #4E7E6C; }   /* Laitages — vert */
+.cat-c-2 .shop-cat-head { background: #EDF3EE; color: #5E7A67; }   /* Légumes — sauge */
+.cat-c-3 .shop-cat-head { background: #FaF3E6; color: #B98A3E; }   /* Féculents — ambre */
+.cat-c-4 .shop-cat-head { background: #F2EDF2; color: #8A6A8A; }   /* Épicerie — mauve */
