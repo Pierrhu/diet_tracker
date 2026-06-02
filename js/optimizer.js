@@ -64,7 +64,7 @@ export function computeDayFromItems(items) {
   }, { kcal:0, protein:0, carbs:0, fat:0 });
 }
 
-export function optimizeDay(items, targets) {
+export function optimizeDay(items, targets, maxScale = 3) {
   const levers = [];
   const work = items.map(it => {
     const r = getById(it.id);
@@ -82,7 +82,7 @@ export function optimizeDay(items, targets) {
             ref: ov, idx, type: cls,
             // bornes : comptables limités (ex. œufs 1–6×base), sinon 0.3×–3.5×
             min: countable ? ing.qty : Math.max(20, ing.qty * 0.5),
-            max: countable ? ing.qty * 2 : ing.qty * 2.2,
+            max: countable ? ing.qty * 3 : ing.qty * maxScale,
             countable,
             base: ing.qty,
           });

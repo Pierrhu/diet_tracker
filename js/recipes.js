@@ -5,6 +5,7 @@ import { renderRecipeDetail } from './recipeDetail.js';
 
 const FILTERS = [
   { key: 'all',    label: 'Tout'              },
+  { key: 'starter',label: 'Entrées'           },
   { key: 'dinner', label: 'Dîner'              },
   { key: 'lunch',  label: 'Déjeuner'           },
   { key: 'side',   label: 'Accompagnements'    },

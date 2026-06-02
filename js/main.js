@@ -7,6 +7,7 @@ import { renderRecipes }   from './recipes.js';
 import { renderShopping }  from './shopping.js';
 import { renderHistory }   from './history.js';
 import { renderSettings }  from './settings.js';
+import { renderBatch }     from './batch.js';
 
 const VIEWS = {
   week:     renderWeek,
@@ -16,6 +17,7 @@ const VIEWS = {
   shopping: renderShopping,
   history:  renderHistory,
   settings: renderSettings,
+  batch:    renderBatch,
 };
 
 function navigate(view) { setState({ currentView: view }); render(); }

@@ -3,7 +3,6 @@ import { state } from './state.js';
 const ITEMS = [
   { id: 'week',     label: 'Semaine'  },
   { id: 'planner',  label: 'Jour'     },
-  { id: 'macros',   label: 'Macros'   },
   { id: 'recipes',  label: 'Recettes' },
   { id: 'shopping', label: 'Courses'  },
 ];

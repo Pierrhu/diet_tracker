@@ -1,5 +1,5 @@
 // DIET — bundled app (généré par build.js)
-// 2026-06-01T14:24:27.832Z
+// 2026-06-02T23:38:56.909Z
 
 
 // ──────────────────────────────────────────────
@@ -36,11 +36,11 @@ const RECIPES = [
       { name: 'Herbes de Provence', qty: 3, unit: 'g', kcal: 8, protein: 0.3, carbs: 1.7, fat: 0.3 },
     ],
     steps: [
-      'Préchauffer le four à 200°C.',
+      'Préchauffer l\'air fryer à 160°C.',
       'Mélanger zeste de citron + ail haché + thym + herbes + huile + sel + poivre.',
       'Inciser le poulet, glisser la marinade sous la peau. Enduire l\'extérieur.',
       'Disposer les légumes coupés en gros morceaux autour. Jus de citron sur tout.',
-      'Enfourner 35-40 min. Reposer 5 min avant de couper.',
+      'Cuire à l\'air fryer 28-32 min. Reposer 4 min avant de couper.',
       'Cuire le riz en parallèle (rincer, 2x volume d\'eau, 12 min).',
     ],
     tip: 'Batch : cuire 3 blancs d\'un coup. Le poulet froid va dans les wraps et salades toute la semaine.',
@@ -132,11 +132,11 @@ const RECIPES = [
       { name: 'Huile d\'olive', qty: 5, unit: 'g', kcal: 45, protein: 0, carbs: 0, fat: 5 },
     ],
     steps: [
-      'Préchauffer le four à 180°C.',
+      'Préchauffer l\'air fryer à 140°C.',
       'Trancher les courgettes finement (3mm). Saler, laisser dégorger 10 min, éponger avec du papier absorbant.',
       'Mélanger thon + ricotta + fromage blanc + oeuf + ail haché + basilic + sel + poivre.',
       'Dans un plat huilé, alterner couches de courgettes et mélange thon. Finir avec parmesan.',
-      'Enfourner 25 min jusqu\'à gratinage doré.',
+      'Cuire à l\'air fryer 20 min jusqu\'à gratinage doré.',
     ],
     tip: 'Faire dégorger les courgettes est indispensable — sinon le gratin rend de l\'eau. Batch : faire x2 et congeler une portion.',
     tags: ['batch', 'four', 'low-carb', 'italien'],
@@ -144,7 +144,7 @@ const RECIPES = [
 
   {
     id: 'D05',
-    name: 'Pad kra pao thaï',
+    name: 'Pad kra pao au poulet',
     category: 'dinner',
     emoji: '🌿',
     prepTime: 10,
@@ -212,7 +212,7 @@ const RECIPES = [
 
   {
     id: 'D07',
-    name: 'Gyudon — boeuf caramélisé soja-mirin',
+    name: 'Gyūdon (bœuf caramélisé soja-mirin)',
     category: 'dinner',
     emoji: '🍱',
     prepTime: 10,
@@ -343,7 +343,7 @@ const RECIPES = [
 
   {
     id: 'D11',
-    name: 'Mafé de poulet — sauce cacahuète',
+    name: 'Mafé de poulet (sauce cacahuète)',
     category: 'dinner',
     emoji: '🥜',
     prepTime: 15,
@@ -508,7 +508,7 @@ const RECIPES = [
 
   {
     id: 'D16',
-    name: 'Poulet tikka masala allégé',
+    name: 'Tikka masala de poulet allégé',
     category: 'dinner',
     emoji: '🍛',
     prepTime: 15,
@@ -541,7 +541,7 @@ const RECIPES = [
 
   {
     id: 'D17',
-    name: 'Poulet souvlaki bowl façon grec',
+    name: 'Bowl grec au poulet souvlaki',
     category: 'dinner',
     emoji: '🇬🇷',
     prepTime: 15,
@@ -565,7 +565,7 @@ const RECIPES = [
       'Mariner le poulet dans huile + jus de citron + origan + ail + sel + poivre 30 min.',
       'Tzatziki : râper le concombre, presser l\'excès d\'eau, mélanger avec fromage blanc + ail râpé + menthe + citron + sel.',
       'Cuire le riz.',
-      'Griller le poulet à la poêle ou grill pan 6-8 min. Reposer 2 min.',
+      'Griller le poulet à la poêle ou grill pan 5-6 min. Reposer 2 min.',
       'Trancher le poulet en lanières.',
       'Assembler le bowl : riz, poulet, tzatziki, tomates cerises, olives. Arroser d\'huile d\'olive.',
     ],
@@ -575,7 +575,7 @@ const RECIPES = [
 
   {
     id: 'D18',
-    name: 'Poisson blanc chermoula marocaine',
+    name: 'Poisson blanc à la chermoula',
     category: 'dinner',
     emoji: '🐟',
     prepTime: 20,
@@ -706,7 +706,7 @@ const RECIPES = [
 
   {
     id: 'L02',
-    name: 'Salade thaï poulet froid',
+    name: 'Salade thaï au poulet',
     category: 'lunch',
     emoji: '🌶️',
     prepTime: 15,
@@ -794,7 +794,7 @@ const RECIPES = [
 
   {
     id: 'L05',
-    name: 'Salade césar allégée poulet',
+    name: 'Salade César allégée au poulet',
     category: 'lunch',
     emoji: '🥗',
     prepTime: 15,
@@ -962,7 +962,7 @@ const RECIPES = [
     ],
     steps: [
       'Couper le chou-fleur en petits bouquets. Mélanger avec huile + cumin + sel.',
-      'Rôtir au four 200°C pendant 25 min jusqu\'à bords dorés et légèrement brûlés.',
+      'Cuire à l\'air fryer à l\'air fryer 180°C pendant 20 min jusqu\'à bords dorés et légèrement brûlés.',
       'Sauce tahini allégée : tahini + fromage blanc + citron + ail râpé + eau tiède pour fluidifier.',
       'Assembler : chou-fleur rôti + pois chiches + poulet froid + sauce tahini + persil.',
     ],
@@ -1050,7 +1050,7 @@ const RECIPES = [
       'Battre les oeufs avec fromage blanc + herbes de Provence + sel + poivre.',
       'Ajouter thon émietté aux légumes. Mélanger.',
       'Verser le mélange oeufs sur les légumes. Feu moyen, 4-5 min.',
-      'Finir 2 min sous le grill du four si l\'omelette est épaisse.',
+      'Finir 2 min en mode grill de l\'air fryer si l\'omelette est épaisse.',
     ],
     tip: 'Le fromage blanc dans les oeufs les rend plus aérés et moins denses. Le poivron fondant avec le thon = combo imbattable.',
     tags: ['français', 'oeufs', 'rapide'],
@@ -1213,11 +1213,11 @@ const RECIPES = [
       { name: 'Huile d\'olive', qty: 5, unit: 'g', kcal: 45, protein: 0, carbs: 0, fat: 5 },
     ],
     steps: [
-      'Préchauffer le four à 180°C.',
+      'Préchauffer l\'air fryer à 140°C.',
       'Faire revenir oignon + tomates + ail dans l\'huile 5 min. Ajouter thon émietté.',
-      'Répartir dans ramequins allant au four.',
+      'Répartir dans des ramequins allant à l\'air fryer.',
       'Casser 1-2 oeufs par ramequin. Émietter la feta dessus.',
-      'Enfourner 10-12 min (blanc pris, jaune encore coulant).',
+      'Cuire à l\'air fryer 8-10 min (blanc pris, jaune encore coulant).',
     ],
     tip: 'La feta apporte le sel — ne pas saler avant de goûter. Servir avec pain grillé pour saucer le jaune coulant.',
     tags: ['four', 'méditerranéen', 'oeufs'],
@@ -1372,7 +1372,7 @@ const RECIPES = [
     steps: [
       'Couper courgettes en rondelles épaisses (1cm) ou en bâtonnets.',
       'Badigeonner d\'huile + herbes + ail + sel + poivre.',
-      'Griller sur grill pan ou four 220°C, 4-5 min de chaque côté.',
+      'Griller à la poêle (ou air fryer 180°C) 3-4 min de chaque côté.',
     ],
     tip: 'Ne pas bouger les courgettes pendant la cuisson pour obtenir les marques de grill. C\'est ce qui donne le goût grillé.',
     tags: ['légumes', 'grill', 'méditerranéen'],
@@ -1499,9 +1499,9 @@ const RECIPES = [
       { name: 'Herbes fraîches', qty: 5, unit: 'g', kcal: 2, protein: 0.2, carbs: 0.5, fat: 0.1 },
     ],
     steps: [
-      'Préchauffer le four à 220°C.',
+      'Préchauffer l\'air fryer à 180°C.',
       'Couper les poivrons en 4 dans la longueur. Badigeonner d\'huile + sel.',
-      'Rôtir 30 min jusqu\'à que la peau soit bien noire sur les bords.',
+      'Cuire à l\'air fryer 24 min jusqu\'à que la peau soit bien noire sur les bords.',
       'Mettre dans un sac plastique fermé 10 min — la vapeur facilite l\'épluchage.',
       'Peler, assaisonner avec huile + balsamique + ail + herbes.',
     ],
@@ -1591,9 +1591,9 @@ const RECIPES = [
       { name: 'Cumin + paprika', qty: 2, unit: 'g', kcal: 6, protein: 0.3, carbs: 1, fat: 0.3 },
     ],
     steps: [
-      'Préchauffer le four à 200°C.',
+      'Préchauffer l\'air fryer à 160°C.',
       'Couper la patate douce en cubes de 2 cm. Assaisonner huile + épices + sel.',
-      'Rôtir 25 min en retournant à mi-cuisson.',
+      'Cuire à l\'air fryer 20 min en retournant à mi-cuisson.',
     ],
     tip: 'Excellent avec du poulet ou du poisson. Très rassasiant.',
     tags: ['féculents', 'batch', 'four'],
@@ -1867,11 +1867,11 @@ const RECIPES = [
       { name: 'Fromage blanc 0% (topping)', qty: 150, unit: 'g', kcal: 68, protein: 12, carbs: 6, fat: 0 },
     ],
     steps: [
-      'Préchauffer le four à 180°C.',
+      'Préchauffer l\'air fryer à 140°C.',
       'Éplucher et couper les pommes en dés. Disposer dans un plat à gratin.',
       'Mélanger flocons + miel + huile de coco fondue + cannelle → forme le crumble.',
       'Répartir le crumble sur les pommes.',
-      'Enfourner 20-25 min jusqu\'à dorure du crumble.',
+      'Cuire à l\'air fryer 16-20 min jusqu\'à dorure du crumble.',
       'Servir avec fromage blanc froid.',
     ],
     tip: 'Batch : faire x2 pommes, congeler en portions. Réchauffer 5 min au four ou 90 sec au micro-ondes.',
@@ -1929,10 +1929,10 @@ const RECIPES = [
       { name: 'Levure chimique', qty: 3, unit: 'g', kcal: 6, protein: 0, carbs: 1.5, fat: 0 },
     ],
     steps: [
-      'Préchauffer le four à 175°C.',
+      'Préchauffer l\'air fryer à 135°C.',
       'Mixer pois chiches + oeufs + miel + beurre de cacahuète + cacao + levure jusqu\'à pâte lisse.',
       'Verser dans un moule huilé de 20x20cm (ou équivalent).',
-      'Enfourner 18-20 min. Le centre doit rester légèrement humide.',
+      'Cuire à l\'air fryer 14-16 min. Le centre doit rester légèrement humide.',
       'Laisser refroidir complètement avant de couper en 4 carrés.',
     ],
     tip: 'On ne sent PAS les pois chiches — le cacao et le beurre de cacahuète dominent. La texture est dense et fondante, exactement comme un vrai brownie. Se congèle très bien.',
@@ -1969,17 +1969,17 @@ const RECIPES = [
       { name: 'Cannelle', qty: 2, unit: 'g', kcal: 5, protein: 0, carbs: 1.4, fat: 0.1 },
     ],
     steps: [
-      'Préchauffer le four à 175°C.',
+      'Préchauffer l\'air fryer à 135°C.',
       'Écraser la banane. Casser le chocolat en pépites.',
       'Mélanger banane + flocons + miel + cannelle + pépites de chocolat.',
       'Former des galettes (la recette en fait 4). Poser sur plaque papier cuisson.',
-      'Enfourner 12-15 min. Laisser refroidir — elles durcissent en refroidissant.',
+      'Cuire à l\'air fryer 10-12 min. Laisser refroidir — elles durcissent en refroidissant.',
     ],
     tip: 'Recette pour 4 galettes — macros par portion de 2. Sans gluten si tu utilises des flocons d\'avoine certifiés. Se conservent 5 jours dans une boîte hermétique.',
     tags: ['batch', 'four', 'biscuit', 'chocolat'],
   },
   {
-    id: 'SW16', name: 'Yaourt glacé maison (frozen yogurt)', category: 'sweet', emoji: '🍦',
+    id: 'SW16', name: 'Yaourt glacé maison', category: 'sweet', emoji: '🍦',
     prepTime: 5, cookTime: 0, batch: true,
     macros: { kcal: 253, protein: 26, carbs: 38, fat: 1 },
     ingredients: [
@@ -2027,7 +2027,7 @@ const RECIPES = [
   // NOUVELLES RECETTES — DÎNERS
   // ─────────────────────────────────────────────────────────────
   {
-    id: 'D21', name: 'Poulet au beurre indien (butter chicken allégé)', category: 'dinner', emoji: '🧈',
+    id: 'D21', name: 'Butter chicken allégé', category: 'dinner', emoji: '🧈',
     prepTime: 15, cookTime: 25, batch: true,
     macros: { kcal: 812, protein: 80, carbs: 80, fat: 19 },
     ingredients: [
@@ -2163,7 +2163,7 @@ const RECIPES = [
       { name: 'Huile + citron + cumin', qty: 8, unit: 'g', kcal: 50, protein: 0.2, carbs: 1, fat: 5 },
     ],
     steps: [
-      'Rôtir la patate douce en dés + pois chiches au four 200°C, 25 min avec huile + cumin.',
+      'Cuire la patate douce en dés + pois chiches à l\'air fryer 180°C, 20 min avec huile + cumin (en une couche, secouer à mi-cuisson).',
       'Sauce : fromage blanc + tahini + citron + ail + eau.',
       'Disposer en bowl : épinards, patate douce, pois chiches, poulet froid.',
       'Napper de sauce tahini-citron.',
@@ -2239,7 +2239,7 @@ const RECIPES = [
   // NOUVELLES RECETTES — DESSERTS & ENCAS
   // ─────────────────────────────────────────────────────────────
   {
-    id: 'SW17', name: 'Cookie dough protéiné (pâte à cookie crue)', category: 'sweet', emoji: '🍪',
+    id: 'SW17', name: 'Pâte à cookie protéinée (à la cuillère)', category: 'sweet', emoji: '🍪',
     prepTime: 5, cookTime: 0, batch: true,
     macros: { kcal: 320, protein: 22, carbs: 32, fat: 12 },
     ingredients: [
@@ -2355,7 +2355,7 @@ const RECIPES = [
     tags: ['encas', '0-cuisson', 'rapide'],
   },
   {
-    id: 'SW23', name: 'Shake masse whey-avoine-cacahuète', category: 'sweet', emoji: '🥤',
+    id: 'SW23', name: 'Shake prise de masse whey-avoine-cacahuète', category: 'sweet', emoji: '🥤',
     prepTime: 3, cookTime: 0, batch: false,
     macros: { kcal: 620, protein: 45, carbs: 65, fat: 18 },
     ingredients: [
@@ -2411,6 +2411,152 @@ const RECIPES = [
     tip: 'À préparer la veille : tu en fais 3-4 bocaux d\'un coup pour la semaine. Le meilleur encas zéro effort.',
     tags: ['encas', '0-cuisson', 'batch', 'high-protein'],
   },
+  {
+    id: 'EN01', name: 'Velouté de courgettes au fromage frais', category: 'starter', emoji: '🥣',
+    prepTime: 10, cookTime: 15, batch: true,
+    macros: { kcal: 130, protein: 9, carbs: 12, fat: 5 },
+    ingredients: [
+      { name: 'Courgettes', qty: 300, unit: 'g', kcal: 51, protein: 3.6, carbs: 9, fat: 0.9 },
+      { name: 'Fromage frais léger', qty: 40, unit: 'g', kcal: 56, protein: 4, carbs: 2.4, fat: 3.6 },
+      { name: 'Oignon', qty: 50, unit: 'g', kcal: 20, protein: 0.6, carbs: 4.5, fat: 0.1 },
+      { name: 'Ail', qty: 1, unit: 'gousse', kcal: 4, protein: 0.2, carbs: 1, fat: 0 },
+      { name: 'Sel + poivre', qty: 1, unit: 'pincée', kcal: 0, protein: 0, carbs: 0, fat: 0 },
+    ],
+    steps: [
+      'Faire revenir oignon + ail.',
+      'Ajouter les courgettes en morceaux, couvrir d\'eau, cuire 15 min.',
+      'Mixer avec le fromage frais, saler/poivrer.',
+    ],
+    tip: 'Léger et rassasiant pour ouvrir le repas. Se garde 4 jours, parfait en batch.',
+    tags: ['entrée', 'batch', 'léger', 'soupe'],
+  },
+  {
+    id: 'EN02', name: 'Salade de crudités vinaigrette légère', category: 'starter', emoji: '🥗',
+    prepTime: 8, cookTime: 0, batch: false,
+    macros: { kcal: 95, protein: 3, carbs: 11, fat: 4 },
+    ingredients: [
+      { name: 'Carottes', qty: 80, unit: 'g', kcal: 33, protein: 0.7, carbs: 7.6, fat: 0.2 },
+      { name: 'Concombre', qty: 100, unit: 'g', kcal: 15, protein: 0.7, carbs: 3, fat: 0.1 },
+      { name: 'Tomates cerise', qty: 80, unit: 'g', kcal: 14, protein: 0.7, carbs: 2.8, fat: 0.2 },
+      { name: 'Huile d\'olive', qty: 4, unit: 'g', kcal: 36, protein: 0, carbs: 0, fat: 4 },
+      { name: 'Vinaigre balsamique', qty: 5, unit: 'g', kcal: 4, protein: 0, carbs: 1, fat: 0 },
+    ],
+    steps: [
+      'Râper les carottes, couper concombre et tomates.',
+      'Mélanger huile + vinaigre + sel.',
+      'Assaisonner juste avant de servir.',
+    ],
+    tip: 'L\'entrée fraîcheur classique. Coupe la faim sans plomber les calories.',
+    tags: ['entrée', '0-cuisson', 'léger', 'salade'],
+  },
+  {
+    id: 'EN03', name: 'Velouté de tomates basilic', category: 'starter', emoji: '🍅',
+    prepTime: 8, cookTime: 15, batch: true,
+    macros: { kcal: 110, protein: 4, carbs: 16, fat: 3 },
+    ingredients: [
+      { name: 'Tomates concassées', qty: 300, unit: 'g', kcal: 72, protein: 3, carbs: 12, fat: 0.6 },
+      { name: 'Oignon', qty: 50, unit: 'g', kcal: 20, protein: 0.6, carbs: 4.5, fat: 0.1 },
+      { name: 'Huile d\'olive', qty: 3, unit: 'g', kcal: 27, protein: 0, carbs: 0, fat: 3 },
+      { name: 'Basilic frais', qty: 5, unit: 'g', kcal: 1, protein: 0.1, carbs: 0.2, fat: 0 },
+      { name: 'Ail', qty: 1, unit: 'gousse', kcal: 4, protein: 0.2, carbs: 1, fat: 0 },
+    ],
+    steps: [
+      'Revenir oignon + ail dans l\'huile.',
+      'Ajouter les tomates, mijoter 15 min.',
+      'Mixer avec le basilic.',
+    ],
+    tip: 'Réconfortant et très peu calorique. Double les quantités pour la semaine.',
+    tags: ['entrée', 'batch', 'léger', 'soupe'],
+  },
+  {
+    id: 'EN04', name: 'Carottes râpées citron-cumin', category: 'starter', emoji: '🥕',
+    prepTime: 7, cookTime: 0, batch: true,
+    macros: { kcal: 100, protein: 2, carbs: 13, fat: 4 },
+    ingredients: [
+      { name: 'Carottes', qty: 150, unit: 'g', kcal: 62, protein: 1.4, carbs: 14, fat: 0.3 },
+      { name: 'Huile d\'olive', qty: 4, unit: 'g', kcal: 36, protein: 0, carbs: 0, fat: 4 },
+      { name: 'Citron (jus)', qty: 10, unit: 'ml', kcal: 2, protein: 0, carbs: 0.7, fat: 0 },
+      { name: 'Cumin', qty: 1, unit: 'pincée', kcal: 2, protein: 0.1, carbs: 0.2, fat: 0.1 },
+    ],
+    steps: [
+      'Râper les carottes.',
+      'Assaisonner huile + citron + cumin + sel.',
+      'Laisser mariner 10 min.',
+    ],
+    tip: 'Tient 3-4 jours au frigo, encore meilleure le lendemain.',
+    tags: ['entrée', '0-cuisson', 'batch', 'léger'],
+  },
+  {
+    id: 'EN05', name: 'Soupe miso aux légumes', category: 'starter', emoji: '🍲',
+    prepTime: 5, cookTime: 8, batch: false,
+    macros: { kcal: 85, protein: 6, carbs: 9, fat: 3 },
+    ingredients: [
+      { name: 'Pâte de miso', qty: 20, unit: 'g', kcal: 40, protein: 2.5, carbs: 5, fat: 1.2 },
+      { name: 'Champignons de Paris', qty: 60, unit: 'g', kcal: 13, protein: 1.9, carbs: 1.8, fat: 0.2 },
+      { name: 'Épinards frais', qty: 40, unit: 'g', kcal: 9, protein: 1.1, carbs: 1.4, fat: 0.2 },
+      { name: 'Oignon', qty: 30, unit: 'g', kcal: 12, protein: 0.4, carbs: 2.7, fat: 0.1 },
+    ],
+    steps: [
+      'Chauffer 400ml d\'eau (sans bouillir).',
+      'Ajouter champignons et oignon, cuire 5 min.',
+      'Hors du feu, délayer le miso, ajouter les épinards.',
+    ],
+    tip: 'Réchauffe et coupe la faim avant le plat. Ne jamais faire bouillir le miso.',
+    tags: ['entrée', 'léger', 'soupe', 'rapide'],
+  },
+  {
+    id: 'EN06', name: 'Salade verte tomate-concombre', category: 'starter', emoji: '🥬',
+    prepTime: 5, cookTime: 0, batch: false,
+    macros: { kcal: 80, protein: 2, carbs: 7, fat: 5 },
+    ingredients: [
+      { name: 'Salade verte', qty: 60, unit: 'g', kcal: 9, protein: 0.8, carbs: 1.2, fat: 0.1 },
+      { name: 'Tomates cerise', qty: 80, unit: 'g', kcal: 14, protein: 0.7, carbs: 2.8, fat: 0.2 },
+      { name: 'Concombre', qty: 80, unit: 'g', kcal: 12, protein: 0.5, carbs: 2.4, fat: 0.1 },
+      { name: 'Huile d\'olive', qty: 5, unit: 'g', kcal: 45, protein: 0, carbs: 0, fat: 5 },
+    ],
+    steps: [
+      'Laver et couper les légumes.',
+      'Assaisonner d\'huile, vinaigre et sel.',
+    ],
+    tip: 'L\'entrée minute zéro effort.',
+    tags: ['entrée', '0-cuisson', 'léger', 'salade'],
+  },
+  {
+    id: 'EN07', name: 'Gaspacho de concombre', category: 'starter', emoji: '🥒',
+    prepTime: 10, cookTime: 0, batch: true,
+    macros: { kcal: 90, protein: 3, carbs: 9, fat: 4 },
+    ingredients: [
+      { name: 'Concombre', qty: 200, unit: 'g', kcal: 30, protein: 1.4, carbs: 6, fat: 0.2 },
+      { name: 'Fromage blanc 0%', qty: 60, unit: 'g', kcal: 27, protein: 4.8, carbs: 2.4, fat: 0 },
+      { name: 'Huile d\'olive', qty: 3, unit: 'g', kcal: 27, protein: 0, carbs: 0, fat: 3 },
+      { name: 'Ail', qty: 1, unit: 'gousse', kcal: 4, protein: 0.2, carbs: 1, fat: 0 },
+      { name: 'Menthe fraîche', qty: 3, unit: 'g', kcal: 1, protein: 0.1, carbs: 0.2, fat: 0 },
+    ],
+    steps: [
+      'Mixer concombre + fromage blanc + ail + menthe.',
+      'Filet d\'huile, sel, servir bien frais.',
+    ],
+    tip: 'Frais et protéiné. Idéal l\'été, se garde 2 jours.',
+    tags: ['entrée', '0-cuisson', 'batch', 'léger', 'soupe'],
+  },
+  {
+    id: 'EN08', name: 'Betteraves-chèvre frais', category: 'starter', emoji: '🍠',
+    prepTime: 6, cookTime: 0, batch: false,
+    macros: { kcal: 120, protein: 6, carbs: 12, fat: 5 },
+    ingredients: [
+      { name: 'Betterave cuite', qty: 120, unit: 'g', kcal: 52, protein: 2, carbs: 9.6, fat: 0.2 },
+      { name: 'Fromage frais léger', qty: 40, unit: 'g', kcal: 56, protein: 4, carbs: 2.4, fat: 3.6 },
+      { name: 'Huile d\'olive', qty: 2, unit: 'g', kcal: 18, protein: 0, carbs: 0, fat: 2 },
+      { name: 'Ciboulette', qty: 3, unit: 'g', kcal: 1, protein: 0.1, carbs: 0.1, fat: 0 },
+    ],
+    steps: [
+      'Couper les betteraves en dés.',
+      'Émietter le fromage frais dessus.',
+      'Filet d\'huile, ciboulette, poivre.',
+    ],
+    tip: 'Sucré-salé qui change. Les betteraves déjà cuites sous vide font gagner du temps.',
+    tags: ['entrée', '0-cuisson', 'léger'],
+  },
 ];
 
 // ─────────────────────────────────────────────────────────────
@@ -2421,6 +2567,7 @@ const getDinners = () => RECIPES.filter(r => r.category === 'dinner');
 const getLunches = () => RECIPES.filter(r => r.category === 'lunch');
 const getSides   = () => RECIPES.filter(r => r.category === 'side');
 const getSweets  = () => RECIPES.filter(r => r.category === 'sweet');
+const getStarters = () => RECIPES.filter(r => r.category === 'starter');
 const getById    = (id) => RECIPES.find(r => r.id === id);
 const getBatch   = () => RECIPES.filter(r => r.batch);
 
@@ -2620,7 +2767,7 @@ const USER = {
 //
 // Migration : les anciennes entrées stockaient des strings ('D01') → converties à la volée.
 
-const EMPTY_MEALS = () => ({ lunch: [], dinner: [], sides: [], sweet: [] });
+const EMPTY_MEALS = () => ({ starter: [], lunch: [], dinner: [], sides: [], sweet: [] });
 
 function normalizeItem(item) {
   // Ancien format : string → { id, servings:1 }
@@ -2632,7 +2779,7 @@ function normalizeItem(item) {
 
 function normalizeEntry(entry) {
   const meals = EMPTY_MEALS();
-  ['lunch', 'dinner', 'sides', 'sweet'].forEach(slot => {
+  ['starter', 'lunch', 'dinner', 'sides', 'sweet'].forEach(slot => {
     meals[slot] = (entry.meals?.[slot] || []).map(normalizeItem);
   });
   return { date: entry.date, meals };
@@ -2716,9 +2863,9 @@ function formatDateShort(isoDate) {
   });
 }
 
-function mbar(value, target, color) {
+function mbar(value, target, color, overThreshold = 1.08) {
   const pct = Math.min((value / target) * 100, 100).toFixed(1);
-  const over = value > target;
+  const over = value > target * overThreshold;
   return `<div class="mbar-wrap"><div class="mbar ${over ? 'over' : ''}" style="width:${pct}%;background:${over ? 'var(--danger)' : color}"></div></div>`;
 }
 
@@ -2762,7 +2909,7 @@ function scaledMacros(recipe, servings = 1) {
 
 // Total d'un jour : meals = { slot: [{id, servings, overrides?}] }
 function computeDayMacros(entry) {
-  const slots = ['lunch', 'dinner', 'sides', 'sweet'];
+  const slots = ['starter', 'lunch', 'dinner', 'sides', 'sweet'];
   return slots.reduce((acc, slot) => {
     (entry.meals[slot] || []).forEach(item => {
       const m = itemMacros(item);
@@ -2854,7 +3001,7 @@ function computeDayFromItems(items) {
   }, { kcal:0, protein:0, carbs:0, fat:0 });
 }
 
-function optimizeDay(items, targets) {
+function optimizeDay(items, targets, maxScale = 3) {
   const levers = [];
   const work = items.map(it => {
     const r = getById(it.id);
@@ -2872,7 +3019,7 @@ function optimizeDay(items, targets) {
             ref: ov, idx, type: cls,
             // bornes : comptables limités (ex. œufs 1–6×base), sinon 0.3×–3.5×
             min: countable ? ing.qty : Math.max(20, ing.qty * 0.5),
-            max: countable ? ing.qty * 2 : ing.qty * 2.2,
+            max: countable ? ing.qty * 3 : ing.qty * maxScale,
             countable,
             base: ing.qty,
           });
@@ -2963,6 +3110,240 @@ function optimizeDay(items, targets) {
 
 
 // ──────────────────────────────────────────────
+// js/weekgen.js
+// ──────────────────────────────────────────────
+// weekgen.js — Générateur de menu de semaine automatique pour le batch cooking.
+//
+// Principe :
+//  1. On choisit 4-5 plats qui PARTAGENT des ingrédients (batch facile), au hasard
+//     (différent à chaque génération) parmi dîners + déjeuners.
+//  2. On choisit 2-3 desserts batch.
+//  3. Chaque plat est répété 1-2× dans la semaine, réparti sur les créneaux libres
+//     (midis non-cantine + dîners). Les midis cantine reçoivent le menu C01.
+//  4. On optimise les quantités sur la semaine (protéines prioritaires).
+//  5. Les quantités d'achat sont arrondies aux formats du commerce.
+
+
+// ── Similarité entre recettes : nb d'ingrédients "principaux" partagés ──
+function mainIngredients(r) {
+  return new Set(
+    r.ingredients
+      .filter(i => classifyIngredient(i.name) !== 'fixed')
+      .map(i => canonicalKey(i.name))
+  );
+}
+function canonicalKey(name) {
+  const n = name.toLowerCase();
+  if (/poulet/.test(n)) return 'poulet';
+  if (/thon/.test(n)) return 'thon';
+  if (/boeuf|bœuf|steak/.test(n)) return 'boeuf';
+  if (/dinde/.test(n)) return 'dinde';
+  if (/saumon|colin|merlu|cabillaud|poisson/.test(n)) return 'poisson';
+  if (/crevette/.test(n)) return 'crevette';
+  if (/\briz\b/.test(n)) return 'riz';
+  if (/pâte|pate/.test(n)) return 'pates';
+  if (/quinoa/.test(n)) return 'quinoa';
+  if (/patate douce/.test(n)) return 'patate douce';
+  if (/lentille/.test(n)) return 'lentille';
+  if (/pois chiche/.test(n)) return 'pois chiche';
+  return n;
+}
+function shareScore(a, b) {
+  const sa = mainIngredients(a), sb = mainIngredients(b);
+  let n = 0; sa.forEach(x => { if (sb.has(x)) n++; });
+  return n;
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// Choisit nbMains plats qui partagent un max d'ingrédients, en partant d'une graine aléatoire.
+function pickCohesiveMains(pool, nbMains) {
+  const start = pool[Math.floor(Math.random() * pool.length)];
+  const chosen = [start];
+  const rest = pool.filter(r => r.id !== start.id);
+  while (chosen.length < nbMains && rest.length) {
+    // score chaque candidat = somme des partages avec les plats déjà choisis (+ un peu d'aléa)
+    let best = null, bestScore = -1;
+    shuffle(rest).forEach(cand => {
+      const sc = chosen.reduce((s, c) => s + shareScore(c, cand), 0) + Math.random() * 0.9;
+      if (sc > bestScore) { bestScore = sc; best = cand; }
+    });
+    chosen.push(best);
+    rest.splice(rest.indexOf(best), 1);
+  }
+  return chosen;
+}
+
+// ── Génère le plan de la semaine ──
+// opts = { cantineLunches: number (0-5), targets: {kcal,protein,carbs,fat} }
+// Renvoie { dates: {date: {meals}}, mains, sweets }
+
+function generateWeek({ cantineDays = [], nextWeek = true, targets } = {}) {
+  targets = targets || { kcal: 2200, protein: 180, carbs: 220, fat: 65 };
+  const dates = nextWeek ? getNextWeekDates() : getWeekDates();
+
+  const dinners = getDinners();
+  const lunches = getLunches().filter(r => r.id !== 'C01'); // la cantine est gérée à part
+  const sweets  = getSweets();
+
+  // 4-5 plats cohérents. Viande/poisson OBLIGATOIRE chaque jour → on ne garde
+  // que les plats contenant une vraie source de viande ou poisson comme levier.
+  const hasMeat = r => r.ingredients.some(i => classifyIngredient(i.name) === 'protein');
+  const nbMains = 4 + Math.round(Math.random()); // 4 ou 5
+  const meatPool = shuffle([...dinners, ...lunches].filter(hasMeat));
+  const mains = pickCohesiveMains(meatPool.length >= nbMains ? meatPool : [...dinners, ...lunches], nbMains);
+
+  // 2-3 desserts batch (on privilégie ceux tagués batch)
+  const nbSweets = 2 + Math.round(Math.random()); // 2 ou 3
+  const sweetPool = shuffle(sweets);
+  const batchSweets = sweetPool.filter(s => (s.tags || []).includes('batch'));
+  const chosenSweets = (batchSweets.length >= nbSweets ? batchSweets : sweetPool).slice(0, nbSweets);
+
+  // ── Répartition sur la semaine ──
+  // cantineDays : tableau d'index de jour (0=Lun … 6=Dim) où le midi est à la cantine.
+  const slotsToFill = [];
+  dates.forEach((date, i) => {
+    slotsToFill.push({ date, slot: 'dinner' });
+    if (cantineDays.includes(i)) {
+      slotsToFill.push({ date, slot: 'lunch', cantine: true });
+    } else {
+      slotsToFill.push({ date, slot: 'lunch' });
+    }
+  });
+
+  // file des plats maison (chaque plat ×2 si possible, pour le batch)
+  let mealQueue = [];
+  mains.forEach(m => { mealQueue.push(m); mealQueue.push(m); }); // ×2
+  mealQueue = shuffle(mealQueue);
+
+  // construit l'objet entries
+  const entries = {};
+  dates.forEach(d => entries[d] = { date: d, meals: { starter: [], lunch: [], dinner: [], sides: [], sweet: [] } });
+
+  // Place les plats maison en évitant le même plat midi+soir le même jour.
+  let qi = 0;
+  const nextMeal = (avoidId) => {
+    for (let k = 0; k < mealQueue.length; k++) {
+      const cand = mealQueue[(qi + k) % mealQueue.length];
+      if (cand.id !== avoidId) { qi += k + 1; return cand; }
+    }
+    const m = mealQueue[qi % mealQueue.length]; qi++; return m;
+  };
+  slotsToFill.forEach(s => {
+    if (s.cantine) {
+      entries[s.date].meals.lunch.push({ id: 'C01', servings: 1 });
+      return;
+    }
+    // éviter de répéter le plat déjà mis à l'autre repas du jour
+    const other = s.slot === 'dinner' ? entries[s.date].meals.lunch : entries[s.date].meals.dinner;
+    const avoidId = other[0]?.id;
+    const meal = nextMeal(avoidId);
+    entries[s.date].meals[s.slot].push({ id: meal.id, servings: 1 });
+  });
+
+  // desserts batch : on en met 2 max, répartis dans la semaine
+  // Desserts batch : on les RÉUTILISE sur plusieurs jours (ils sont batch-cookés).
+  // Chaque dessert choisi est placé sur ~2-3 jours répartis dans la semaine.
+  chosenSweets.forEach((sw, idx) => {
+    // jours de départ décalés selon le dessert, puis tous les 2 jours
+    for (let day = idx; day < 7; day += chosenSweets.length) {
+      entries[dates[day]].meals.sweet.push({ id: sw.id, servings: 1 });
+    }
+  });
+
+  // Compléments caloriques : entrées salées + ASSEMBLAGES SIMPLES (fromage blanc/whey, tartines).
+  // On varie d'un jour à l'autre, on ne répète pas un dessert batch.
+  const FILLER_STARTERS = shuffle(getStarters().sort((a, b) => b.macros.kcal - a.macros.kcal).slice(0, 6));
+  // encas d'assemblage = tags 'encas' (SW20+) : fromage blanc+whey, tartines PB/miel, shakes…
+  const FILLER_SNACKS = shuffle(getSweets().filter(s => (s.tags || []).includes('encas')));
+
+  // Jeûne intermittent : le dîner doit concentrer ~62% des calories de la journée.
+  // On optimise donc le DÎNER avec une grosse cible, et le RESTE (entrée/midi/accomp./dessert)
+  // avec la cible restante.
+  const DINNER_SHARE = 0.62;
+  function splitTargets(part) {
+    return {
+      kcal: Math.round(targets.kcal * part),
+      protein: Math.round(targets.protein * part),
+      carbs: Math.round(targets.carbs * part),
+      fat: Math.round(targets.fat * part),
+    };
+  }
+
+  function optimizeGroup(e, slots, grpTargets, maxScale = 3) {
+    const flat = [];
+    slots.forEach(slot =>
+      (e.meals[slot] || []).forEach((it, idx) => flat.push({ slot, idx, item: it })));
+    if (!flat.length) return;
+    const optimized = optimizeDay(flat.map(f => f.item), grpTargets, maxScale);
+    flat.forEach((f, i) => {
+      const o = optimized[i];
+      if (o.overrides) { e.meals[f.slot][f.idx].overrides = o.overrides; e.meals[f.slot][f.idx].servings = 1; }
+      else { e.meals[f.slot][f.idx].servings = o.servings || 1; }
+    });
+  }
+
+  function applyOptimized(e) {
+    const hasDinner = (e.meals.dinner || []).length > 0;
+    if (hasDinner) {
+      optimizeGroup(e, ['dinner'], splitTargets(DINNER_SHARE), 5);
+      optimizeGroup(e, ['starter','lunch','sides','sweet'], splitTargets(1 - DINNER_SHARE));
+    } else {
+      // pas de dîner ce jour-là (rare) → on répartit normalement
+      optimizeGroup(e, ['starter','lunch','dinner','sides','sweet'], targets);
+    }
+  }
+
+  // ── Optimisation + complément automatique, jour par jour ──
+  let starterRot = 0, snackRot = 0;
+  dates.forEach(d => {
+    const e = entries[d];
+    if (!e.meals.starter) e.meals.starter = [];
+    if (!['lunch','dinner','sides','sweet'].some(s => (e.meals[s]||[]).length)) return;
+    applyOptimized(e);
+
+    let guard = 0;
+    while (guard++ < 4) {
+      const tot = computeDayFromItems(
+        ['starter','lunch','dinner','sides','sweet'].flatMap(s => e.meals[s] || [])
+      );
+      const deficit = targets.kcal - tot.kcal;
+      if (deficit < 200) break;
+      const present = new Set(['starter','lunch','dinner','sides','sweet'].flatMap(s => (e.meals[s]||[]).map(i => i.id)));
+      let added = null;
+      // 1) une entrée salée si pas encore d'entrée ce jour-là
+      if (!(e.meals.starter || []).length && FILLER_STARTERS.length) {
+        for (let k = 0; k < FILLER_STARTERS.length; k++) {
+          const cand = FILLER_STARTERS[(starterRot + k) % FILLER_STARTERS.length];
+          if (!present.has(cand.id)) { added = cand; starterRot += k + 1; break; }
+        }
+        if (added) e.meals.starter.push({ id: added.id, servings: 1 });
+      }
+      // 2) sinon un encas d'assemblage simple, en rotation (fromage blanc/whey, tartines…)
+      if (!added && FILLER_SNACKS.length) {
+        for (let k = 0; k < FILLER_SNACKS.length; k++) {
+          const cand = FILLER_SNACKS[(snackRot + k) % FILLER_SNACKS.length];
+          if (!present.has(cand.id)) { added = cand; snackRot += k + 1; break; }
+        }
+        if (added) e.meals.sweet.push({ id: added.id, servings: 1 });
+      }
+      if (!added) break;
+      applyOptimized(e);
+    }
+  });
+
+  return { dates, entries, mains, sweets: chosenSweets, cantineDays };
+}
+
+
+// ──────────────────────────────────────────────
 // js/state.js
 // ──────────────────────────────────────────────
 
@@ -2990,7 +3371,6 @@ function currentEntry() {
 const ITEMS = [
   { id: 'week',     label: 'Semaine'  },
   { id: 'planner',  label: 'Jour'     },
-  { id: 'macros',   label: 'Macros'   },
   { id: 'recipes',  label: 'Recettes' },
   { id: 'shopping', label: 'Courses'  },
 ];
@@ -3021,32 +3401,28 @@ function renderNav() {
 // ──────────────────────────────────────────────
 // js/week.js
 // ──────────────────────────────────────────────
-// week.js — Planning hebdomadaire (vue principale)
-// Permet de composer le menu de toute une semaine, jour par jour.
-// Bascule "Cette semaine" / "Semaine prochaine".
+// week.js — Page d'accueil : générateur de menu de semaine automatique.
 
 
 const DAY_LABELS = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+let cantineDays = JSON.parse(localStorage.getItem('hebe_cantine_days') || '[]');
 
-let weekMode = 'current'; // 'current' | 'next'
+function weekHasPlan(dates) {
+  return dates.some(d => {
+    const e = getEntry(d);
+    return ['lunch','dinner','sides','sweet'].some(s => (e.meals[s]||[]).length);
+  });
+}
 
 function renderWeek() {
   const app = document.getElementById('app');
   app.querySelector('.view')?.remove();
 
-  const dates = weekMode === 'current' ? getWeekDates() : getNextWeekDates();
-  const today = getTodayDate();
+  const dates = getNextWeekDates();
   const { targets } = USER;
-
-  // Totaux semaine
-  let weekKcal = 0, plannedDays = 0;
-  dates.forEach(d => {
-    const m = computeDayMacros(getEntry(d));
-    if (m.kcal > 0) { weekKcal += m.kcal; plannedDays++; }
-  });
+  const hasPlan = weekHasPlan(dates);
 
   const view = el('div', 'view week-view');
-
   view.innerHTML = `
     <div class="week-header">
       <div class="masthead">
@@ -3056,90 +3432,107 @@ function renderWeek() {
         </div>
         <button class="week-settings" aria-label="Réglages"><svg viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></button>
       </div>
-      <div class="week-subtitle">Ma semaine</div>
-      <div class="week-toggle">
-        <button class="wk-tab ${weekMode==='current'?'active':''}" data-mode="current">Cette semaine</button>
-        <button class="wk-tab ${weekMode==='next'?'active':''}" data-mode="next">Semaine prochaine</button>
-      </div>
-      <div class="week-summary">
-        ${plannedDays}/7 jours planifiés${plannedDays ? ` · ~${Math.round(weekKcal/plannedDays)} kcal/jour` : ''}
-      </div>
     </div>
+
+    <div class="gen-card">
+      <div class="gen-title">Ma semaine</div>
+      <div class="gen-cantine">
+        <span class="gen-cantine-label">Midis à la cantine</span>
+        <div class="cantine-days">
+          ${['L','M','M','J','V','S','D'].map((d,i)=>`<button class="cant-day ${cantineDays.includes(i)?'on':''}" data-i="${i}">${d}</button>`).join('')}
+        </div>
+      </div>
+      <button class="generate-btn">${hasPlan ? 'Régénérer ma semaine' : 'Générer ma semaine'}</button>
+    </div>
+
     <div class="week-days"></div>
-    <div class="week-actions">
-      <button class="week-shop-btn">Générer la liste de courses</button>
-    </div>
+
+    ${hasPlan ? `
+    <div class="week-tiles">
+      <button class="week-tile tile-recipes">
+        <span class="tile-ic">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 4h12a3 3 0 0 1 3 3v21H11a3 3 0 0 1-3-3z"/>
+            <path d="M23 9h1a3 3 0 0 1 3 3v13a3 3 0 0 0 3 3"/>
+            <line x1="12" y1="10" x2="19" y2="10"/><line x1="12" y1="14" x2="19" y2="14"/><line x1="12" y1="18" x2="16" y2="18"/>
+          </svg>
+        </span>
+        <span class="tile-label">Recettes</span>
+        <span class="tile-sub">à cuisiner</span>
+      </button>
+      <button class="week-tile tile-shop">
+        <span class="tile-ic">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 6h3l2.2 13.2a2 2 0 0 0 2 1.7h9.4a2 2 0 0 0 2-1.6L26 10H9"/>
+            <circle cx="13" cy="26" r="1.6"/><circle cx="23" cy="26" r="1.6"/>
+          </svg>
+        </span>
+        <span class="tile-label">Courses</span>
+        <span class="tile-sub">liste prête</span>
+      </button>
+    </div>` : ''}
   `;
 
   const daysWrap = view.querySelector('.week-days');
 
-  dates.forEach((date, i) => {
-    const entry  = getEntry(date);
-    const macros = computeDayMacros(entry);
-    const isToday = date === today;
-    const over = macros.kcal > targets.kcal;
-    const totalItems = ['lunch','dinner','sides','sweet']
-      .reduce((n, s) => n + (entry.meals[s]?.length || 0), 0);
-
-    const card = el('div', `week-day ${isToday ? 'is-today' : ''} ${totalItems ? '' : 'empty'}`);
-    card.dataset.date = date;
-
-    const dayNum = new Date(date + 'T12:00:00').getDate();
-
-    card.innerHTML = `
-      <div class="wd-left">
-        <div class="wd-label">${DAY_LABELS[i]}</div>
-        <div class="wd-num">${dayNum}</div>
-      </div>
-      <div class="wd-body">
-        ${totalItems ? `
-          <div class="wd-kcal ${over ? 'over' : ''}">
-            ${Math.round(macros.kcal)} kcal
-            <span class="wd-prot ${macros.protein >= targets.protein ? 'ok' : (macros.protein >= targets.protein*0.8 ? 'close' : 'low')}">${Math.round(macros.protein)}g P${macros.protein >= targets.protein ? ' ✓' : ''}</span>
-            ${over ? '<span class="wd-warn">dépassé</span>' : ''}
-          </div>
-          ${mbar(macros.kcal, targets.kcal, 'var(--accent)')}
-          <div class="wd-meals">
-            ${mealLine('', entry.meals.lunch)}
-            ${mealLine('', entry.meals.dinner)}
-            ${mealLine('', entry.meals.sides)}
-            ${mealLine('', entry.meals.sweet)}
-          </div>
-        ` : `<div class="wd-empty">Vide — appuie pour planifier</div>`}
-      </div>
-      <span class="wd-arrow">›</span>
-    `;
-
-    card.addEventListener('click', () => {
-      setState({ selectedDate: date, currentView: 'planner' });
-      window._nav?.('planner');
+  if (hasPlan) {
+    dates.forEach((date, i) => {
+      const entry = getEntry(date);
+      const macros = computeDayMacros(entry);
+      const over = macros.kcal > targets.kcal * 1.08;
+      const totalItems = ['lunch','dinner','sides','sweet'].reduce((n,s)=>n+(entry.meals[s]?.length||0),0);
+      const card = el('div', `week-day ${totalItems ? '' : 'empty'}`);
+      card.dataset.date = date;
+      const dayNum = new Date(date+'T12:00:00').getDate();
+      card.innerHTML = `
+        <div class="wd-left"><div class="wd-label">${DAY_LABELS[i]}</div><div class="wd-num">${dayNum}</div></div>
+        <div class="wd-body">
+          ${totalItems ? `
+            <div class="wd-kcal ${over?'over':''}">${Math.round(macros.kcal)} kcal
+              <span class="wd-prot ${macros.protein>=targets.protein?'ok':'low'}">${Math.round(macros.protein)}g P${macros.protein>=targets.protein?' ✓':''}</span>
+            </div>
+            ${mbar(macros.kcal, targets.kcal, 'var(--accent)')}
+            <div class="wd-meals">
+              ${mealLine(entry.meals.starter)}${mealLine(entry.meals.lunch)}${mealLine(entry.meals.dinner)}${mealLine(entry.meals.sweet)}
+            </div>` : `<div class="wd-empty">Vide</div>`}
+        </div>
+        <span class="wd-arrow">›</span>`;
+      card.addEventListener('click', () => { setState({ selectedDate: date, currentView: 'planner' }); window._nav?.('planner'); });
+      daysWrap.appendChild(card);
     });
-
-    daysWrap.appendChild(card);
-  });
-
-  // Events
-  view.querySelector('.week-settings')?.addEventListener('click', () => window._nav?.('settings'));
-  view.querySelectorAll('.wk-tab').forEach(b =>
-    b.addEventListener('click', () => { weekMode = b.dataset.mode; renderWeek(); })
-  );
-  view.querySelector('.week-shop-btn').addEventListener('click', () => {
-    // Mémorise la plage de dates pour la vue courses
-    const range = weekMode === 'current' ? getWeekDates() : getNextWeekDates();
-    localStorage.setItem('diet_shop_range', JSON.stringify(range));
-    window._nav?.('shopping');
-  });
+  }
 
   app.insertBefore(view, app.querySelector('#nav'));
+
+  // events
+  view.querySelector('.week-settings').addEventListener('click', () => window._nav?.('settings'));
+  view.querySelectorAll('.cant-day').forEach(b => b.addEventListener('click', () => {
+    const i = parseInt(b.dataset.i);
+    if (cantineDays.includes(i)) cantineDays = cantineDays.filter(x => x !== i);
+    else cantineDays = [...cantineDays, i];
+    localStorage.setItem('hebe_cantine_days', JSON.stringify(cantineDays));
+    b.classList.toggle('on');
+  }));
+  view.querySelector('.generate-btn').addEventListener('click', () => {
+    const btn = view.querySelector('.generate-btn');
+    btn.textContent = '… génération en cours';
+    btn.disabled = true;
+    setTimeout(() => {
+      const { entries } = generateWeek({ cantineDays, nextWeek: true, targets: USER.targets });
+      Object.values(entries).forEach(e => saveEntry(e));
+      renderWeek();
+    }, 60);
+  });
+  view.querySelector('.tile-recipes')?.addEventListener('click', () => window._nav?.('batch'));
+  view.querySelector('.tile-shop')?.addEventListener('click', () => {
+    localStorage.setItem('diet_shop_range', JSON.stringify(getNextWeekDates()));
+    window._nav?.('shopping');
+  });
 }
 
-function mealLine(emoji, items) {
+function mealLine(items) {
   if (!items || !items.length) return '';
-  const names = items.map(it => {
-    const r = getById(it.id);
-    if (!r) return '';
-    return r.name + (it.servings > 1 ? ` ×${it.servings}` : '');
-  }).filter(Boolean).join(', ');
+  const names = items.map(it => getById(it.id)?.name).filter(Boolean).join(', ');
   return `<div class="wd-meal-line">${names}</div>`;
 }
 
@@ -3152,6 +3545,7 @@ function mealLine(emoji, items) {
 
 
 const SLOTS = [
+  { key: 'starter', label: 'Entrée',           emoji: '',  fn: getStarters },
   { key: 'lunch',  label: 'Déjeuner',        emoji: '',  fn: getLunches },
   { key: 'dinner', label: 'Dîner',            emoji: '',  fn: getDinners },
   { key: 'sides',  label: 'Accompagnements',  emoji: '',  fn: getSides  },
@@ -3218,7 +3612,7 @@ function renderPlanner() {
   const macros = computeDayMacros(entry);
   const { targets } = USER;
   const kcalPct = Math.round((macros.kcal / targets.kcal) * 100);
-  const over    = macros.kcal > targets.kcal;
+  const over    = macros.kcal > targets.kcal * 1.08;
   const isToday = entry.date === getTodayDate();
 
   const view = el('div', 'view planner-view');
@@ -3247,7 +3641,7 @@ function renderPlanner() {
       <div class="mini-macro"><span class="mm-val fat">${Math.round(macros.fat)}g</span><span class="mm-label">Lipides</span></div>
     </div>
     ${entry.meals.lunch.length || entry.meals.dinner.length || entry.meals.sides.length || entry.meals.sweet.length
-      ? `<button class="optimize-btn">✦ Optimiser les portions</button>` : ''}`;
+      ? `<button class="optimize-btn">Optimiser les portions</button>` : ''}`;
   view.appendChild(hdr);
 
   SLOTS.forEach(({ key, label, emoji }) => {
@@ -3445,7 +3839,7 @@ function renderMacros() {
   const entry  = currentEntry();
   const macros = computeDayMacros(entry);
   const { targets } = USER;
-  const over = macros.kcal > targets.kcal;
+  const over = macros.kcal > targets.kcal * 1.08;
 
   const view = el('div', 'view macros-view');
 
@@ -3499,7 +3893,7 @@ function renderMacros() {
 
 function macroRow(name, val, target, color) {
   const pct = Math.round((val / target) * 100);
-  const over = val > target;
+  const over = val > target * 1.1;
   return `
     <div class="macro-row">
       <div class="macro-row-hd">
@@ -3626,6 +4020,7 @@ function renderRecipeDetail(recipe, fromView = 'recipes') {
 
 const FILTERS = [
   { key: 'all',    label: 'Tout'              },
+  { key: 'starter',label: 'Entrées'           },
   { key: 'dinner', label: 'Dîner'              },
   { key: 'lunch',  label: 'Déjeuner'           },
   { key: 'side',   label: 'Accompagnements'    },
@@ -3710,73 +4105,187 @@ const saveChecked  = (a) => localStorage.setItem(CHECKED_KEY, JSON.stringify(a))
 const clearChecked = () => localStorage.removeItem(CHECKED_KEY);
 
 // Catégorisation simple pour grouper la liste
+// Ordre d'affichage des rayons (les noms doivent correspondre à categorize()).
 const CATEGORIES = [
-  { name: 'Viandes & Poisson', match: ['poulet','boeuf','steak','merguez','saucisse','thon','saumon','colin','merlu','poisson','dinde','bacon','anchois'] },
-  { name: 'Oeufs & Laitages',  match: ['oeuf','fromage','ricotta','feta','lait','yaourt','parmesan'] },
-  { name: 'Légumes & Fruits',  match: ['courgette','poivron','oignon','ail','tomate','carotte','brocoli','épinard','haricot','champignon','concombre','chou','salade','laitue','citron','banane','mangue','pomme','avocat','fruit','framboise','passion','gingembre','olive','romaine'] },
-  { name: 'Féculents & Légumineuses', match: ['riz','pâte','quinoa','pain','flocon','avoine','lentille','pois chiche','semoule','tortilla','cracker','boudoir','biscuit'] },
-  { name: 'Épicerie & Autres', match: [] },
+  { name: 'Viandes & poisson' },
+  { name: 'Œufs & laitages' },
+  { name: 'Légumes & fruits' },
+  { name: 'Féculents & légumineuses' },
+  { name: 'Épicerie & placard' },
+];
+
+// Icônes SVG par rayon (line-art, dans l'ordre des CATEGORIES).
+const CAT_ICONS = [
+  // Viandes & poisson — poisson stylisé
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c3-5 9-6 14-3 2 1.2 4 3 4 3s-2 1.8-4 3c-5 3-11 2-14-3z"/><path d="M17 9.5l3-2.5M17 14.5l3 2.5"/><circle cx="8" cy="11" r="1"/></svg>',
+  // Œufs & laitages — bouteille de lait
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v3l2 4v10a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V10l2-4z"/><line x1="7" y1="13" x2="17" y2="13"/></svg>',
+  // Légumes & fruits — feuille/pomme
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7c-1-3-4-4-7-3 0 4 2 7 7 7"/><path d="M12 21c-3 0-5-2-5-6 0-3 2-5 5-5s5 2 5 5c0 4-2 6-5 6z"/></svg>',
+  // Féculents — épi de blé
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="22" x2="12" y2="9"/><path d="M12 9c0-2-2-3-2-5 1 0 2 .5 2 2 0-1.5 1-2 2-2 0 2-2 3-2 5z"/><path d="M12 13c-1-1.5-3-1.5-4-1 .3 1.6 1.8 2.5 4 2.5M12 13c1-1.5 3-1.5 4-1-.3 1.6-1.8 2.5-4 2.5"/><path d="M12 17c-1-1.5-3-1.5-4-1 .3 1.6 1.8 2.5 4 2.5M12 17c1-1.5 3-1.5 4-1-.3 1.6-1.8 2.5-4 2.5"/></svg>',
+  // Épicerie — sachet/pot
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8h10l1 12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1z"/><path d="M9 8V5a3 3 0 0 1 6 0v3"/></svg>',
 ];
 
 // Regroupe les variantes d'un même produit en un seul nom canonique,
 // pour éviter les doublons dans la liste de courses (poulet / poulet cuit / poulet émincé…).
 // On ne fusionne que des produits réellement identiques à l'achat.
 const CANON = [
-  { rx: /poulet/i,                       name: 'Blanc de poulet',               unit: 'g' },
-  { rx: /thon/i,                         name: 'Thon au naturel',               unit: 'g' },
-  { rx: /\bdinde\b/i,                    name: 'Blanc de dinde',                unit: 'g' },
-  { rx: /^oeufs?( durs| poch)?$|^oeuf$/i,name: 'Oeufs',                         unit: 'pièces' },
-  { rx: /blancs? d'?oeuf/i,              name: "Blancs d'oeuf",                 unit: 'g' },
-  { rx: /^p[âa]tes/i,                    name: 'Pâtes',                         unit: 'g' },
-  { rx: /^riz/i,                         name: 'Riz',                           unit: 'g' },
-  { rx: /boulgh?our|boulgour/i,          name: 'Boulghour',                     unit: 'g' },
-  { rx: /quinoa/i,                       name: 'Quinoa',                        unit: 'g' },
-  { rx: /^orzo/i,                        name: 'Orzo',                          unit: 'g' },
-  { rx: /lentilles corail/i,            name: 'Lentilles corail',             unit: 'g' },
-  { rx: /lentilles vertes/i,            name: 'Lentilles vertes',             unit: 'g' },
-  { rx: /pois chiches/i,                name: 'Pois chiches',                  unit: 'g' },
-  { rx: /haricots rouges/i,             name: 'Haricots rouges',              unit: 'g' },
-  { rx: /haricots blancs/i,             name: 'Haricots blancs',              unit: 'g' },
-  { rx: /haricots verts/i,              name: 'Haricots verts',               unit: 'g' },
-  { rx: /^[ée]pinards/i,                name: 'Épinards',                      unit: 'g' },
-  { rx: /fromage blanc/i,               name: 'Fromage blanc 0%',              unit: 'g' },
-  { rx: /^courgettes?/i,                name: 'Courgettes',                    unit: 'g' },
-  { rx: /^carottes?( r[âa]p[ée]e?)?$/i, name: 'Carottes',                      unit: 'g' },
-  { rx: /^tomates cerise/i,             name: 'Tomates cerise',                unit: 'g' },
-  { rx: /^tomates concass/i,            name: 'Tomates concassées',            unit: 'g' },
-  { rx: /^tomates$/i,                   name: 'Tomates',                       unit: 'g' },
-  { rx: /^poivrons?/i,                  name: 'Poivron',                       unit: 'g' },
-  { rx: /flocons d'?avoine/i,           name: "Flocons d'avoine",              unit: 'g' },
-  { rx: /beurre de cacahu/i,            name: 'Beurre de cacahuète',           unit: 'g' },
-  { rx: /pain complet/i,                name: 'Pain complet',                  unit: 'g' },
-  { rx: /fruits rouges/i,               name: 'Fruits rouges',                 unit: 'g' },
-  { rx: /^citron vert/i,                name: 'Citron vert',                   unit: 'pièces' },
-  { rx: /^citron/i,                     name: 'Citron',                        unit: 'pièces' },
-  { rx: /^oignon rouge/i,               name: 'Oignon rouge',                  unit: 'g' },
-  { rx: /^oignon/i,                     name: 'Oignon',                        unit: 'g' },
+  // Mélanges d'assaisonnement (contiennent un "+") → placard, AVANT les règles produits
+  { rx: /\+/i, name: 'Épices & aromates (placard)' },
+  // Viandes / poisson
+  { rx: /poulet/i,                          name: 'Blanc de poulet' },
+  { rx: /\bdinde\b/i,                       name: 'Blanc de dinde' },
+  { rx: /steak hach|boeuf|b\u0153uf/i,        name: 'Steak haché 5%' },
+  { rx: /poulet hach/i,                     name: 'Poulet haché' },
+  { rx: /merguez/i,                         name: 'Merguez de volaille' },
+  { rx: /thon/i,                            name: 'Thon au naturel' },
+  { rx: /saumon/i,                          name: 'Saumon' },
+  { rx: /colin|merlu|poisson blanc/i,       name: 'Poisson blanc (colin/merlu)' },
+  { rx: /crevette/i,                        name: 'Crevettes décortiquées' },
+  { rx: /anchois/i,                         name: 'Anchois' },
+  { rx: /^bacon/i,                          name: 'Bacon de dinde' },
+  // Oeufs & laitages
+  { rx: /blancs? d'?oeuf/i,                 name: "Blancs d'oeuf" },
+  { rx: /^oeufs?\b|oeufs? (durs?|poch)/i,    name: 'Oeufs' },
+  { rx: /fromage blanc/i,                   name: 'Fromage blanc 0%' },
+  { rx: /fromage frais/i,                   name: 'Fromage frais léger' },
+  { rx: /^skyr/i,                           name: 'Skyr' },
+  { rx: /ricotta/i,                         name: 'Ricotta' },
+  { rx: /^feta/i,                           name: 'Feta' },
+  { rx: /parmesan/i,                        name: 'Parmesan' },
+  { rx: /emmental/i,                        name: 'Emmental allégé' },
+  { rx: /lait de coco/i,                    name: 'Lait de coco light' },
+  { rx: /lait \u00e9cr\u00e9m|lait ecrem/i,    name: 'Lait écrémé' },
+  // Féculents & légumineuses
+  { rx: /^p[âa]tes compl]?|^p[âa]tes/i,     name: 'Pâtes complètes' },
+  { rx: /\borzo\b/i,                        name: 'Orzo' },
+  { rx: /nouilles de riz/i,                 name: 'Nouilles de riz' },
+  { rx: /riz basmati/i,                     name: 'Riz basmati' },
+  { rx: /riz rond/i,                        name: 'Riz rond' },
+  { rx: /^riz\b/i,                           name: 'Riz' },
+  { rx: /boulgh?our|boulgour/i,             name: 'Boulghour' },
+  { rx: /quinoa/i,                          name: 'Quinoa' },
+  { rx: /flocons d'?avoine/i,               name: "Flocons d'avoine" },
+  { rx: /lentilles corail/i,                name: 'Lentilles corail' },
+  { rx: /lentilles vertes/i,                name: 'Lentilles vertes' },
+  { rx: /pois chiches/i,                    name: 'Pois chiches' },
+  { rx: /haricots rouges/i,                 name: 'Haricots rouges' },
+  { rx: /haricots blancs/i,                 name: 'Haricots blancs' },
+  { rx: /^ma\u00efs|^mais/i,                  name: 'Maïs' },
+  { rx: /tortillas?/i,                      name: 'Tortillas blé complètes' },
+  { rx: /pain complet/i,                    name: 'Pain complet' },
+  { rx: /crackers/i,                        name: 'Crackers de seigle' },
+  { rx: /chapelure/i,                       name: 'Chapelure' },
+  // Légumes & fruits
+  { rx: /haricots verts/i,                  name: 'Haricots verts' },
+  { rx: /^[ée\u00e9]pinards/i,                name: 'Épinards' },
+  { rx: /^courgettes?/i,                    name: 'Courgettes' },
+  { rx: /chou-fleur/i,                      name: 'Chou-fleur' },
+  { rx: /chou blanc/i,                      name: 'Chou blanc' },
+  { rx: /^brocoli/i,                        name: 'Brocoli' },
+  { rx: /champignons/i,                     name: 'Champignons de Paris' },
+  { rx: /^carottes?/i,                      name: 'Carottes' },
+  { rx: /^concombre/i,                      name: 'Concombre' },
+  { rx: /tomates cerise/i,                  name: 'Tomates cerise' },
+  { rx: /tomates concass/i,                 name: 'Tomates concassées' },
+  { rx: /^tomates?$/i,                      name: 'Tomates' },
+  { rx: /^poivrons?/i,                      name: 'Poivron' },
+  { rx: /patate douce/i,                    name: 'Patate douce' },
+  { rx: /pommes de terre/i,                 name: 'Pommes de terre' },
+  { rx: /betterave/i,                       name: 'Betterave cuite' },
+  { rx: /^salade|laitue|romaine/i,          name: 'Salade verte' },
+  { rx: /avocat/i,                          name: 'Avocat' },
+  { rx: /oignon rouge/i,                    name: 'Oignon rouge' },
+  { rx: /^oignon/i,                         name: 'Oignon' },
+  { rx: /citron vert/i,                     name: 'Citron vert' },
+  { rx: /citron|jus.*zeste|zeste.*citron/i, name: 'Citron' },
+  { rx: /^banane/i,                         name: 'Banane' },
+  { rx: /mangue/i,                          name: 'Mangue surgelée' },
+  { rx: /^pommes?\b/i,                       name: 'Pommes' },
+  { rx: /fruits rouges/i,                   name: 'Fruits rouges surgelés' },
+  { rx: /framboises/i,                      name: 'Framboises surgelées' },
+  { rx: /fruit de la passion/i,             name: 'Fruit de la passion' },
+  { rx: /dattes/i,                          name: 'Dattes dénoyautées' },
+  { rx: /\bgingembre\b/i,                   name: 'Gingembre frais' },
+  { rx: /^ail\b/i,                           name: 'Ail' },
+  { rx: /olives noires/i,                   name: 'Olives noires' },
+  { rx: /olives vertes/i,                   name: 'Olives vertes' },
+  { rx: /câpres|capres/i,                   name: 'Câpres' },
+  { rx: /cornichons/i,                      name: 'Cornichons' },
+  { rx: /piment rouge/i,                    name: 'Piment rouge' },
+  // Herbes fraîches (regroupées)
+  { rx: /coriandre fra/i,                   name: 'Coriandre fraîche' },
+  { rx: /persil/i,                          name: 'Persil frais' },
+  { rx: /menthe fra|^menthe/i,              name: 'Menthe fraîche' },
+  { rx: /basilic/i,                         name: 'Basilic frais' },
+  { rx: /ciboulette/i,                      name: 'Ciboulette' },
+  { rx: /thym frais/i,                      name: 'Thym frais' },
+  // Épicerie / condiments / poudres (tout ce qui est sec/placard)
+  { rx: /beurre de cacahu/i,                name: 'Beurre de cacahuète' },
+  { rx: /^beurre\b/i,                        name: 'Beurre' },
+  { rx: /tahini/i,                          name: 'Tahini' },
+  { rx: /huile d'?olive/i,                  name: "Huile d'olive" },
+  { rx: /huile de sésame|huile de sesame/i, name: 'Huile de sésame' },
+  { rx: /huile de coco/i,                   name: 'Huile de coco' },
+  { rx: /huile \+ |^huile/i,                 name: "Huile d'olive" },
+  { rx: /miel/i,                            name: 'Miel' },
+  { rx: /sauce soja|soja \+/i,              name: 'Sauce soja' },
+  { rx: /sauce huîtres|sauce huitres/i,     name: 'Sauce huîtres' },
+  { rx: /sauce worcester/i,                 name: 'Sauce Worcester' },
+  { rx: /gochujang/i,                       name: 'Gochujang' },
+  { rx: /sriracha/i,                        name: 'Sriracha' },
+  { rx: /pâte de curry|pate de curry/i,     name: 'Pâte de curry vert' },
+  { rx: /pâte de miso|pate de miso/i,       name: 'Pâte de miso' },
+  { rx: /moutarde/i,                        name: 'Moutarde de Dijon' },
+  { rx: /vinaigre balsamique|vinaigre \+/i, name: 'Vinaigre balsamique' },
+  { rx: /citron confit/i,                   name: 'Citron confit' },
+  { rx: /chocolat noir|pépites de chocolat|pepites/i, name: 'Chocolat noir 85%' },
+  { rx: /cacao/i,                           name: 'Cacao non sucré' },
+  { rx: /whey|protéine en poudre|proteine en poudre/i, name: 'Whey (protéine en poudre)' },
+  { rx: /graines de chia/i,                 name: 'Graines de chia' },
+  { rx: /noix de coco/i,                    name: 'Noix de coco râpée' },
+  { rx: /cacahuètes|cacahuetes/i,           name: 'Cacahuètes non salées' },
+  { rx: /sésame|sesame/i,                   name: 'Sésame' },
+  { rx: /levure/i,                          name: 'Levure chimique' },
+  { rx: /extrait de vanille|vanille/i,      name: 'Vanille' },
+  { rx: /café|cafe expresso/i,              name: 'Café' },
+  { rx: /biscuits? boudoir/i,               name: 'Biscuits boudoir' },
+  { rx: /biscuits? type petit|petit beurre/i, name: 'Biscuits Petit Beurre' },
+  // Épices & mélanges → tout en placard, regroupé par "Épices"
+  { rx: /garam masala|tikka|ras el hanout|curry|curcuma|cumin|paprika|harissa|cannelle|origan|herbes de provence|herbes fra|épices|epices|ail en poudre|gingembre en poudre/i, name: 'Épices & aromates (placard)' },
+  { rx: /^sel|^poivre|sel \+ poivre/i,      name: 'Sel & poivre' },
 ];
 
-// Renvoie {name, unit} canonique pour un ingrédient, ou null si on garde tel quel.
+// Catégorie d'un produit (déjà canonisé) → rayon du magasin.
+const CAT_RULES = [
+  { name: 'Viandes & poisson',        rx: /poulet|dinde|boeuf|steak|merguez|thon|saumon|poisson|crevette|anchois|bacon/i },
+  { name: 'Œufs & laitages',          rx: /oeuf|fromage|ricotta|feta|parmesan|emmental|skyr|lait|yaourt|beurre$/i },
+  { name: 'Féculents & légumineuses', rx: /pâtes|riz|orzo|nouilles|boulghour|quinoa|flocons|lentilles|pois chiches|haricots (rouges|blancs)|maïs|tortillas|pain|crackers|chapelure/i },
+  { name: 'Légumes & fruits',         rx: /haricots verts|épinards|courgettes|chou|brocoli|champignons|carottes|concombre|tomates?|poivron|patate|pommes de terre|betterave|salade|avocat|oignon|citron|banane|mangue|pommes|fruits rouges|framboises|passion|dattes|gingembre|ail$|olives|câpres|cornichons|piment|coriandre|persil|menthe|basilic|ciboulette|thym/i },
+];
+
+// Renvoie {name} canonique pour un ingrédient.
 function canonical(ingName) {
   for (const c of CANON) {
-    if (c.rx.test(ingName)) return { name: c.name, unit: c.unit };
+    if (c.rx.test(ingName)) return c.name;
   }
   return null;
 }
 
 function categorize(name) {
-  const n = name.toLowerCase();
-  for (const cat of CATEGORIES) {
-    if (cat.match.some(m => n.includes(m))) return cat.name;
+  for (const cat of CAT_RULES) {
+    if (cat.rx.test(name)) return cat.name;
   }
-  return 'Épicerie & Autres';
+  return 'Épicerie & placard';
 }
 
 function buildList(dates) {
   const map = {};
   dates.forEach(date => {
     const entry = getEntry(date);
-    ['lunch','dinner','sides','sweet'].forEach(slot => {
+    ['starter','lunch','dinner','sides','sweet'].forEach(slot => {
       (entry.meals[slot] || []).forEach(item => {
         const r = getById(item.id);
         if (!r) return;
@@ -3785,19 +4294,50 @@ function buildList(dates) {
         const s = item.servings || 1;
         const ov = item.overrides;
         r.ingredients.forEach((ing, idx) => {
-          const qty = (ov && ov[idx] != null) ? ov[idx] : ing.qty * s;
-          const canon = canonical(ing.name);
-          // On ne fusionne que si l'unité de la recette correspond à l'unité canonique
-          const useCanon = canon && canon.unit === ing.unit;
-          const displayName = useCanon ? canon.name : ing.name;
+          let qty = (ov && ov[idx] != null) ? ov[idx] : ing.qty * s;
+          const canonName = canonical(ing.name);
+          const displayName = canonName || ing.name;
           const key = displayName.toLowerCase();
-          if (!map[key]) map[key] = { name: displayName, qty: 0, unit: ing.unit, cat: categorize(displayName) };
+          // Unité : on normalise. Citron/oeufs/etc. → pièces ; sinon on garde l'unité de la recette.
+          let unit = ing.unit;
+          // Conversion du jus/zeste de citron en nombre d'agrumes (1 citron ≈ 40 ml de jus, ≈ 80 g).
+          if (/^citron/i.test(displayName) || /citron vert/i.test(displayName)) {
+            if (ing.unit === 'ml') qty = qty / 40;
+            else if (ing.unit === 'g') qty = qty / 80;
+            unit = 'pièces';
+          } else if (/oeufs|piment rouge|fruit de la passion|^pommes$/i.test(displayName)) {
+            unit = 'pièces';
+          }
+          if (!map[key]) map[key] = { name: displayName, qty: 0, unit, cat: categorize(displayName) };
           map[key].qty += qty;
         });
       });
     });
   });
   return Object.values(map);
+}
+
+// Arrondit la quantité à acheter à un format réaliste du commerce.
+function toPurchase(item) {
+  const n = item.name.toLowerCase();
+  const q = item.qty;
+  // Épices, sel & poivre, herbes : pas de quantité chiffrée utile → "à vérifier au placard"
+  if (/épices|epices|aromates|sel & poivre|sel &amp; poivre/.test(n)) return { qty: '', unit: 'au placard' };
+  if (/poulet|boeuf|bœuf|steak|dinde|saumon|colin|merlu|poisson|crevette|merguez|thon/.test(n) && item.unit === 'g')
+    return { qty: Math.max(100, Math.ceil(q/100)*100), unit: 'g' };
+  if (/fromage blanc|skyr|yaourt/.test(n) && item.unit === 'g') {
+    const pots = Math.max(1, Math.ceil(q/500)); return { qty: pots*500, unit: `g · ${pots} pot${pots>1?'s':''} 500g` };
+  }
+  if (/riz|pâtes|pates|quinoa|boulghour|orzo|lentille|pois chiche|flocons/.test(n) && item.unit==='g')
+    return { qty: Math.ceil(q/250)*250, unit: 'g' };
+  if (/lait/.test(n) && item.unit==='ml') return { qty: Math.ceil(q/250)*250, unit: 'ml' };
+  // Oeufs entiers : par boîte de 6. Blancs d'oeuf : restent en pièces simples.
+  if (item.unit === 'pièces' && /^oeufs/.test(n)) {
+    const e = Math.ceil(q); return { qty: e, unit: `pièces · ${Math.ceil(e/6)}×6` };
+  }
+  if (item.unit === 'pièces') return { qty: Math.ceil(q), unit: 'pièces' };
+  if (item.unit === 'g') return { qty: Math.ceil(q/50)*50, unit: 'g' };
+  return { qty: Math.ceil(q), unit: item.unit };
 }
 
 function renderShopping() {
@@ -3848,27 +4388,36 @@ function renderShopping() {
           ${items.length} ingrédients · ${done}/${items.length} cochés
           ${done > 0 ? '<button class="clear-btn">Tout décocher</button>' : ''}
         </div>
+        <div class="shop-progress"><div class="shop-progress-fill" style="width:${items.length ? Math.round(done/items.length*100) : 0}%"></div></div>
       </div>
       <div class="shopping-list">
         ${items.length ? CATEGORIES.map(c => {
           const list = grouped[c.name];
           if (!list || !list.length) return '';
           list.sort((a,b)=>a.name.localeCompare(b.name,'fr'));
+          const ci = CATEGORIES.indexOf(c);
+          const doneInCat = list.filter(it => checked.includes(it.name.toLowerCase())).length;
           return `
-            <div class="shop-cat-title">${c.name}</div>
-            <div class="shop-group">
-            ${list.map(item => {
-              const key = item.name.toLowerCase();
-              const isChecked = checked.includes(key);
-              const qty = Math.round(item.qty * 10) / 10;
-              return `<div class="shop-item ${isChecked ? 'done' : ''}" data-key="${key}">
-                <div class="shop-check ${isChecked ? 'checked' : ''}"></div>
-                <div class="shop-info">
-                  <div class="shop-name">${item.name}</div>
-                  <div class="shop-qty">${qty} ${item.unit}</div>
-                </div>
-              </div>`;
-            }).join('')}
+            <div class="shop-cat cat-c-${ci}">
+              <div class="shop-cat-head">
+                <span class="shop-cat-ic">${CAT_ICONS[ci] || ''}</span>
+                <span class="shop-cat-name">${c.name}</span>
+                <span class="shop-cat-count">${doneInCat}/${list.length}</span>
+              </div>
+              <div class="shop-group">
+              ${list.map(item => {
+                const key = item.name.toLowerCase();
+                const isChecked = checked.includes(key);
+                const p = toPurchase(item);
+                return `<div class="shop-item ${isChecked ? 'done' : ''}" data-key="${key}">
+                  <div class="shop-check ${isChecked ? 'checked' : ''}"></div>
+                  <div class="shop-info">
+                    <div class="shop-name">${item.name}</div>
+                    <div class="shop-qty">${p.qty} ${p.unit}</div>
+                  </div>
+                </div>`;
+              }).join('')}
+              </div>
             </div>`;
         }).join('') : `<div class="empty-shop">Aucun repas planifié.<br><br>Planifie ta semaine dans <strong>Semaine</strong>.</div>`}
       </div>
@@ -3934,7 +4483,7 @@ function renderHistory() {
     const macros = computeDayMacros(entry);
     const anyMeal = SLOTS.some(s => (entry.meals[s.key]||[]).length > 0);
     if (!anyMeal) return;
-    const over = macros.kcal > targets.kcal;
+    const over = macros.kcal > targets.kcal * 1.08;
 
     const day = el('div', 'history-day');
     day.innerHTML = `
@@ -4155,6 +4704,188 @@ function renderSettings() {
 
 
 // ──────────────────────────────────────────────
+// js/batch.js
+// ──────────────────────────────────────────────
+// batch.js — Page "Recettes de la semaine" : fiches détaillées de tous les plats à cuisiner,
+// avec les quantités totales (toutes portions de la semaine cumulées) + les étapes.
+
+
+// Estime le temps de conservation d'une recette (frigo + éventuellement congélo).
+function conservation(r) {
+  const tags = r.tags || [];
+  const n = r.name.toLowerCase();
+  const txt = (r.steps || []).join(' ').toLowerCase();
+  // Poisson cru / cuit : courte conservation
+  if (/saumon|thon frais|poisson cru|poke|tartare|sashimi/.test(n)) return { fridge: '1 jour', freezer: null };
+  if (/poisson|colin|merlu|cabillaud|crevette|saumon/.test(n)) return { fridge: '2 jours', freezer: '1 mois' };
+  // Salades crues / crudités : 1-2 jours
+  if (tags.includes('salade') || /crudités|salade verte|carpaccio/.test(n)) return { fridge: '1-2 jours', freezer: null };
+  // Soupes / veloutés : bien au frigo, congèlent très bien
+  if (tags.includes('soupe') || /velouté|soupe|gaspacho/.test(n)) return { fridge: '4-5 jours', freezer: '2 mois' };
+  // Desserts laitiers (fromage blanc, skyr…) : 2-3 jours, pas de congélo (sauf glacés)
+  if (tags.includes('congelé') || /glac|nice cream|frozen/.test(n)) return { fridge: '—', freezer: '1 mois (congelé)' };
+  if (r.category === 'sweet' && /fromage blanc|skyr|yaourt|mousse|tiramisu|cheesecake|pudding/.test(n)) return { fridge: '2-3 jours', freezer: null };
+  // Mijotés / plats en sauce / currys : 3-4 jours, congèlent bien
+  if (/curry|mijot|tajine|chili|dal|mafé|stroganoff|bolognaise|sauce/.test(n + txt)) return { fridge: '3-4 jours', freezer: '2 mois' };
+  // Viandes cuites, bowls, gratins : 3 jours
+  if (/poulet|boeuf|dinde|steak|porc|gratin|boulettes|bowl/.test(n)) return { fridge: '3 jours', freezer: '1-2 mois' };
+  // Féculents / légumineuses cuits : 3-4 jours
+  if (/riz|pâtes|quinoa|lentilles|pois chiches|boulghour/.test(n)) return { fridge: '3-4 jours', freezer: '2 mois' };
+  // Gâteaux / crumbles / energy balls : plusieurs jours
+  if (/crumble|gâteau|brownie|galettes|energy balls|cookie|muffin/.test(n)) return { fridge: '4-5 jours', freezer: '1 mois' };
+  // défaut raisonnable
+  return { fridge: '3 jours', freezer: null };
+}
+
+
+function renderBatch() {
+  const app = document.getElementById('app');
+  app.querySelector('.view')?.remove();
+
+  const dates = getNextWeekDates();
+
+  // Recenser les recettes uniques à cuisiner + portions cumulées sur la semaine.
+  // counts[id] = { mult } où mult = somme des portions (servings) sur la semaine.
+  // Pour les plats optimisés (overrides), on cumule les quantités par ingrédient.
+  const agg = {}; // id → { portions, ingTotals: {idx: grams} | null }
+  dates.forEach(d => {
+    const e = getEntry(d);
+    ['starter','lunch','dinner','sides','sweet'].forEach(slot => {
+      (e.meals[slot] || []).forEach(it => {
+        const r = getById(it.id);
+        if (!r) return;
+        if ((r.tags || []).includes('cantine')) return;
+        // On ne garde que ce qui vaut la peine d'être batch-cooké :
+        // plats et desserts qui demandent une vraie cuisson/préparation.
+        // On exclut les assemblages rapides (sans cuisson ET courts), qui se font sur le moment.
+        const cookTime = r.cookTime || 0;
+        const totalTime = (r.prepTime || 0) + cookTime;
+        const isQuickAssembly = cookTime === 0 && totalTime <= 8;
+        const taggedNoCookSnack = (r.tags || []).includes('0-cuisson') && r.category === 'sweet' && totalTime <= 8;
+        if (isQuickAssembly || taggedNoCookSnack) return; // trop rapide → pas dans le batch
+        if (!agg[it.id]) agg[it.id] = { portions: 0, ingTotals: {} };
+        const a = agg[it.id];
+        if (it.overrides) {
+          // quantités absolues en grammes
+          Object.entries(it.overrides).forEach(([idx, g]) => {
+            a.ingTotals[idx] = (a.ingTotals[idx] || 0) + g;
+          });
+          a.portions += 1;
+        } else {
+          const s = it.servings || 1;
+          r.ingredients.forEach((ing, idx) => {
+            a.ingTotals[idx] = (a.ingTotals[idx] || 0) + ing.qty * s;
+          });
+          a.portions += s;
+        }
+      });
+    });
+  });
+
+  const ids = Object.keys(agg);
+  const view = el('div', 'view batch-view');
+
+  if (!ids.length) {
+    view.innerHTML = `
+      <div class="batch-header"><button class="batch-back">‹ Semaine</button><div class="page-title">Recettes de la semaine</div></div>
+      <div class="batch-empty">Génère d'abord ton menu de la semaine, puis reviens ici pour les fiches recettes.</div>`;
+    app.insertBefore(view, app.querySelector('#nav'));
+    view.querySelector('.batch-back').addEventListener('click', () => window._nav?.('week'));
+    return;
+  }
+
+  // Trier : plats d'abord (dinner/lunch), puis entrées, accompagnements, desserts
+  const order = { lunch: 0, dinner: 0, starter: 1, side: 2, sweet: 3 };
+  ids.sort((a, b) => (order[getById(a).category] ?? 9) - (order[getById(b).category] ?? 9));
+
+  view.innerHTML = `
+    <div class="batch-header"><button class="batch-back">‹ Semaine</button><div class="page-title">Recettes de la semaine</div></div>
+    <div class="batch-intro">${ids.length} préparations · glisse pour naviguer</div>
+    <div class="bc-progress">
+      <span class="bc-counter"><span class="bc-cur">1</span> / ${ids.length}</span>
+      <div class="bc-dots">${ids.map((_,i)=>`<span class="bc-dot ${i===0?'on':''}"></span>`).join('')}</div>
+    </div>
+    <div class="bc-slider">
+      <div class="bc-track">
+      ${ids.map(id => {
+        const r = getById(id);
+        const a = agg[id];
+        const portionLabel = a.portions >= 2 ? `${Math.round(a.portions)} portions` : '1 portion';
+        return `
+          <div class="bc-slide">
+          <div class="bc-recipe">
+            <div class="bc-recipe-hd">
+              <span class="bc-emoji">${r.emoji}</span>
+              <div>
+                <div class="bc-name">${r.name}</div>
+                <div class="bc-meta">${portionLabel} · ${(r.prepTime||0)+(r.cookTime||0)} min</div>
+              </div>
+            </div>
+            ${(() => { const cons = conservation(r); return `
+            <div class="bc-conserv">
+              <span class="bc-conserv-item"><span class="bc-conserv-ic">❄</span> Frigo : <strong>${cons.fridge}</strong></span>
+              ${cons.freezer ? `<span class="bc-conserv-item"><span class="bc-conserv-ic">🧊</span> Congélo : <strong>${cons.freezer}</strong></span>` : ''}
+            </div>`; })()}
+            <div class="bc-block-title">Ingrédients (total semaine)</div>
+            <div class="bc-ings">
+              ${r.ingredients.map((ing, idx) => {
+                const g = Math.round(a.ingTotals[idx] || 0);
+                return `<div class="bc-ing"><span>${ing.name}</span><span class="bc-ing-q">${g} ${ing.unit}</span></div>`;
+              }).join('')}
+            </div>
+            <div class="bc-block-title">Préparation</div>
+            <div class="bc-steps">
+              ${r.steps.map((s, i) => `<div class="bc-step"><span class="bc-step-n">${i+1}</span><span>${s}</span></div>`).join('')}
+            </div>
+            ${r.tip ? `<div class="bc-tip">${r.tip}</div>` : ''}
+          </div>
+          </div>`;
+      }).join('')}
+      </div>
+    </div>
+    <div class="bc-nav">
+      <button class="bc-arrow bc-prev" aria-label="Précédent">‹</button>
+      <button class="bc-arrow bc-next" aria-label="Suivant">›</button>
+    </div>
+  `;
+
+  app.insertBefore(view, app.querySelector('#nav'));
+  view.querySelector('.batch-back').addEventListener('click', () => window._nav?.('week'));
+
+  // ── Slider logic : swipe tactile + flèches + points ──
+  const track = view.querySelector('.bc-track');
+  const slides = view.querySelectorAll('.bc-slide');
+  const dots = view.querySelectorAll('.bc-dot');
+  const curEl = view.querySelector('.bc-cur');
+  let idx = 0;
+  const total = slides.length;
+
+  function go(n) {
+    idx = Math.max(0, Math.min(total - 1, n));
+    track.style.transform = `translateX(-${idx * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('on', i === idx));
+    curEl.textContent = idx + 1;
+    view.querySelector('.bc-prev').disabled = idx === 0;
+    view.querySelector('.bc-next').disabled = idx === total - 1;
+  }
+  view.querySelector('.bc-prev').addEventListener('click', () => go(idx - 1));
+  view.querySelector('.bc-next').addEventListener('click', () => go(idx + 1));
+
+  // swipe
+  let startX = 0, dx = 0, dragging = false;
+  const slider = view.querySelector('.bc-slider');
+  slider.addEventListener('touchstart', e => { startX = e.touches[0].clientX; dragging = true; }, { passive: true });
+  slider.addEventListener('touchmove', e => { if (dragging) dx = e.touches[0].clientX - startX; }, { passive: true });
+  slider.addEventListener('touchend', () => {
+    if (!dragging) return; dragging = false;
+    if (Math.abs(dx) > 50) go(idx + (dx < 0 ? 1 : -1));
+    dx = 0;
+  });
+  go(0);
+}
+
+
+// ──────────────────────────────────────────────
 // js/main.js
 // ──────────────────────────────────────────────
 
@@ -4166,6 +4897,7 @@ const VIEWS = {
   shopping: renderShopping,
   history:  renderHistory,
   settings: renderSettings,
+  batch:    renderBatch,
 };
 
 function navigate(view) { setState({ currentView: view }); render(); }

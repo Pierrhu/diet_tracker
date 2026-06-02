@@ -12,73 +12,187 @@ const saveChecked  = (a) => localStorage.setItem(CHECKED_KEY, JSON.stringify(a))
 const clearChecked = () => localStorage.removeItem(CHECKED_KEY);
 
 // Catégorisation simple pour grouper la liste
+// Ordre d'affichage des rayons (les noms doivent correspondre à categorize()).
 const CATEGORIES = [
-  { name: 'Viandes & Poisson', match: ['poulet','boeuf','steak','merguez','saucisse','thon','saumon','colin','merlu','poisson','dinde','bacon','anchois'] },
-  { name: 'Oeufs & Laitages',  match: ['oeuf','fromage','ricotta','feta','lait','yaourt','parmesan'] },
-  { name: 'Légumes & Fruits',  match: ['courgette','poivron','oignon','ail','tomate','carotte','brocoli','épinard','haricot','champignon','concombre','chou','salade','laitue','citron','banane','mangue','pomme','avocat','fruit','framboise','passion','gingembre','olive','romaine'] },
-  { name: 'Féculents & Légumineuses', match: ['riz','pâte','quinoa','pain','flocon','avoine','lentille','pois chiche','semoule','tortilla','cracker','boudoir','biscuit'] },
-  { name: 'Épicerie & Autres', match: [] },
+  { name: 'Viandes & poisson' },
+  { name: 'Œufs & laitages' },
+  { name: 'Légumes & fruits' },
+  { name: 'Féculents & légumineuses' },
+  { name: 'Épicerie & placard' },
+];
+
+// Icônes SVG par rayon (line-art, dans l'ordre des CATEGORIES).
+const CAT_ICONS = [
+  // Viandes & poisson — poisson stylisé
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c3-5 9-6 14-3 2 1.2 4 3 4 3s-2 1.8-4 3c-5 3-11 2-14-3z"/><path d="M17 9.5l3-2.5M17 14.5l3 2.5"/><circle cx="8" cy="11" r="1"/></svg>',
+  // Œufs & laitages — bouteille de lait
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v3l2 4v10a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V10l2-4z"/><line x1="7" y1="13" x2="17" y2="13"/></svg>',
+  // Légumes & fruits — feuille/pomme
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7c-1-3-4-4-7-3 0 4 2 7 7 7"/><path d="M12 21c-3 0-5-2-5-6 0-3 2-5 5-5s5 2 5 5c0 4-2 6-5 6z"/></svg>',
+  // Féculents — épi de blé
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="22" x2="12" y2="9"/><path d="M12 9c0-2-2-3-2-5 1 0 2 .5 2 2 0-1.5 1-2 2-2 0 2-2 3-2 5z"/><path d="M12 13c-1-1.5-3-1.5-4-1 .3 1.6 1.8 2.5 4 2.5M12 13c1-1.5 3-1.5 4-1-.3 1.6-1.8 2.5-4 2.5"/><path d="M12 17c-1-1.5-3-1.5-4-1 .3 1.6 1.8 2.5 4 2.5M12 17c1-1.5 3-1.5 4-1-.3 1.6-1.8 2.5-4 2.5"/></svg>',
+  // Épicerie — sachet/pot
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8h10l1 12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1z"/><path d="M9 8V5a3 3 0 0 1 6 0v3"/></svg>',
 ];
 
 // Regroupe les variantes d'un même produit en un seul nom canonique,
 // pour éviter les doublons dans la liste de courses (poulet / poulet cuit / poulet émincé…).
 // On ne fusionne que des produits réellement identiques à l'achat.
 const CANON = [
-  { rx: /poulet/i,                       name: 'Blanc de poulet',               unit: 'g' },
-  { rx: /thon/i,                         name: 'Thon au naturel',               unit: 'g' },
-  { rx: /\bdinde\b/i,                    name: 'Blanc de dinde',                unit: 'g' },
-  { rx: /^oeufs?( durs| poch)?$|^oeuf$/i,name: 'Oeufs',                         unit: 'pièces' },
-  { rx: /blancs? d'?oeuf/i,              name: "Blancs d'oeuf",                 unit: 'g' },
-  { rx: /^p[âa]tes/i,                    name: 'Pâtes',                         unit: 'g' },
-  { rx: /^riz/i,                         name: 'Riz',                           unit: 'g' },
-  { rx: /boulgh?our|boulgour/i,          name: 'Boulghour',                     unit: 'g' },
-  { rx: /quinoa/i,                       name: 'Quinoa',                        unit: 'g' },
-  { rx: /^orzo/i,                        name: 'Orzo',                          unit: 'g' },
-  { rx: /lentilles corail/i,            name: 'Lentilles corail',             unit: 'g' },
-  { rx: /lentilles vertes/i,            name: 'Lentilles vertes',             unit: 'g' },
-  { rx: /pois chiches/i,                name: 'Pois chiches',                  unit: 'g' },
-  { rx: /haricots rouges/i,             name: 'Haricots rouges',              unit: 'g' },
-  { rx: /haricots blancs/i,             name: 'Haricots blancs',              unit: 'g' },
-  { rx: /haricots verts/i,              name: 'Haricots verts',               unit: 'g' },
-  { rx: /^[ée]pinards/i,                name: 'Épinards',                      unit: 'g' },
-  { rx: /fromage blanc/i,               name: 'Fromage blanc 0%',              unit: 'g' },
-  { rx: /^courgettes?/i,                name: 'Courgettes',                    unit: 'g' },
-  { rx: /^carottes?( r[âa]p[ée]e?)?$/i, name: 'Carottes',                      unit: 'g' },
-  { rx: /^tomates cerise/i,             name: 'Tomates cerise',                unit: 'g' },
-  { rx: /^tomates concass/i,            name: 'Tomates concassées',            unit: 'g' },
-  { rx: /^tomates$/i,                   name: 'Tomates',                       unit: 'g' },
-  { rx: /^poivrons?/i,                  name: 'Poivron',                       unit: 'g' },
-  { rx: /flocons d'?avoine/i,           name: "Flocons d'avoine",              unit: 'g' },
-  { rx: /beurre de cacahu/i,            name: 'Beurre de cacahuète',           unit: 'g' },
-  { rx: /pain complet/i,                name: 'Pain complet',                  unit: 'g' },
-  { rx: /fruits rouges/i,               name: 'Fruits rouges',                 unit: 'g' },
-  { rx: /^citron vert/i,                name: 'Citron vert',                   unit: 'pièces' },
-  { rx: /^citron/i,                     name: 'Citron',                        unit: 'pièces' },
-  { rx: /^oignon rouge/i,               name: 'Oignon rouge',                  unit: 'g' },
-  { rx: /^oignon/i,                     name: 'Oignon',                        unit: 'g' },
+  // Mélanges d'assaisonnement (contiennent un "+") → placard, AVANT les règles produits
+  { rx: /\+/i, name: 'Épices & aromates (placard)' },
+  // Viandes / poisson
+  { rx: /poulet/i,                          name: 'Blanc de poulet' },
+  { rx: /\bdinde\b/i,                       name: 'Blanc de dinde' },
+  { rx: /steak hach|boeuf|b\u0153uf/i,        name: 'Steak haché 5%' },
+  { rx: /poulet hach/i,                     name: 'Poulet haché' },
+  { rx: /merguez/i,                         name: 'Merguez de volaille' },
+  { rx: /thon/i,                            name: 'Thon au naturel' },
+  { rx: /saumon/i,                          name: 'Saumon' },
+  { rx: /colin|merlu|poisson blanc/i,       name: 'Poisson blanc (colin/merlu)' },
+  { rx: /crevette/i,                        name: 'Crevettes décortiquées' },
+  { rx: /anchois/i,                         name: 'Anchois' },
+  { rx: /^bacon/i,                          name: 'Bacon de dinde' },
+  // Oeufs & laitages
+  { rx: /blancs? d'?oeuf/i,                 name: "Blancs d'oeuf" },
+  { rx: /^oeufs?\b|oeufs? (durs?|poch)/i,    name: 'Oeufs' },
+  { rx: /fromage blanc/i,                   name: 'Fromage blanc 0%' },
+  { rx: /fromage frais/i,                   name: 'Fromage frais léger' },
+  { rx: /^skyr/i,                           name: 'Skyr' },
+  { rx: /ricotta/i,                         name: 'Ricotta' },
+  { rx: /^feta/i,                           name: 'Feta' },
+  { rx: /parmesan/i,                        name: 'Parmesan' },
+  { rx: /emmental/i,                        name: 'Emmental allégé' },
+  { rx: /lait de coco/i,                    name: 'Lait de coco light' },
+  { rx: /lait \u00e9cr\u00e9m|lait ecrem/i,    name: 'Lait écrémé' },
+  // Féculents & légumineuses
+  { rx: /^p[âa]tes compl]?|^p[âa]tes/i,     name: 'Pâtes complètes' },
+  { rx: /\borzo\b/i,                        name: 'Orzo' },
+  { rx: /nouilles de riz/i,                 name: 'Nouilles de riz' },
+  { rx: /riz basmati/i,                     name: 'Riz basmati' },
+  { rx: /riz rond/i,                        name: 'Riz rond' },
+  { rx: /^riz\b/i,                           name: 'Riz' },
+  { rx: /boulgh?our|boulgour/i,             name: 'Boulghour' },
+  { rx: /quinoa/i,                          name: 'Quinoa' },
+  { rx: /flocons d'?avoine/i,               name: "Flocons d'avoine" },
+  { rx: /lentilles corail/i,                name: 'Lentilles corail' },
+  { rx: /lentilles vertes/i,                name: 'Lentilles vertes' },
+  { rx: /pois chiches/i,                    name: 'Pois chiches' },
+  { rx: /haricots rouges/i,                 name: 'Haricots rouges' },
+  { rx: /haricots blancs/i,                 name: 'Haricots blancs' },
+  { rx: /^ma\u00efs|^mais/i,                  name: 'Maïs' },
+  { rx: /tortillas?/i,                      name: 'Tortillas blé complètes' },
+  { rx: /pain complet/i,                    name: 'Pain complet' },
+  { rx: /crackers/i,                        name: 'Crackers de seigle' },
+  { rx: /chapelure/i,                       name: 'Chapelure' },
+  // Légumes & fruits
+  { rx: /haricots verts/i,                  name: 'Haricots verts' },
+  { rx: /^[ée\u00e9]pinards/i,                name: 'Épinards' },
+  { rx: /^courgettes?/i,                    name: 'Courgettes' },
+  { rx: /chou-fleur/i,                      name: 'Chou-fleur' },
+  { rx: /chou blanc/i,                      name: 'Chou blanc' },
+  { rx: /^brocoli/i,                        name: 'Brocoli' },
+  { rx: /champignons/i,                     name: 'Champignons de Paris' },
+  { rx: /^carottes?/i,                      name: 'Carottes' },
+  { rx: /^concombre/i,                      name: 'Concombre' },
+  { rx: /tomates cerise/i,                  name: 'Tomates cerise' },
+  { rx: /tomates concass/i,                 name: 'Tomates concassées' },
+  { rx: /^tomates?$/i,                      name: 'Tomates' },
+  { rx: /^poivrons?/i,                      name: 'Poivron' },
+  { rx: /patate douce/i,                    name: 'Patate douce' },
+  { rx: /pommes de terre/i,                 name: 'Pommes de terre' },
+  { rx: /betterave/i,                       name: 'Betterave cuite' },
+  { rx: /^salade|laitue|romaine/i,          name: 'Salade verte' },
+  { rx: /avocat/i,                          name: 'Avocat' },
+  { rx: /oignon rouge/i,                    name: 'Oignon rouge' },
+  { rx: /^oignon/i,                         name: 'Oignon' },
+  { rx: /citron vert/i,                     name: 'Citron vert' },
+  { rx: /citron|jus.*zeste|zeste.*citron/i, name: 'Citron' },
+  { rx: /^banane/i,                         name: 'Banane' },
+  { rx: /mangue/i,                          name: 'Mangue surgelée' },
+  { rx: /^pommes?\b/i,                       name: 'Pommes' },
+  { rx: /fruits rouges/i,                   name: 'Fruits rouges surgelés' },
+  { rx: /framboises/i,                      name: 'Framboises surgelées' },
+  { rx: /fruit de la passion/i,             name: 'Fruit de la passion' },
+  { rx: /dattes/i,                          name: 'Dattes dénoyautées' },
+  { rx: /\bgingembre\b/i,                   name: 'Gingembre frais' },
+  { rx: /^ail\b/i,                           name: 'Ail' },
+  { rx: /olives noires/i,                   name: 'Olives noires' },
+  { rx: /olives vertes/i,                   name: 'Olives vertes' },
+  { rx: /câpres|capres/i,                   name: 'Câpres' },
+  { rx: /cornichons/i,                      name: 'Cornichons' },
+  { rx: /piment rouge/i,                    name: 'Piment rouge' },
+  // Herbes fraîches (regroupées)
+  { rx: /coriandre fra/i,                   name: 'Coriandre fraîche' },
+  { rx: /persil/i,                          name: 'Persil frais' },
+  { rx: /menthe fra|^menthe/i,              name: 'Menthe fraîche' },
+  { rx: /basilic/i,                         name: 'Basilic frais' },
+  { rx: /ciboulette/i,                      name: 'Ciboulette' },
+  { rx: /thym frais/i,                      name: 'Thym frais' },
+  // Épicerie / condiments / poudres (tout ce qui est sec/placard)
+  { rx: /beurre de cacahu/i,                name: 'Beurre de cacahuète' },
+  { rx: /^beurre\b/i,                        name: 'Beurre' },
+  { rx: /tahini/i,                          name: 'Tahini' },
+  { rx: /huile d'?olive/i,                  name: "Huile d'olive" },
+  { rx: /huile de sésame|huile de sesame/i, name: 'Huile de sésame' },
+  { rx: /huile de coco/i,                   name: 'Huile de coco' },
+  { rx: /huile \+ |^huile/i,                 name: "Huile d'olive" },
+  { rx: /miel/i,                            name: 'Miel' },
+  { rx: /sauce soja|soja \+/i,              name: 'Sauce soja' },
+  { rx: /sauce huîtres|sauce huitres/i,     name: 'Sauce huîtres' },
+  { rx: /sauce worcester/i,                 name: 'Sauce Worcester' },
+  { rx: /gochujang/i,                       name: 'Gochujang' },
+  { rx: /sriracha/i,                        name: 'Sriracha' },
+  { rx: /pâte de curry|pate de curry/i,     name: 'Pâte de curry vert' },
+  { rx: /pâte de miso|pate de miso/i,       name: 'Pâte de miso' },
+  { rx: /moutarde/i,                        name: 'Moutarde de Dijon' },
+  { rx: /vinaigre balsamique|vinaigre \+/i, name: 'Vinaigre balsamique' },
+  { rx: /citron confit/i,                   name: 'Citron confit' },
+  { rx: /chocolat noir|pépites de chocolat|pepites/i, name: 'Chocolat noir 85%' },
+  { rx: /cacao/i,                           name: 'Cacao non sucré' },
+  { rx: /whey|protéine en poudre|proteine en poudre/i, name: 'Whey (protéine en poudre)' },
+  { rx: /graines de chia/i,                 name: 'Graines de chia' },
+  { rx: /noix de coco/i,                    name: 'Noix de coco râpée' },
+  { rx: /cacahuètes|cacahuetes/i,           name: 'Cacahuètes non salées' },
+  { rx: /sésame|sesame/i,                   name: 'Sésame' },
+  { rx: /levure/i,                          name: 'Levure chimique' },
+  { rx: /extrait de vanille|vanille/i,      name: 'Vanille' },
+  { rx: /café|cafe expresso/i,              name: 'Café' },
+  { rx: /biscuits? boudoir/i,               name: 'Biscuits boudoir' },
+  { rx: /biscuits? type petit|petit beurre/i, name: 'Biscuits Petit Beurre' },
+  // Épices & mélanges → tout en placard, regroupé par "Épices"
+  { rx: /garam masala|tikka|ras el hanout|curry|curcuma|cumin|paprika|harissa|cannelle|origan|herbes de provence|herbes fra|épices|epices|ail en poudre|gingembre en poudre/i, name: 'Épices & aromates (placard)' },
+  { rx: /^sel|^poivre|sel \+ poivre/i,      name: 'Sel & poivre' },
 ];
 
-// Renvoie {name, unit} canonique pour un ingrédient, ou null si on garde tel quel.
+// Catégorie d'un produit (déjà canonisé) → rayon du magasin.
+const CAT_RULES = [
+  { name: 'Viandes & poisson',        rx: /poulet|dinde|boeuf|steak|merguez|thon|saumon|poisson|crevette|anchois|bacon/i },
+  { name: 'Œufs & laitages',          rx: /oeuf|fromage|ricotta|feta|parmesan|emmental|skyr|lait|yaourt|beurre$/i },
+  { name: 'Féculents & légumineuses', rx: /pâtes|riz|orzo|nouilles|boulghour|quinoa|flocons|lentilles|pois chiches|haricots (rouges|blancs)|maïs|tortillas|pain|crackers|chapelure/i },
+  { name: 'Légumes & fruits',         rx: /haricots verts|épinards|courgettes|chou|brocoli|champignons|carottes|concombre|tomates?|poivron|patate|pommes de terre|betterave|salade|avocat|oignon|citron|banane|mangue|pommes|fruits rouges|framboises|passion|dattes|gingembre|ail$|olives|câpres|cornichons|piment|coriandre|persil|menthe|basilic|ciboulette|thym/i },
+];
+
+// Renvoie {name} canonique pour un ingrédient.
 function canonical(ingName) {
   for (const c of CANON) {
-    if (c.rx.test(ingName)) return { name: c.name, unit: c.unit };
+    if (c.rx.test(ingName)) return c.name;
   }
   return null;
 }
 
 function categorize(name) {
-  const n = name.toLowerCase();
-  for (const cat of CATEGORIES) {
-    if (cat.match.some(m => n.includes(m))) return cat.name;
+  for (const cat of CAT_RULES) {
+    if (cat.rx.test(name)) return cat.name;
   }
-  return 'Épicerie & Autres';
+  return 'Épicerie & placard';
 }
 
 function buildList(dates) {
   const map = {};
   dates.forEach(date => {
     const entry = getEntry(date);
-    ['lunch','dinner','sides','sweet'].forEach(slot => {
+    ['starter','lunch','dinner','sides','sweet'].forEach(slot => {
       (entry.meals[slot] || []).forEach(item => {
         const r = getById(item.id);
         if (!r) return;
@@ -87,19 +201,50 @@ function buildList(dates) {
         const s = item.servings || 1;
         const ov = item.overrides;
         r.ingredients.forEach((ing, idx) => {
-          const qty = (ov && ov[idx] != null) ? ov[idx] : ing.qty * s;
-          const canon = canonical(ing.name);
-          // On ne fusionne que si l'unité de la recette correspond à l'unité canonique
-          const useCanon = canon && canon.unit === ing.unit;
-          const displayName = useCanon ? canon.name : ing.name;
+          let qty = (ov && ov[idx] != null) ? ov[idx] : ing.qty * s;
+          const canonName = canonical(ing.name);
+          const displayName = canonName || ing.name;
           const key = displayName.toLowerCase();
-          if (!map[key]) map[key] = { name: displayName, qty: 0, unit: ing.unit, cat: categorize(displayName) };
+          // Unité : on normalise. Citron/oeufs/etc. → pièces ; sinon on garde l'unité de la recette.
+          let unit = ing.unit;
+          // Conversion du jus/zeste de citron en nombre d'agrumes (1 citron ≈ 40 ml de jus, ≈ 80 g).
+          if (/^citron/i.test(displayName) || /citron vert/i.test(displayName)) {
+            if (ing.unit === 'ml') qty = qty / 40;
+            else if (ing.unit === 'g') qty = qty / 80;
+            unit = 'pièces';
+          } else if (/oeufs|piment rouge|fruit de la passion|^pommes$/i.test(displayName)) {
+            unit = 'pièces';
+          }
+          if (!map[key]) map[key] = { name: displayName, qty: 0, unit, cat: categorize(displayName) };
           map[key].qty += qty;
         });
       });
     });
   });
   return Object.values(map);
+}
+
+// Arrondit la quantité à acheter à un format réaliste du commerce.
+function toPurchase(item) {
+  const n = item.name.toLowerCase();
+  const q = item.qty;
+  // Épices, sel & poivre, herbes : pas de quantité chiffrée utile → "à vérifier au placard"
+  if (/épices|epices|aromates|sel & poivre|sel &amp; poivre/.test(n)) return { qty: '', unit: 'au placard' };
+  if (/poulet|boeuf|bœuf|steak|dinde|saumon|colin|merlu|poisson|crevette|merguez|thon/.test(n) && item.unit === 'g')
+    return { qty: Math.max(100, Math.ceil(q/100)*100), unit: 'g' };
+  if (/fromage blanc|skyr|yaourt/.test(n) && item.unit === 'g') {
+    const pots = Math.max(1, Math.ceil(q/500)); return { qty: pots*500, unit: `g · ${pots} pot${pots>1?'s':''} 500g` };
+  }
+  if (/riz|pâtes|pates|quinoa|boulghour|orzo|lentille|pois chiche|flocons/.test(n) && item.unit==='g')
+    return { qty: Math.ceil(q/250)*250, unit: 'g' };
+  if (/lait/.test(n) && item.unit==='ml') return { qty: Math.ceil(q/250)*250, unit: 'ml' };
+  // Oeufs entiers : par boîte de 6. Blancs d'oeuf : restent en pièces simples.
+  if (item.unit === 'pièces' && /^oeufs/.test(n)) {
+    const e = Math.ceil(q); return { qty: e, unit: `pièces · ${Math.ceil(e/6)}×6` };
+  }
+  if (item.unit === 'pièces') return { qty: Math.ceil(q), unit: 'pièces' };
+  if (item.unit === 'g') return { qty: Math.ceil(q/50)*50, unit: 'g' };
+  return { qty: Math.ceil(q), unit: item.unit };
 }
 
 export function renderShopping() {
@@ -150,27 +295,36 @@ export function renderShopping() {
           ${items.length} ingrédients · ${done}/${items.length} cochés
           ${done > 0 ? '<button class="clear-btn">Tout décocher</button>' : ''}
         </div>
+        <div class="shop-progress"><div class="shop-progress-fill" style="width:${items.length ? Math.round(done/items.length*100) : 0}%"></div></div>
       </div>
       <div class="shopping-list">
         ${items.length ? CATEGORIES.map(c => {
           const list = grouped[c.name];
           if (!list || !list.length) return '';
           list.sort((a,b)=>a.name.localeCompare(b.name,'fr'));
+          const ci = CATEGORIES.indexOf(c);
+          const doneInCat = list.filter(it => checked.includes(it.name.toLowerCase())).length;
           return `
-            <div class="shop-cat-title">${c.name}</div>
-            <div class="shop-group">
-            ${list.map(item => {
-              const key = item.name.toLowerCase();
-              const isChecked = checked.includes(key);
-              const qty = Math.round(item.qty * 10) / 10;
-              return `<div class="shop-item ${isChecked ? 'done' : ''}" data-key="${key}">
-                <div class="shop-check ${isChecked ? 'checked' : ''}"></div>
-                <div class="shop-info">
-                  <div class="shop-name">${item.name}</div>
-                  <div class="shop-qty">${qty} ${item.unit}</div>
-                </div>
-              </div>`;
-            }).join('')}
+            <div class="shop-cat cat-c-${ci}">
+              <div class="shop-cat-head">
+                <span class="shop-cat-ic">${CAT_ICONS[ci] || ''}</span>
+                <span class="shop-cat-name">${c.name}</span>
+                <span class="shop-cat-count">${doneInCat}/${list.length}</span>
+              </div>
+              <div class="shop-group">
+              ${list.map(item => {
+                const key = item.name.toLowerCase();
+                const isChecked = checked.includes(key);
+                const p = toPurchase(item);
+                return `<div class="shop-item ${isChecked ? 'done' : ''}" data-key="${key}">
+                  <div class="shop-check ${isChecked ? 'checked' : ''}"></div>
+                  <div class="shop-info">
+                    <div class="shop-name">${item.name}</div>
+                    <div class="shop-qty">${p.qty} ${p.unit}</div>
+                  </div>
+                </div>`;
+              }).join('')}
+              </div>
             </div>`;
         }).join('') : `<div class="empty-shop">Aucun repas planifié.<br><br>Planifie ta semaine dans <strong>Semaine</strong>.</div>`}
       </div>

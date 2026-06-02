@@ -19,9 +19,9 @@ export function formatDateShort(isoDate) {
   });
 }
 
-export function mbar(value, target, color) {
+export function mbar(value, target, color, overThreshold = 1.08) {
   const pct = Math.min((value / target) * 100, 100).toFixed(1);
-  const over = value > target;
+  const over = value > target * overThreshold;
   return `<div class="mbar-wrap"><div class="mbar ${over ? 'over' : ''}" style="width:${pct}%;background:${over ? 'var(--danger)' : color}"></div></div>`;
 }
 
@@ -65,7 +65,7 @@ export function scaledMacros(recipe, servings = 1) {
 
 // Total d'un jour : meals = { slot: [{id, servings, overrides?}] }
 export function computeDayMacros(entry) {
-  const slots = ['lunch', 'dinner', 'sides', 'sweet'];
+  const slots = ['starter', 'lunch', 'dinner', 'sides', 'sweet'];
   return slots.reduce((acc, slot) => {
     (entry.meals[slot] || []).forEach(item => {
       const m = itemMacros(item);

@@ -30,7 +30,7 @@ export function renderHistory() {
     const macros = computeDayMacros(entry);
     const anyMeal = SLOTS.some(s => (entry.meals[s.key]||[]).length > 0);
     if (!anyMeal) return;
-    const over = macros.kcal > targets.kcal;
+    const over = macros.kcal > targets.kcal * 1.08;
 
     const day = el('div', 'history-day');
     day.innerHTML = `

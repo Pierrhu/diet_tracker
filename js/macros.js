@@ -10,7 +10,7 @@ export function renderMacros() {
   const entry  = currentEntry();
   const macros = computeDayMacros(entry);
   const { targets } = USER;
-  const over = macros.kcal > targets.kcal;
+  const over = macros.kcal > targets.kcal * 1.08;
 
   const view = el('div', 'view macros-view');
 
@@ -64,7 +64,7 @@ export function renderMacros() {
 
 function macroRow(name, val, target, color) {
   const pct = Math.round((val / target) * 100);
-  const over = val > target;
+  const over = val > target * 1.1;
   return `
     <div class="macro-row">
       <div class="macro-row-hd">

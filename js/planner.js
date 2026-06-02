@@ -3,12 +3,13 @@
 
 import { state, setState, currentEntry } from './state.js';
 import { saveEntry, getTodayDate }       from '../data/log.js';
-import { getDinners, getLunches, getSides, getSweets, getById } from '../data/recipes.js';
+import { getDinners, getLunches, getSides, getSweets, getStarters, getById } from '../data/recipes.js';
 import { USER }                          from '../data/user.js';
 import { el, formatDate, mbar, scaledMacros, itemMacros, computeDayMacros, openSheet, closeSheet } from './utils.js';
 import { optimizeDay }                   from './optimizer.js';
 
 const SLOTS = [
+  { key: 'starter', label: 'Entrée',           emoji: '',  fn: getStarters },
   { key: 'lunch',  label: 'Déjeuner',        emoji: '',  fn: getLunches },
   { key: 'dinner', label: 'Dîner',            emoji: '',  fn: getDinners },
   { key: 'sides',  label: 'Accompagnements',  emoji: '',  fn: getSides  },
@@ -75,7 +76,7 @@ export function renderPlanner() {
   const macros = computeDayMacros(entry);
   const { targets } = USER;
   const kcalPct = Math.round((macros.kcal / targets.kcal) * 100);
-  const over    = macros.kcal > targets.kcal;
+  const over    = macros.kcal > targets.kcal * 1.08;
   const isToday = entry.date === getTodayDate();
 
   const view = el('div', 'view planner-view');
@@ -104,7 +105,7 @@ export function renderPlanner() {
       <div class="mini-macro"><span class="mm-val fat">${Math.round(macros.fat)}g</span><span class="mm-label">Lipides</span></div>
     </div>
     ${entry.meals.lunch.length || entry.meals.dinner.length || entry.meals.sides.length || entry.meals.sweet.length
-      ? `<button class="optimize-btn">✦ Optimiser les portions</button>` : ''}`;
+      ? `<button class="optimize-btn">Optimiser les portions</button>` : ''}`;
   view.appendChild(hdr);
 
   SLOTS.forEach(({ key, label, emoji }) => {
