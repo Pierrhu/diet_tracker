@@ -29,11 +29,11 @@ export const RECIPES = [
       { name: 'Herbes de Provence', qty: 3, unit: 'g', kcal: 8, protein: 0.3, carbs: 1.7, fat: 0.3 },
     ],
     steps: [
-      'Préchauffer le four à 200°C.',
+      'Préchauffer l\'air fryer à 160°C.',
       'Mélanger zeste de citron + ail haché + thym + herbes + huile + sel + poivre.',
       'Inciser le poulet, glisser la marinade sous la peau. Enduire l\'extérieur.',
       'Disposer les légumes coupés en gros morceaux autour. Jus de citron sur tout.',
-      'Enfourner 35-40 min. Reposer 5 min avant de couper.',
+      'Cuire à l\'air fryer 28-32 min. Reposer 4 min avant de couper.',
       'Cuire le riz en parallèle (rincer, 2x volume d\'eau, 12 min).',
     ],
     tip: 'Batch : cuire 3 blancs d\'un coup. Le poulet froid va dans les wraps et salades toute la semaine.',
@@ -125,11 +125,11 @@ export const RECIPES = [
       { name: 'Huile d\'olive', qty: 5, unit: 'g', kcal: 45, protein: 0, carbs: 0, fat: 5 },
     ],
     steps: [
-      'Préchauffer le four à 180°C.',
+      'Préchauffer l\'air fryer à 140°C.',
       'Trancher les courgettes finement (3mm). Saler, laisser dégorger 10 min, éponger avec du papier absorbant.',
       'Mélanger thon + ricotta + fromage blanc + oeuf + ail haché + basilic + sel + poivre.',
       'Dans un plat huilé, alterner couches de courgettes et mélange thon. Finir avec parmesan.',
-      'Enfourner 25 min jusqu\'à gratinage doré.',
+      'Cuire à l\'air fryer 20 min jusqu\'à gratinage doré.',
     ],
     tip: 'Faire dégorger les courgettes est indispensable — sinon le gratin rend de l\'eau. Batch : faire x2 et congeler une portion.',
     tags: ['batch', 'four', 'low-carb', 'italien'],
@@ -137,7 +137,7 @@ export const RECIPES = [
 
   {
     id: 'D05',
-    name: 'Pad kra pao thaï',
+    name: 'Pad kra pao au poulet',
     category: 'dinner',
     emoji: '🌿',
     prepTime: 10,
@@ -205,7 +205,7 @@ export const RECIPES = [
 
   {
     id: 'D07',
-    name: 'Gyudon — boeuf caramélisé soja-mirin',
+    name: 'Gyūdon (bœuf caramélisé soja-mirin)',
     category: 'dinner',
     emoji: '🍱',
     prepTime: 10,
@@ -336,7 +336,7 @@ export const RECIPES = [
 
   {
     id: 'D11',
-    name: 'Mafé de poulet — sauce cacahuète',
+    name: 'Mafé de poulet (sauce cacahuète)',
     category: 'dinner',
     emoji: '🥜',
     prepTime: 15,
@@ -501,7 +501,7 @@ export const RECIPES = [
 
   {
     id: 'D16',
-    name: 'Poulet tikka masala allégé',
+    name: 'Tikka masala de poulet allégé',
     category: 'dinner',
     emoji: '🍛',
     prepTime: 15,
@@ -534,7 +534,7 @@ export const RECIPES = [
 
   {
     id: 'D17',
-    name: 'Poulet souvlaki bowl façon grec',
+    name: 'Bowl grec au poulet souvlaki',
     category: 'dinner',
     emoji: '🇬🇷',
     prepTime: 15,
@@ -558,7 +558,7 @@ export const RECIPES = [
       'Mariner le poulet dans huile + jus de citron + origan + ail + sel + poivre 30 min.',
       'Tzatziki : râper le concombre, presser l\'excès d\'eau, mélanger avec fromage blanc + ail râpé + menthe + citron + sel.',
       'Cuire le riz.',
-      'Griller le poulet à la poêle ou grill pan 6-8 min. Reposer 2 min.',
+      'Griller le poulet à la poêle ou grill pan 5-6 min. Reposer 2 min.',
       'Trancher le poulet en lanières.',
       'Assembler le bowl : riz, poulet, tzatziki, tomates cerises, olives. Arroser d\'huile d\'olive.',
     ],
@@ -568,7 +568,7 @@ export const RECIPES = [
 
   {
     id: 'D18',
-    name: 'Poisson blanc chermoula marocaine',
+    name: 'Poisson blanc à la chermoula',
     category: 'dinner',
     emoji: '🐟',
     prepTime: 20,
@@ -699,7 +699,7 @@ export const RECIPES = [
 
   {
     id: 'L02',
-    name: 'Salade thaï poulet froid',
+    name: 'Salade thaï au poulet',
     category: 'lunch',
     emoji: '🌶️',
     prepTime: 15,
@@ -787,7 +787,7 @@ export const RECIPES = [
 
   {
     id: 'L05',
-    name: 'Salade césar allégée poulet',
+    name: 'Salade César allégée au poulet',
     category: 'lunch',
     emoji: '🥗',
     prepTime: 15,
@@ -955,7 +955,7 @@ export const RECIPES = [
     ],
     steps: [
       'Couper le chou-fleur en petits bouquets. Mélanger avec huile + cumin + sel.',
-      'Rôtir au four 200°C pendant 25 min jusqu\'à bords dorés et légèrement brûlés.',
+      'Cuire à l\'air fryer à l\'air fryer 180°C pendant 20 min jusqu\'à bords dorés et légèrement brûlés.',
       'Sauce tahini allégée : tahini + fromage blanc + citron + ail râpé + eau tiède pour fluidifier.',
       'Assembler : chou-fleur rôti + pois chiches + poulet froid + sauce tahini + persil.',
     ],
@@ -1043,7 +1043,7 @@ export const RECIPES = [
       'Battre les oeufs avec fromage blanc + herbes de Provence + sel + poivre.',
       'Ajouter thon émietté aux légumes. Mélanger.',
       'Verser le mélange oeufs sur les légumes. Feu moyen, 4-5 min.',
-      'Finir 2 min sous le grill du four si l\'omelette est épaisse.',
+      'Finir 2 min en mode grill de l\'air fryer si l\'omelette est épaisse.',
     ],
     tip: 'Le fromage blanc dans les oeufs les rend plus aérés et moins denses. Le poivron fondant avec le thon = combo imbattable.',
     tags: ['français', 'oeufs', 'rapide'],
@@ -1206,11 +1206,11 @@ export const RECIPES = [
       { name: 'Huile d\'olive', qty: 5, unit: 'g', kcal: 45, protein: 0, carbs: 0, fat: 5 },
     ],
     steps: [
-      'Préchauffer le four à 180°C.',
+      'Préchauffer l\'air fryer à 140°C.',
       'Faire revenir oignon + tomates + ail dans l\'huile 5 min. Ajouter thon émietté.',
-      'Répartir dans ramequins allant au four.',
+      'Répartir dans des ramequins allant à l\'air fryer.',
       'Casser 1-2 oeufs par ramequin. Émietter la feta dessus.',
-      'Enfourner 10-12 min (blanc pris, jaune encore coulant).',
+      'Cuire à l\'air fryer 8-10 min (blanc pris, jaune encore coulant).',
     ],
     tip: 'La feta apporte le sel — ne pas saler avant de goûter. Servir avec pain grillé pour saucer le jaune coulant.',
     tags: ['four', 'méditerranéen', 'oeufs'],
@@ -1365,7 +1365,7 @@ export const RECIPES = [
     steps: [
       'Couper courgettes en rondelles épaisses (1cm) ou en bâtonnets.',
       'Badigeonner d\'huile + herbes + ail + sel + poivre.',
-      'Griller sur grill pan ou four 220°C, 4-5 min de chaque côté.',
+      'Griller à la poêle (ou air fryer 180°C) 3-4 min de chaque côté.',
     ],
     tip: 'Ne pas bouger les courgettes pendant la cuisson pour obtenir les marques de grill. C\'est ce qui donne le goût grillé.',
     tags: ['légumes', 'grill', 'méditerranéen'],
@@ -1492,9 +1492,9 @@ export const RECIPES = [
       { name: 'Herbes fraîches', qty: 5, unit: 'g', kcal: 2, protein: 0.2, carbs: 0.5, fat: 0.1 },
     ],
     steps: [
-      'Préchauffer le four à 220°C.',
+      'Préchauffer l\'air fryer à 180°C.',
       'Couper les poivrons en 4 dans la longueur. Badigeonner d\'huile + sel.',
-      'Rôtir 30 min jusqu\'à que la peau soit bien noire sur les bords.',
+      'Cuire à l\'air fryer 24 min jusqu\'à que la peau soit bien noire sur les bords.',
       'Mettre dans un sac plastique fermé 10 min — la vapeur facilite l\'épluchage.',
       'Peler, assaisonner avec huile + balsamique + ail + herbes.',
     ],
@@ -1584,9 +1584,9 @@ export const RECIPES = [
       { name: 'Cumin + paprika', qty: 2, unit: 'g', kcal: 6, protein: 0.3, carbs: 1, fat: 0.3 },
     ],
     steps: [
-      'Préchauffer le four à 200°C.',
+      'Préchauffer l\'air fryer à 160°C.',
       'Couper la patate douce en cubes de 2 cm. Assaisonner huile + épices + sel.',
-      'Rôtir 25 min en retournant à mi-cuisson.',
+      'Cuire à l\'air fryer 20 min en retournant à mi-cuisson.',
     ],
     tip: 'Excellent avec du poulet ou du poisson. Très rassasiant.',
     tags: ['féculents', 'batch', 'four'],
@@ -1860,11 +1860,11 @@ export const RECIPES = [
       { name: 'Fromage blanc 0% (topping)', qty: 150, unit: 'g', kcal: 68, protein: 12, carbs: 6, fat: 0 },
     ],
     steps: [
-      'Préchauffer le four à 180°C.',
+      'Préchauffer l\'air fryer à 140°C.',
       'Éplucher et couper les pommes en dés. Disposer dans un plat à gratin.',
       'Mélanger flocons + miel + huile de coco fondue + cannelle → forme le crumble.',
       'Répartir le crumble sur les pommes.',
-      'Enfourner 20-25 min jusqu\'à dorure du crumble.',
+      'Cuire à l\'air fryer 16-20 min jusqu\'à dorure du crumble.',
       'Servir avec fromage blanc froid.',
     ],
     tip: 'Batch : faire x2 pommes, congeler en portions. Réchauffer 5 min au four ou 90 sec au micro-ondes.',
@@ -1922,10 +1922,10 @@ export const RECIPES = [
       { name: 'Levure chimique', qty: 3, unit: 'g', kcal: 6, protein: 0, carbs: 1.5, fat: 0 },
     ],
     steps: [
-      'Préchauffer le four à 175°C.',
+      'Préchauffer l\'air fryer à 135°C.',
       'Mixer pois chiches + oeufs + miel + beurre de cacahuète + cacao + levure jusqu\'à pâte lisse.',
       'Verser dans un moule huilé de 20x20cm (ou équivalent).',
-      'Enfourner 18-20 min. Le centre doit rester légèrement humide.',
+      'Cuire à l\'air fryer 14-16 min. Le centre doit rester légèrement humide.',
       'Laisser refroidir complètement avant de couper en 4 carrés.',
     ],
     tip: 'On ne sent PAS les pois chiches — le cacao et le beurre de cacahuète dominent. La texture est dense et fondante, exactement comme un vrai brownie. Se congèle très bien.',
@@ -1962,17 +1962,17 @@ export const RECIPES = [
       { name: 'Cannelle', qty: 2, unit: 'g', kcal: 5, protein: 0, carbs: 1.4, fat: 0.1 },
     ],
     steps: [
-      'Préchauffer le four à 175°C.',
+      'Préchauffer l\'air fryer à 135°C.',
       'Écraser la banane. Casser le chocolat en pépites.',
       'Mélanger banane + flocons + miel + cannelle + pépites de chocolat.',
       'Former des galettes (la recette en fait 4). Poser sur plaque papier cuisson.',
-      'Enfourner 12-15 min. Laisser refroidir — elles durcissent en refroidissant.',
+      'Cuire à l\'air fryer 10-12 min. Laisser refroidir — elles durcissent en refroidissant.',
     ],
     tip: 'Recette pour 4 galettes — macros par portion de 2. Sans gluten si tu utilises des flocons d\'avoine certifiés. Se conservent 5 jours dans une boîte hermétique.',
     tags: ['batch', 'four', 'biscuit', 'chocolat'],
   },
   {
-    id: 'SW16', name: 'Yaourt glacé maison (frozen yogurt)', category: 'sweet', emoji: '🍦',
+    id: 'SW16', name: 'Yaourt glacé maison', category: 'sweet', emoji: '🍦',
     prepTime: 5, cookTime: 0, batch: true,
     macros: { kcal: 253, protein: 26, carbs: 38, fat: 1 },
     ingredients: [
@@ -2020,7 +2020,7 @@ export const RECIPES = [
   // NOUVELLES RECETTES — DÎNERS
   // ─────────────────────────────────────────────────────────────
   {
-    id: 'D21', name: 'Poulet au beurre indien (butter chicken allégé)', category: 'dinner', emoji: '🧈',
+    id: 'D21', name: 'Butter chicken allégé', category: 'dinner', emoji: '🧈',
     prepTime: 15, cookTime: 25, batch: true,
     macros: { kcal: 812, protein: 80, carbs: 80, fat: 19 },
     ingredients: [
@@ -2156,7 +2156,7 @@ export const RECIPES = [
       { name: 'Huile + citron + cumin', qty: 8, unit: 'g', kcal: 50, protein: 0.2, carbs: 1, fat: 5 },
     ],
     steps: [
-      'Rôtir la patate douce en dés + pois chiches au four 200°C, 25 min avec huile + cumin.',
+      'Cuire la patate douce en dés + pois chiches à l\'air fryer 180°C, 20 min avec huile + cumin (en une couche, secouer à mi-cuisson).',
       'Sauce : fromage blanc + tahini + citron + ail + eau.',
       'Disposer en bowl : épinards, patate douce, pois chiches, poulet froid.',
       'Napper de sauce tahini-citron.',
@@ -2232,7 +2232,7 @@ export const RECIPES = [
   // NOUVELLES RECETTES — DESSERTS & ENCAS
   // ─────────────────────────────────────────────────────────────
   {
-    id: 'SW17', name: 'Cookie dough protéiné (pâte à cookie crue)', category: 'sweet', emoji: '🍪',
+    id: 'SW17', name: 'Pâte à cookie protéinée (à la cuillère)', category: 'sweet', emoji: '🍪',
     prepTime: 5, cookTime: 0, batch: true,
     macros: { kcal: 320, protein: 22, carbs: 32, fat: 12 },
     ingredients: [
@@ -2348,7 +2348,7 @@ export const RECIPES = [
     tags: ['encas', '0-cuisson', 'rapide'],
   },
   {
-    id: 'SW23', name: 'Shake masse whey-avoine-cacahuète', category: 'sweet', emoji: '🥤',
+    id: 'SW23', name: 'Shake prise de masse whey-avoine-cacahuète', category: 'sweet', emoji: '🥤',
     prepTime: 3, cookTime: 0, batch: false,
     macros: { kcal: 620, protein: 45, carbs: 65, fat: 18 },
     ingredients: [
@@ -2404,6 +2404,152 @@ export const RECIPES = [
     tip: 'À préparer la veille : tu en fais 3-4 bocaux d\'un coup pour la semaine. Le meilleur encas zéro effort.',
     tags: ['encas', '0-cuisson', 'batch', 'high-protein'],
   },
+  {
+    id: 'EN01', name: 'Velouté de courgettes au fromage frais', category: 'starter', emoji: '🥣',
+    prepTime: 10, cookTime: 15, batch: true,
+    macros: { kcal: 130, protein: 9, carbs: 12, fat: 5 },
+    ingredients: [
+      { name: 'Courgettes', qty: 300, unit: 'g', kcal: 51, protein: 3.6, carbs: 9, fat: 0.9 },
+      { name: 'Fromage frais léger', qty: 40, unit: 'g', kcal: 56, protein: 4, carbs: 2.4, fat: 3.6 },
+      { name: 'Oignon', qty: 50, unit: 'g', kcal: 20, protein: 0.6, carbs: 4.5, fat: 0.1 },
+      { name: 'Ail', qty: 1, unit: 'gousse', kcal: 4, protein: 0.2, carbs: 1, fat: 0 },
+      { name: 'Sel + poivre', qty: 1, unit: 'pincée', kcal: 0, protein: 0, carbs: 0, fat: 0 },
+    ],
+    steps: [
+      'Faire revenir oignon + ail.',
+      'Ajouter les courgettes en morceaux, couvrir d\'eau, cuire 15 min.',
+      'Mixer avec le fromage frais, saler/poivrer.',
+    ],
+    tip: 'Léger et rassasiant pour ouvrir le repas. Se garde 4 jours, parfait en batch.',
+    tags: ['entrée', 'batch', 'léger', 'soupe'],
+  },
+  {
+    id: 'EN02', name: 'Salade de crudités vinaigrette légère', category: 'starter', emoji: '🥗',
+    prepTime: 8, cookTime: 0, batch: false,
+    macros: { kcal: 95, protein: 3, carbs: 11, fat: 4 },
+    ingredients: [
+      { name: 'Carottes', qty: 80, unit: 'g', kcal: 33, protein: 0.7, carbs: 7.6, fat: 0.2 },
+      { name: 'Concombre', qty: 100, unit: 'g', kcal: 15, protein: 0.7, carbs: 3, fat: 0.1 },
+      { name: 'Tomates cerise', qty: 80, unit: 'g', kcal: 14, protein: 0.7, carbs: 2.8, fat: 0.2 },
+      { name: 'Huile d\'olive', qty: 4, unit: 'g', kcal: 36, protein: 0, carbs: 0, fat: 4 },
+      { name: 'Vinaigre balsamique', qty: 5, unit: 'g', kcal: 4, protein: 0, carbs: 1, fat: 0 },
+    ],
+    steps: [
+      'Râper les carottes, couper concombre et tomates.',
+      'Mélanger huile + vinaigre + sel.',
+      'Assaisonner juste avant de servir.',
+    ],
+    tip: 'L\'entrée fraîcheur classique. Coupe la faim sans plomber les calories.',
+    tags: ['entrée', '0-cuisson', 'léger', 'salade'],
+  },
+  {
+    id: 'EN03', name: 'Velouté de tomates basilic', category: 'starter', emoji: '🍅',
+    prepTime: 8, cookTime: 15, batch: true,
+    macros: { kcal: 110, protein: 4, carbs: 16, fat: 3 },
+    ingredients: [
+      { name: 'Tomates concassées', qty: 300, unit: 'g', kcal: 72, protein: 3, carbs: 12, fat: 0.6 },
+      { name: 'Oignon', qty: 50, unit: 'g', kcal: 20, protein: 0.6, carbs: 4.5, fat: 0.1 },
+      { name: 'Huile d\'olive', qty: 3, unit: 'g', kcal: 27, protein: 0, carbs: 0, fat: 3 },
+      { name: 'Basilic frais', qty: 5, unit: 'g', kcal: 1, protein: 0.1, carbs: 0.2, fat: 0 },
+      { name: 'Ail', qty: 1, unit: 'gousse', kcal: 4, protein: 0.2, carbs: 1, fat: 0 },
+    ],
+    steps: [
+      'Revenir oignon + ail dans l\'huile.',
+      'Ajouter les tomates, mijoter 15 min.',
+      'Mixer avec le basilic.',
+    ],
+    tip: 'Réconfortant et très peu calorique. Double les quantités pour la semaine.',
+    tags: ['entrée', 'batch', 'léger', 'soupe'],
+  },
+  {
+    id: 'EN04', name: 'Carottes râpées citron-cumin', category: 'starter', emoji: '🥕',
+    prepTime: 7, cookTime: 0, batch: true,
+    macros: { kcal: 100, protein: 2, carbs: 13, fat: 4 },
+    ingredients: [
+      { name: 'Carottes', qty: 150, unit: 'g', kcal: 62, protein: 1.4, carbs: 14, fat: 0.3 },
+      { name: 'Huile d\'olive', qty: 4, unit: 'g', kcal: 36, protein: 0, carbs: 0, fat: 4 },
+      { name: 'Citron (jus)', qty: 10, unit: 'ml', kcal: 2, protein: 0, carbs: 0.7, fat: 0 },
+      { name: 'Cumin', qty: 1, unit: 'pincée', kcal: 2, protein: 0.1, carbs: 0.2, fat: 0.1 },
+    ],
+    steps: [
+      'Râper les carottes.',
+      'Assaisonner huile + citron + cumin + sel.',
+      'Laisser mariner 10 min.',
+    ],
+    tip: 'Tient 3-4 jours au frigo, encore meilleure le lendemain.',
+    tags: ['entrée', '0-cuisson', 'batch', 'léger'],
+  },
+  {
+    id: 'EN05', name: 'Soupe miso aux légumes', category: 'starter', emoji: '🍲',
+    prepTime: 5, cookTime: 8, batch: false,
+    macros: { kcal: 85, protein: 6, carbs: 9, fat: 3 },
+    ingredients: [
+      { name: 'Pâte de miso', qty: 20, unit: 'g', kcal: 40, protein: 2.5, carbs: 5, fat: 1.2 },
+      { name: 'Champignons de Paris', qty: 60, unit: 'g', kcal: 13, protein: 1.9, carbs: 1.8, fat: 0.2 },
+      { name: 'Épinards frais', qty: 40, unit: 'g', kcal: 9, protein: 1.1, carbs: 1.4, fat: 0.2 },
+      { name: 'Oignon', qty: 30, unit: 'g', kcal: 12, protein: 0.4, carbs: 2.7, fat: 0.1 },
+    ],
+    steps: [
+      'Chauffer 400ml d\'eau (sans bouillir).',
+      'Ajouter champignons et oignon, cuire 5 min.',
+      'Hors du feu, délayer le miso, ajouter les épinards.',
+    ],
+    tip: 'Réchauffe et coupe la faim avant le plat. Ne jamais faire bouillir le miso.',
+    tags: ['entrée', 'léger', 'soupe', 'rapide'],
+  },
+  {
+    id: 'EN06', name: 'Salade verte tomate-concombre', category: 'starter', emoji: '🥬',
+    prepTime: 5, cookTime: 0, batch: false,
+    macros: { kcal: 80, protein: 2, carbs: 7, fat: 5 },
+    ingredients: [
+      { name: 'Salade verte', qty: 60, unit: 'g', kcal: 9, protein: 0.8, carbs: 1.2, fat: 0.1 },
+      { name: 'Tomates cerise', qty: 80, unit: 'g', kcal: 14, protein: 0.7, carbs: 2.8, fat: 0.2 },
+      { name: 'Concombre', qty: 80, unit: 'g', kcal: 12, protein: 0.5, carbs: 2.4, fat: 0.1 },
+      { name: 'Huile d\'olive', qty: 5, unit: 'g', kcal: 45, protein: 0, carbs: 0, fat: 5 },
+    ],
+    steps: [
+      'Laver et couper les légumes.',
+      'Assaisonner d\'huile, vinaigre et sel.',
+    ],
+    tip: 'L\'entrée minute zéro effort.',
+    tags: ['entrée', '0-cuisson', 'léger', 'salade'],
+  },
+  {
+    id: 'EN07', name: 'Gaspacho de concombre', category: 'starter', emoji: '🥒',
+    prepTime: 10, cookTime: 0, batch: true,
+    macros: { kcal: 90, protein: 3, carbs: 9, fat: 4 },
+    ingredients: [
+      { name: 'Concombre', qty: 200, unit: 'g', kcal: 30, protein: 1.4, carbs: 6, fat: 0.2 },
+      { name: 'Fromage blanc 0%', qty: 60, unit: 'g', kcal: 27, protein: 4.8, carbs: 2.4, fat: 0 },
+      { name: 'Huile d\'olive', qty: 3, unit: 'g', kcal: 27, protein: 0, carbs: 0, fat: 3 },
+      { name: 'Ail', qty: 1, unit: 'gousse', kcal: 4, protein: 0.2, carbs: 1, fat: 0 },
+      { name: 'Menthe fraîche', qty: 3, unit: 'g', kcal: 1, protein: 0.1, carbs: 0.2, fat: 0 },
+    ],
+    steps: [
+      'Mixer concombre + fromage blanc + ail + menthe.',
+      'Filet d\'huile, sel, servir bien frais.',
+    ],
+    tip: 'Frais et protéiné. Idéal l\'été, se garde 2 jours.',
+    tags: ['entrée', '0-cuisson', 'batch', 'léger', 'soupe'],
+  },
+  {
+    id: 'EN08', name: 'Betteraves-chèvre frais', category: 'starter', emoji: '🍠',
+    prepTime: 6, cookTime: 0, batch: false,
+    macros: { kcal: 120, protein: 6, carbs: 12, fat: 5 },
+    ingredients: [
+      { name: 'Betterave cuite', qty: 120, unit: 'g', kcal: 52, protein: 2, carbs: 9.6, fat: 0.2 },
+      { name: 'Fromage frais léger', qty: 40, unit: 'g', kcal: 56, protein: 4, carbs: 2.4, fat: 3.6 },
+      { name: 'Huile d\'olive', qty: 2, unit: 'g', kcal: 18, protein: 0, carbs: 0, fat: 2 },
+      { name: 'Ciboulette', qty: 3, unit: 'g', kcal: 1, protein: 0.1, carbs: 0.1, fat: 0 },
+    ],
+    steps: [
+      'Couper les betteraves en dés.',
+      'Émietter le fromage frais dessus.',
+      'Filet d\'huile, ciboulette, poivre.',
+    ],
+    tip: 'Sucré-salé qui change. Les betteraves déjà cuites sous vide font gagner du temps.',
+    tags: ['entrée', '0-cuisson', 'léger'],
+  },
 ];
 
 // ─────────────────────────────────────────────────────────────
@@ -2414,5 +2560,6 @@ export const getDinners = () => RECIPES.filter(r => r.category === 'dinner');
 export const getLunches = () => RECIPES.filter(r => r.category === 'lunch');
 export const getSides   = () => RECIPES.filter(r => r.category === 'side');
 export const getSweets  = () => RECIPES.filter(r => r.category === 'sweet');
+export const getStarters = () => RECIPES.filter(r => r.category === 'starter');
 export const getById    = (id) => RECIPES.find(r => r.id === id);
 export const getBatch   = () => RECIPES.filter(r => r.batch);

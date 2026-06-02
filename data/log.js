@@ -6,7 +6,7 @@
 //
 // Migration : les anciennes entrées stockaient des strings ('D01') → converties à la volée.
 
-const EMPTY_MEALS = () => ({ lunch: [], dinner: [], sides: [], sweet: [] });
+const EMPTY_MEALS = () => ({ starter: [], lunch: [], dinner: [], sides: [], sweet: [] });
 
 function normalizeItem(item) {
   // Ancien format : string → { id, servings:1 }
@@ -18,7 +18,7 @@ function normalizeItem(item) {
 
 function normalizeEntry(entry) {
   const meals = EMPTY_MEALS();
-  ['lunch', 'dinner', 'sides', 'sweet'].forEach(slot => {
+  ['starter', 'lunch', 'dinner', 'sides', 'sweet'].forEach(slot => {
     meals[slot] = (entry.meals?.[slot] || []).map(normalizeItem);
   });
   return { date: entry.date, meals };
