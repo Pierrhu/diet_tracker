@@ -12,6 +12,28 @@ const FILTERS = [
   { key: 'sweet',  label: 'Desserts' },
 ];
 
+const PROT_FILTERS = [
+  { key: 'all',        label: 'Toutes', emoji: '' },
+  { key: 'poulet',     label: 'Poulet', emoji: '🍗' },
+  { key: 'boeuf',      label: 'Bœuf', emoji: '🥩' },
+  { key: 'dinde',      label: 'Dinde', emoji: '🦃' },
+  { key: 'poisson',    label: 'Poisson', emoji: '🐟' },
+  { key: 'crevettes',  label: 'Crevettes', emoji: '🦐' },
+  { key: 'vege',       label: 'Végé', emoji: '🌱' },
+];
+
+// Classe de protéine d'une recette (pour le filtre du catalogue).
+function recipeProtein(r) {
+  const t = JSON.stringify(r.ingredients).toLowerCase();
+  if (/crevette/.test(t)) return 'crevettes';
+  if (/saumon|colin|merlu|cabillaud|poisson|thon/.test(t)) return 'poisson';
+  if (/steak|boeuf|bœuf/.test(t)) return 'boeuf';
+  if (/dinde/.test(t)) return 'dinde';
+  if (/poulet/.test(t)) return 'poulet';
+  if (/tofu|pois chiches|lentilles|haricots (rouges|blancs)/.test(t)) return 'vege';
+  return 'autre';
+}
+
 export function renderRecipes() {
   const app = document.getElementById('app');
   app.querySelector('.view')?.remove();
@@ -30,8 +52,19 @@ export function renderRecipes() {
     tabs.appendChild(btn);
   });
 
+  // Filtre par protéine
+  const protTabs = el('div', 'prot-filter-tabs');
+  const activeProt = state.filterProtein || 'all';
+  PROT_FILTERS.forEach(f => {
+    const btn = el('button', `prot-filter-btn ${activeProt === f.key ? 'active' : ''}`);
+    btn.innerHTML = `${f.emoji ? `<span class="pf-emoji">${f.emoji}</span>` : ''}${f.label}`;
+    btn.addEventListener('click', () => { setState({ filterProtein: f.key }); renderRecipes(); });
+    protTabs.appendChild(btn);
+  });
+
   top.appendChild(search);
   top.appendChild(tabs);
+  top.appendChild(protTabs);
   view.appendChild(top);
 
   const list = el('div', 'recipe-list');
@@ -39,11 +72,13 @@ export function renderRecipes() {
 
   function renderList(query) {
     const cat = state.filterCategory;
+    const prot = state.filterProtein || 'all';
     const filtered = RECIPES.filter(r => {
       const matchCat = cat === 'all' || r.category === cat;
+      const matchProt = prot === 'all' || recipeProtein(r) === prot;
       const matchQ   = r.name.toLowerCase().includes(query.toLowerCase()) ||
                        r.tags?.some(t => t.includes(query.toLowerCase()));
-      return matchCat && matchQ;
+      return matchCat && matchProt && matchQ;
     });
 
     list.innerHTML = filtered.length ? filtered.map(r => `

@@ -5,6 +5,7 @@ export const state = {
   selectedDate:   getTodayDate(),  // jour en cours d'édition dans le planner
   searchQuery:    '',
   filterCategory: 'all',
+  filterProtein:  'all',
 };
 
 export function setState(patch) {

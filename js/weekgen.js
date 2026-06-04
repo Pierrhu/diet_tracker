@@ -74,7 +74,7 @@ function pickCohesiveMains(pool, nbMains) {
 // Renvoie { dates: {date: {meals}}, mains, sweets }
 import { getWeekDates, getNextWeekDates } from '../data/log.js';
 
-export function generateWeek({ cantineDays = [], nextWeek = true, targets } = {}) {
+export function generateWeek({ cantineDays = [], nextWeek = true, targets, proteins = null } = {}) {
   targets = targets || { kcal: 2200, protein: 180, carbs: 220, fat: 65 };
   const dates = nextWeek ? getNextWeekDates() : getWeekDates();
 
@@ -82,18 +82,74 @@ export function generateWeek({ cantineDays = [], nextWeek = true, targets } = {}
   const lunches = getLunches().filter(r => r.id !== 'C01'); // la cantine est gérée à part
   const sweets  = getSweets();
 
-  // 4-5 plats cohérents. Viande/poisson OBLIGATOIRE chaque jour → on ne garde
-  // que les plats contenant une vraie source de viande ou poisson comme levier.
-  const hasMeat = r => r.ingredients.some(i => classifyIngredient(i.name) === 'protein');
-  const nbMains = 4 + Math.round(Math.random()); // 4 ou 5
-  const meatPool = shuffle([...dinners, ...lunches].filter(hasMeat));
-  const mains = pickCohesiveMains(meatPool.length >= nbMains ? meatPool : [...dinners, ...lunches], nbMains);
+  const hasMeat   = r => r.ingredients.some(i => classifyIngredient(i.name) === 'protein');
+  const hasStarch = r => r.ingredients.some(i => ['carb','both'].includes(classifyIngredient(i.name)));
 
-  // 2-3 desserts batch (on privilégie ceux tagués batch)
+  // DÎNERS : vrais repas consistants (viande/poisson + féculent), jamais une salade/soupe légère.
+  // On pioche uniquement dans le pool des dîners (D01–D25), tous consistants.
+  const isFish = r => /crevette|saumon|poisson|colin|merlu|cabillaud|fruits de mer/i.test(JSON.stringify(r.ingredients));
+  // Classe de protéine d'un plat (pour le filtre choisi par l'utilisateur).
+  const proteinOf = r => {
+    const txt = JSON.stringify(r.ingredients).toLowerCase();
+    if (/crevette/.test(txt)) return 'crevettes';
+    if (/saumon/.test(txt)) return 'saumon';
+    if (/colin|merlu|cabillaud|poisson blanc/.test(txt)) return 'poisson';
+    if (/steak|boeuf|bœuf/.test(txt)) return 'boeuf';
+    if (/dinde/.test(txt)) return 'dinde';
+    if (/poulet/.test(txt)) return 'poulet';
+    if (/tofu/.test(txt)) return 'tofu';
+    return 'autre';
+  };
+  // Pool dîners : viande/poisson + féculent. On limite le poisson (cher) à 1 plat max par semaine.
+  let allDinnerMains = dinners.filter(r => hasMeat(r) && hasStarch(r));
+  // Filtre protéines choisi par l'utilisateur (si fourni et non vide)
+  if (proteins && proteins.length) {
+    const filtered = allDinnerMains.filter(r => proteins.includes(proteinOf(r)));
+    if (filtered.length) allDinnerMains = filtered; // sinon on garde tout (évite une semaine vide)
+  }
+  const fishMains = shuffle(allDinnerMains.filter(isFish));
+  const meatMains = shuffle(allDinnerMains.filter(r => !isFish(r)));
+  const nbDinnerMains = 3 + Math.round(Math.random()); // 3 ou 4 plats du soir, répétés
+  // au plus 1 poisson, le reste en viande (poulet/bœuf/dinde) — sauf si l'utilisateur n'a choisi que du poisson
+  const onlyFish = meatMains.length === 0;
+  const dinnerMains = onlyFish
+    ? pickCohesiveMains(fishMains, nbDinnerMains)
+    : pickCohesiveMains(meatMains, nbDinnerMains - (fishMains.length ? 1 : 0))
+        .concat(fishMains.length ? [fishMains[0]] : []);
+  // si pas assez, compléter
+  const fillPool = meatMains.length ? meatMains : fishMains;
+  while (dinnerMains.length < nbDinnerMains && fillPool.length) {
+    const extra = fillPool.find(m => !dinnerMains.includes(m));
+    if (!extra) break; dinnerMains.push(extra);
+  }
+
+  // DÉJEUNERS (midis sans cantine) : pool plus large (salades, bowls, wraps…), avec viande.
+  // On applique le filtre protéines : on retire seulement celles que l'utilisateur a décochées
+  // (thon, œufs… ne sont pas dans les chips → toujours gardés).
+  const CHIP_IDS = ['poulet','boeuf','dinde','crevettes','saumon','tofu'];
+  let lunchPool = shuffle(lunches.filter(hasMeat));
+  if (proteins && proteins.length) {
+    const filtered = lunchPool.filter(r => {
+      const pr = proteinOf(r);
+      return !CHIP_IDS.includes(pr) || proteins.includes(pr);
+    });
+    if (filtered.length) lunchPool = filtered;
+  }
+  const nbLunchMains = 3 + Math.round(Math.random());
+  // on respecte le filtre même si le pool est petit (les plats seront répétés)
+  const lunchSource = lunchPool.length ? lunchPool : lunches;
+  const lunchMains = pickCohesiveMains(lunchSource, Math.min(nbLunchMains, lunchSource.length) || 1);
+
+  // pour la cohérence des courses, on expose l'ensemble des plats choisis
+  const mains = [...dinnerMains, ...lunchMains];
+
+  // Desserts répétés sur la semaine : on privilégie les ASSEMBLAGES SIMPLES rapides
+  // (fromage blanc, skyr, overnight oats) plutôt que les longs (energy balls, cookies).
   const nbSweets = 2 + Math.round(Math.random()); // 2 ou 3
-  const sweetPool = shuffle(sweets);
-  const batchSweets = sweetPool.filter(s => (s.tags || []).includes('batch'));
-  const chosenSweets = (batchSweets.length >= nbSweets ? batchSweets : sweetPool).slice(0, nbSweets);
+  // priorité : encas rapides ≤6 min, puis le reste
+  const quickSweets = shuffle(sweets.filter(s => (s.prepTime + s.cookTime) <= 6));
+  const otherSweets = shuffle(sweets.filter(s => (s.prepTime + s.cookTime) > 6));
+  const chosenSweets = quickSweets.concat(otherSweets).slice(0, nbSweets);
 
   // ── Répartition sur la semaine ──
   // cantineDays : tableau d'index de jour (0=Lun … 6=Dim) où le midi est à la cantine.
@@ -107,35 +163,58 @@ export function generateWeek({ cantineDays = [], nextWeek = true, targets } = {}
     }
   });
 
-  // file des plats maison (chaque plat ×2 si possible, pour le batch)
-  let mealQueue = [];
-  mains.forEach(m => { mealQueue.push(m); mealQueue.push(m); }); // ×2
-  mealQueue = shuffle(mealQueue);
+  // Deux files séparées : plats du soir (consistants) et plats du midi.
+  let dinnerQueue = []; dinnerMains.forEach(m => { dinnerQueue.push(m); dinnerQueue.push(m); });
+  let lunchQueue  = []; lunchMains.forEach(m  => { lunchQueue.push(m);  lunchQueue.push(m);  });
+  dinnerQueue = shuffle(dinnerQueue);
+  lunchQueue  = shuffle(lunchQueue);
 
   // construit l'objet entries
   const entries = {};
   dates.forEach(d => entries[d] = { date: d, meals: { starter: [], lunch: [], dinner: [], sides: [], sweet: [] } });
 
-  // Place les plats maison en évitant le même plat midi+soir le même jour.
-  let qi = 0;
-  const nextMeal = (avoidId) => {
-    for (let k = 0; k < mealQueue.length; k++) {
-      const cand = mealQueue[(qi + k) % mealQueue.length];
-      if (cand.id !== avoidId) { qi += k + 1; return cand; }
+  let di = 0, li = 0;
+  const nextFrom = (queue, getI, setI, avoidId) => {
+    let i = getI();
+    for (let k = 0; k < queue.length; k++) {
+      const cand = queue[(i + k) % queue.length];
+      if (cand.id !== avoidId) { setI(i + k + 1); return cand; }
     }
-    const m = mealQueue[qi % mealQueue.length]; qi++; return m;
+    const m = queue[i % queue.length]; setI(i + 1); return m;
   };
   slotsToFill.forEach(s => {
     if (s.cantine) {
       entries[s.date].meals.lunch.push({ id: 'C01', servings: 1 });
       return;
     }
-    // éviter de répéter le plat déjà mis à l'autre repas du jour
-    const other = s.slot === 'dinner' ? entries[s.date].meals.lunch : entries[s.date].meals.dinner;
-    const avoidId = other[0]?.id;
-    const meal = nextMeal(avoidId);
-    entries[s.date].meals[s.slot].push({ id: meal.id, servings: 1 });
+    if (s.slot === 'dinner') {
+      const avoid = entries[s.date].meals.lunch[0]?.id;
+      const meal = nextFrom(dinnerQueue, () => di, v => di = v, avoid);
+      entries[s.date].meals.dinner.push({ id: meal.id, servings: 1 });
+    } else {
+      const avoid = entries[s.date].meals.dinner[0]?.id;
+      const meal = nextFrom(lunchQueue, () => li, v => li = v, avoid);
+      entries[s.date].meals.lunch.push({ id: meal.id, servings: 1 });
+    }
   });
+
+  // ── Programmer les périssables tôt : poisson J1-J2, viande J1-J3 ──
+  // On réordonne les DÎNERS selon la "fraîcheur" requise (le poisson d'abord).
+  const freshnessRank = (item) => {
+    const r = getById(item.id);
+    if (!r) return 9;
+    const txt = (r.name + ' ' + r.ingredients.map(i => i.name).join(' ')).toLowerCase();
+    if (/saumon|colin|merlu|cabillaud|crevette|poisson|fruits de mer/.test(txt)) return 0; // poisson
+    if (/poulet|dinde|boeuf|bœuf|steak|porc|veau|merguez|haché/.test(txt)) return 1;        // viande fraîche
+    return 2;                                                                                // reste
+  };
+  const dinnerItems = dates.map(d => entries[d].meals.dinner[0]).filter(Boolean);
+  // tri stable par fraîcheur (poisson → viande → reste), en gardant l'ordre relatif sinon
+  const ordered = dinnerItems
+    .map((it, i) => ({ it, i }))
+    .sort((a, b) => freshnessRank(a.it) - freshnessRank(b.it) || a.i - b.i)
+    .map(x => x.it);
+  dates.forEach((d, i) => { if (entries[d].meals.dinner.length) entries[d].meals.dinner[0] = ordered[i]; });
 
   // desserts batch : on en met 2 max, répartis dans la semaine
   // Desserts batch : on les RÉUTILISE sur plusieurs jours (ils sont batch-cookés).

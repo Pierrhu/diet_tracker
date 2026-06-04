@@ -78,6 +78,9 @@ export function renderBatch() {
   });
 
   const ids = Object.keys(agg);
+  // État "cuisiné" mémorisé pour la semaine (clé = première date du plan).
+  const cookedKey = 'hebe_cooked_' + (dates[0] || 'x');
+  let cooked = JSON.parse(localStorage.getItem(cookedKey) || '[]');
   const view = el('div', 'view batch-view');
 
   if (!ids.length) {
@@ -108,13 +111,16 @@ export function renderBatch() {
         const portionLabel = a.portions >= 2 ? `${Math.round(a.portions)} portions` : '1 portion';
         return `
           <div class="bc-slide">
-          <div class="bc-recipe">
+          <div class="bc-recipe" data-rid="${id}">
             <div class="bc-recipe-hd">
               <span class="bc-emoji">${r.emoji}</span>
-              <div>
+              <div class="bc-hd-text">
                 <div class="bc-name">${r.name}</div>
                 <div class="bc-meta">${portionLabel} · ${(r.prepTime||0)+(r.cookTime||0)} min</div>
               </div>
+              <button class="bc-done-btn ${cooked.includes(id) ? 'on' : ''}" data-rid="${id}" aria-label="Marquer comme cuisiné">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </button>
             </div>
             ${(() => { const cons = conservation(r); return `
             <div class="bc-conserv">
@@ -177,4 +183,19 @@ export function renderBatch() {
     dx = 0;
   });
   go(0);
+
+  // Toggle "cuisiné" sur chaque fiche
+  view.querySelectorAll('.bc-done-btn').forEach(btn => btn.addEventListener('click', (ev) => {
+    ev.stopPropagation();
+    const rid = btn.dataset.rid;
+    const i = cooked.indexOf(rid);
+    if (i > -1) cooked.splice(i, 1); else cooked.push(rid);
+    localStorage.setItem(cookedKey, JSON.stringify(cooked));
+    btn.classList.toggle('on');
+    btn.closest('.bc-recipe').classList.toggle('cooked', cooked.includes(rid));
+  }));
+  // état initial visuel
+  view.querySelectorAll('.bc-recipe').forEach(rc => {
+    if (cooked.includes(rc.dataset.rid)) rc.classList.add('cooked');
+  });
 }

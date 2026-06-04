@@ -2,9 +2,11 @@
 // Source : soit une plage de dates choisie depuis la vue Semaine (diet_shop_range),
 // soit les N derniers jours. Les quantités sont multipliées par les portions (servings).
 
-import { getLog, getEntry } from '../data/log.js';
+import { getLog, getEntry, saveEntry } from '../data/log.js';
 import { getById }          from '../data/recipes.js';
 import { el }               from './utils.js';
+import { collectPerishables, applyPerishables } from './perishables.js';
+import { USER } from '../data/user.js';
 
 const CHECKED_KEY = 'diet_shopping_checked';
 const getChecked   = () => JSON.parse(localStorage.getItem(CHECKED_KEY) || '[]');
@@ -328,6 +330,28 @@ export function renderShopping() {
             </div>`;
         }).join('') : `<div class="empty-shop">Aucun repas planifié.<br><br>Planifie ta semaine dans <strong>Semaine</strong>.</div>`}
       </div>
+      ${(() => {
+        const entries = {}; dates.forEach(d => entries[d] = getEntry(d));
+        const perish = collectPerishables(entries, dates);
+        if (!perish.length) return '';
+        return `
+        <div class="perish-section">
+          <div class="perish-title">Ce que j'ai acheté</div>
+          <div class="perish-sub">Ajuste les quantités réelles : Hébé adapte les portions des recettes pour tout consommer à temps.</div>
+          ${perish.map((p, i) => `
+            <div class="perish-row" data-name="${encodeURIComponent(p.name)}">
+              <div class="perish-info">
+                <div class="perish-name">${p.name}</div>
+                <div class="perish-meta"><span class="perish-tag tag-${p.cls}">${p.label} · ${p.days}j frigo</span></div>
+              </div>
+              <div class="perish-qty-ctrl">
+                <input class="perish-input" type="text" inputmode="numeric" data-name="${encodeURIComponent(p.name)}" value="${Math.round(p.plannedQty)}">
+                <span class="perish-unit">${p.unit}</span>
+              </div>
+            </div>`).join('')}
+          <button class="perish-apply">Ajuster mes recettes</button>
+        </div>`;
+      })()}
     `;
 
     // Events
@@ -351,6 +375,25 @@ export function renderShopping() {
       saveChecked(checked);
       app.querySelector('.view')?.remove(); render();
     }));
+
+    // Périssables : appliquer les quantités réelles → scaler les recettes
+    view.querySelector('.perish-apply')?.addEventListener('click', () => {
+      const dts = currentDates();
+      const entries = {}; dts.forEach(d => entries[d] = getEntry(d));
+      const perish = collectPerishables(entries, dts);
+      const bought = {};
+      view.querySelectorAll('.perish-input').forEach(inp => {
+        const name = decodeURIComponent(inp.dataset.name);
+        const v = parseFloat(String(inp.value).replace(',', '.'));
+        if (!isNaN(v) && v >= 0) bought[name] = v;
+      });
+      applyPerishables(entries, dts, perish, bought, USER.targets);
+      Object.values(entries).forEach(e => saveEntry(e));
+      const btn = view.querySelector('.perish-apply');
+      btn.textContent = '✓ Recettes ajustées';
+      btn.classList.add('done');
+      setTimeout(() => { app.querySelector('.view')?.remove(); render(); }, 900);
+    });
 
     app.insertBefore(view, app.querySelector('#nav'));
   }

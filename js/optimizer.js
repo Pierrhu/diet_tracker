@@ -26,7 +26,7 @@ export function classifyIngredient(name) {
 }
 
 // Arrondit une quantité à un palier pratique pour le quotidien.
-function snapQty(grams, countable) {
+export function snapQty(grams, countable) {
   if (countable) return Math.max(1, Math.round(grams));
   if (grams >= 200) return Math.round(grams / 25) * 25;  // gros : pas de 25g
   if (grams >= 60)  return Math.round(grams / 10) * 10;  // moyen : pas de 10g
