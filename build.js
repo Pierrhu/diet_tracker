@@ -1,7 +1,7 @@
 // build.js — concatène les modules en js/app.js (sans imports/exports) pour usage sans serveur
 const fs=require('fs'),path=require('path');
 const BASE=__dirname;
-const FILES=['data/recipes.js','data/calculator.js','data/user.js','data/log.js','js/utils.js','js/optimizer.js','js/weekgen.js','js/state.js','js/nav.js','js/week.js','js/planner.js','js/macros.js','js/recipeDetail.js','js/recipes.js','js/shopping.js','js/history.js','js/settings.js','js/batch.js','js/main.js'];
+const FILES=['data/recipes.js','data/calculator.js','data/user.js','data/log.js','js/utils.js','js/optimizer.js','js/weekgen.js','js/state.js','js/nav.js','js/week.js','js/planner.js','js/macros.js','js/recipeDetail.js','js/recipes.js','js/perishables.js','js/shopping.js','js/history.js','js/settings.js','js/batch.js','js/main.js'];
 function strip(code){
   const lines=code.split('\n'); const out=[]; let inImport=false;
   for(const line of lines){

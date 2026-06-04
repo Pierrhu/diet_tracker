@@ -50,23 +50,38 @@
 #app {
   max-width: 480px;
   margin: 0 auto;
-  padding-bottom: calc(var(--nav-h) + 8px);
+  padding-bottom: calc(var(--nav-h) + 28px);
   min-height: 100dvh;
+}
+body {
+  background:
+    radial-gradient(1200px 600px at 50% -10%, #EAF1E9 0%, rgba(234,241,233,0) 60%),
+    var(--bg);
+  background-attachment: fixed;
 }
 .view { padding: 0 0 16px; }
 
-/* ── Nav ────────────────────────────────────────── */
+/* ── Nav — îlot flottant premium ────────────────── */
 #nav {
   position: fixed;
-  bottom: 0;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0));
   left: 50%;
   transform: translateX(-50%);
-  width: 100%;
-  max-width: 480px;
-  height: var(--nav-h);
-  background: var(--s1);
-  border-top: 1px solid var(--border);
+  width: calc(100% - 32px);
+  max-width: 448px;
+  height: 64px;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: saturate(1.6) blur(22px);
+  -webkit-backdrop-filter: saturate(1.6) blur(22px);
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 18px;
+  box-shadow:
+    0 8px 30px rgba(74,102,83,0.18),
+    0 2px 8px rgba(74,102,83,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.7);
   display: flex;
+  align-items: center;
+  padding: 0 8px;
   z-index: 100;
 }
 .nav-btn {
@@ -79,14 +94,24 @@
   background: none;
   border: none;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
   cursor: pointer;
-  transition: color .15s;
+  transition: color .25s ease;
   padding: 0;
+  position: relative;
+  height: 100%;
 }
-.nav-btn svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.8; }
-.nav-btn.active { color: var(--accent); }
-.nav-btn.active svg { stroke: var(--accent); }
+.nav-btn svg {
+  width: 23px; height: 23px; stroke: currentColor; fill: none; stroke-width: 1.75;
+  transition: stroke .25s ease;
+}
+.nav-btn span { transition: opacity .2s ease; }
+/* item actif : juste la teinte sauge, le label reste visible */
+.nav-btn.active { color: var(--accent-d); }
+.nav-btn.active svg { stroke: var(--accent-d); }
+.nav-btn:not(.active):active svg { transform: scale(.9); }
 
 /* ── Section header ─────────────────────────────── */
 .section-hd {
@@ -1316,7 +1341,7 @@ input, .serv-input, .field-input, .mrow-input, .pcell-input, .sheet-search {
   border: 1px solid var(--border); border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
-.gen-title { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500; line-height: 1.15; }
+.gen-title { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500; line-height: 1.15; margin-bottom: 16px; }
 .gen-sub { font-size: 13px; color: var(--muted2); margin: 6px 0 18px; line-height: 1.5; }
 .gen-cantine {
   display: flex; align-items: center; justify-content: space-between;
@@ -1331,7 +1356,7 @@ input, .serv-input, .field-input, .mrow-input, .pcell-input, .sheet-search {
 .generate-btn {
   width: 100%; background: var(--sage); color: #fff; border: none;
   border-radius: var(--radius-s); padding: 15px; font-size: 15px; font-weight: 600;
-  font-family: 'Outfit', sans-serif; cursor: pointer;
+  font-family: 'Outfit', sans-serif; cursor: pointer; margin-top: 18px;
   box-shadow: 0 8px 22px rgba(124,152,133,0.3); letter-spacing: 0.02em;
 }
 .generate-btn:active { background: var(--sage-d); transform: scale(.99); }
@@ -1532,7 +1557,7 @@ input, .serv-input, .field-input, .mrow-input, .pcell-input, .sheet-search {
 /* ═══════════════════════════════════════════════════
    HÉBÉ — Courses : progression + pastilles de rayon
 ═══════════════════════════════════════════════════ */
-.shop-progress { height: 6px; border-radius: 99px; background: var(--s3); margin-top: 12px; overflow: hidden; }
+.shop-progress { height: 6px; border-radius: 99px; background: var(--border); margin: 12px 0 18px; overflow: hidden; }
 .shop-progress-fill { height: 100%; border-radius: 99px; background: var(--sage); transition: width .3s ease; }
 
 .shop-cat-title { display: flex; align-items: center; gap: 8px; }
@@ -1560,7 +1585,7 @@ input, .serv-input, .field-input, .mrow-input, .pcell-input, .sheet-search {
    HÉBÉ — blocs de catégories Courses (esthétiques)
 ═══════════════════════════════════════════════════ */
 .shop-cat {
-  margin: 0 16px 16px; border-radius: var(--radius); overflow: hidden;
+  margin: 0 0 16px; border-radius: var(--radius); overflow: hidden;
   background: var(--s1); border: 1px solid var(--border);
   box-shadow: 0 4px 20px rgba(94,122,103,0.07);
 }
@@ -1581,3 +1606,78 @@ input, .serv-input, .field-input, .mrow-input, .pcell-input, .sheet-search {
 .cat-c-2 .shop-cat-head { background: #EDF3EE; color: #5E7A67; }   /* Légumes — sauge */
 .cat-c-3 .shop-cat-head { background: #FaF3E6; color: #B98A3E; }   /* Féculents — ambre */
 .cat-c-4 .shop-cat-head { background: #F2EDF2; color: #8A6A8A; }   /* Épicerie — mauve */
+
+/* ═══════════════════════════════════════════════════
+   HÉBÉ — section périssables (Courses)
+═══════════════════════════════════════════════════ */
+.perish-section { margin: 24px 16px 8px; padding: 18px; background: var(--s1); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: 0 4px 20px rgba(94,122,103,0.07); }
+.perish-title { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 500; }
+.perish-sub { font-size: 12.5px; color: var(--muted2); margin: 5px 0 14px; line-height: 1.5; }
+.perish-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; }
+.perish-row + .perish-row { border-top: 1px solid var(--s3); }
+.perish-name { font-size: 14px; font-weight: 500; }
+.perish-meta { margin-top: 3px; }
+.perish-tag { font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: 99px; }
+.tag-poisson { background: #E6EEF2; color: #4E7390; }
+.tag-viande  { background: #FaF0EA; color: #B5704F; }
+.tag-frais   { background: #EDF3EE; color: #5E7A67; }
+.perish-qty-ctrl { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.perish-input { width: 64px; text-align: center; padding: 8px 6px; border-radius: 9px; border: 1px solid var(--border); background: var(--s2); color: var(--text); font-size: 14px; font-weight: 600; }
+.perish-input:focus { border-color: var(--sage); outline: none; }
+.perish-unit { font-size: 12px; color: var(--muted2); width: 24px; }
+.perish-apply { width: 100%; margin-top: 16px; background: var(--sage); color: #fff; border: none; border-radius: var(--radius-s); padding: 13px; font-size: 14px; font-weight: 600; font-family: 'Outfit', sans-serif; cursor: pointer; }
+.perish-apply:active { background: var(--sage-d); transform: scale(.99); }
+.perish-apply.done { background: var(--sage-d); }
+
+/* Bouton "cuisiné" sur les fiches recettes */
+.bc-recipe-hd { position: relative; }
+.bc-hd-text { flex: 1; }
+.bc-done-btn {
+  width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+  border: 1.5px solid var(--border); background: var(--s1); color: var(--border-2);
+  cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .15s;
+}
+.bc-done-btn svg { width: 20px; height: 20px; }
+.bc-done-btn.on { background: var(--sage); border-color: var(--sage); color: #fff; }
+.bc-done-btn:active { transform: scale(.9); }
+.bc-recipe.cooked { opacity: .62; }
+.bc-recipe.cooked .bc-name { text-decoration: line-through; text-decoration-color: var(--muted2); }
+
+/* Verrouillage de jour (Semaine) */
+.week-day { position: relative; }
+.wd-lock {
+  position: absolute; bottom: 12px; right: 14px;
+  width: 28px; height: 28px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--s1); color: var(--muted2); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: all .12s; padding: 0; z-index: 2;
+}
+.wd-lock svg { width: 14px; height: 14px; }
+.wd-lock.on { background: var(--sage); border-color: var(--sage); color: #fff; }
+.wd-lock:active { transform: scale(.9); }
+.week-day.locked { border-color: var(--sage); box-shadow: 0 0 0 1px var(--sage), 0 4px 20px rgba(94,122,103,0.12) !important; }
+
+/* ── Sélecteur de protéines (Semaine) ── */
+.gen-proteins { margin-top: 14px; }
+.protein-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.prot-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 14px; border-radius: 99px; cursor: pointer; white-space: nowrap; line-height: 1;
+  border: 1.5px solid var(--border); background: var(--s1); color: var(--muted2);
+  font-size: 13px; font-weight: 500; font-family: 'Outfit', sans-serif; transition: all .15s;
+}
+.prot-emoji { font-size: 15px; line-height: 1; flex-shrink: 0; display: inline-block; }
+.prot-chip.on { background: var(--sage-bg); border-color: var(--sage); color: var(--sage-d); font-weight: 600; }
+.prot-chip:active { transform: scale(.96); }
+
+/* ── Filtre par protéine (onglet Recettes) ── */
+.prot-filter-tabs { display: flex; gap: 7px; overflow-x: auto; padding: 4px 0 2px; scrollbar-width: none; }
+.prot-filter-tabs::-webkit-scrollbar { display: none; }
+.prot-filter-btn {
+  display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; line-height: 1;
+  padding: 7px 13px; border-radius: 99px; cursor: pointer; flex-shrink: 0;
+  border: 1.5px solid var(--border); background: var(--s1); color: var(--muted2);
+  font-size: 13px; font-weight: 500; font-family: 'Outfit', sans-serif; transition: all .15s;
+}
+.pf-emoji { font-size: 14px; line-height: 1; }
+.prot-filter-btn.active { background: var(--sage-bg); border-color: var(--sage); color: var(--sage-d); font-weight: 600; }
+.prot-filter-btn:active { transform: scale(.96); }
