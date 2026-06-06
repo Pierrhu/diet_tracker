@@ -38,9 +38,24 @@
   --kcal:     #7C9885;
   --danger:   #C77B6B;
 
+  /* Accents chaleureux & vivants (identité Hébé) */
+  --honey:    #E0A95E;
+  --honey-l:  #F2D9AE;
+  --terra:    #D98E6B;
+  --bloom:    #C98BA8;
+  --leaf:     #8FB573;
+  --leaf-d:   #6E9456;
+  --warm-bg:  #FBF4E9;
+  --warm-tint:#FCF7EF;
+  /* Dégradés sauge doux (accents discrets, sans saut de teinte) */
+  --grad-sage:    linear-gradient(90deg, #9DB8A6, #7C9885);
+  --grad-sage-v:  linear-gradient(180deg, #9DB8A6, #7C9885);
+  --grad-pill:    linear-gradient(145deg, #8FAB97, #6E8B76);
+
   --radius:   20px;
   --radius-s: 14px;
   --radius-xs: 10px;
+  --gutter:   16px;
   --nav-h:    72px;
   --shadow:   0 4px 24px rgba(94,122,103,0.08);
   --shadow-lg: 0 12px 40px rgba(94,122,103,0.12);
@@ -414,7 +429,7 @@ body {
 .shop-info { flex: 1; }
 .shop-name { font-size: 14px; transition: color .15s; }
 .shop-qty  { font-size: 12px; color: var(--muted2); margin-top: 1px; }
-.shop-item.done .shop-name { color: var(--muted); text-decoration: line-through; }
+.shop-item.done .shop-name { color: var(--muted2); text-decoration: none; }
 .empty-shop { text-align: center; color: var(--muted); padding: 40px 16px; font-size: 14px; }
 
 /* ═══════════════════════════════════════════════════
@@ -431,7 +446,7 @@ body {
 .hday-macro span { font-weight: 600; color: var(--text); }
 .hday-bars   { padding: 8px 14px; display: flex; flex-direction: column; gap: 5px; }
 .hday-bar-row { display: flex; align-items: center; gap: 8px; }
-.hday-bar-label { font-size: 10px; color: var(--muted); width: 14px; }
+.hday-bar-label { font-size: 10px; font-weight: 600; letter-spacing: .03em; text-transform: uppercase; color: var(--muted); width: 30px; flex-shrink: 0; }
 .hday-bar-wrap  { flex: 1; }
 .hday-meals  { padding: 6px 14px 12px; }
 .hday-meal   { font-size: 12px; color: var(--muted2); padding: 3px 0; display: flex; gap: 6px; }
@@ -1214,8 +1229,11 @@ input, .serv-input, .field-input, .mrow-input, .pcell-input, .sheet-search {
   content: '✓'; color: #fff !important; font-size: 13px; font-weight: 700;
 }
 .shop-info { min-width: 0; flex: 1; }
-.shop-name { font-size: 15px; font-weight: 500; color: var(--text); }
-.shop-item.done .shop-name { color: var(--muted) !important; text-decoration: line-through; }
+.shop-name { font-size: 15px; font-weight: 500; color: var(--text); transition: color .2s ease; }
+/* État coché : fondu élégant de toute la ligne, sans rature */
+.shop-item.done { opacity: .5; }
+.shop-item.done .shop-name { color: var(--muted2) !important; text-decoration: none !important; font-weight: 400; }
+.shop-item.done .shop-qty { color: var(--muted) !important; }
 .shop-qty { font-size: 12px; color: var(--muted2); margin-top: 1px; }
 
 /* Bannière de plage / stats : bien dans la gouttière */
@@ -1640,8 +1658,8 @@ input, .serv-input, .field-input, .mrow-input, .pcell-input, .sheet-search {
 .bc-done-btn svg { width: 20px; height: 20px; }
 .bc-done-btn.on { background: var(--sage); border-color: var(--sage); color: #fff; }
 .bc-done-btn:active { transform: scale(.9); }
-.bc-recipe.cooked { opacity: .62; }
-.bc-recipe.cooked .bc-name { text-decoration: line-through; text-decoration-color: var(--muted2); }
+.bc-recipe.cooked { opacity: .7; }
+.bc-recipe.cooked .bc-name { color: var(--muted2); text-decoration: none; }
 
 /* Verrouillage de jour (Semaine) */
 .week-day { position: relative; }
@@ -1681,3 +1699,626 @@ input, .serv-input, .field-input, .mrow-input, .pcell-input, .sheet-search {
 .pf-emoji { font-size: 14px; line-height: 1; }
 .prot-filter-btn.active { background: var(--sage-bg); border-color: var(--sage); color: var(--sage-d); font-weight: 600; }
 .prot-filter-btn:active { transform: scale(.96); }
+
+/* ═══════════════════════════════════════════════════
+   HÉBÉ — UNIFICATION DES GOUTTIÈRES (centrage mobile)
+   Source unique de vérité pour l'alignement horizontal.
+   Définie en dernier : prévaut sur les règles éparses.
+   Chaque bloc de premier niveau partage exactement la
+   même marge gauche/droite = --gutter.
+═══════════════════════════════════════════════════ */
+
+/* 1) Tous les conteneurs de page : même gouttière */
+.week-view,
+.planner-view,
+.macros-view,
+.recipes-view,
+.shopping-view,
+.history-view,
+.settings-view,
+.batch-view {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* 2) Blocs de premier niveau : marge horizontale identique */
+.gen-card,
+.week-days,
+.week-actions,
+.week-tiles,
+.gen-greeting,
+.planner-header,
+.meal-slot,
+.macros-hero,
+.macros-breakdown,
+.recipe-list,
+.recipes-header,
+.prot-filter-wrap,
+.shopping-header,
+.shop-stats,
+.shop-cat,
+.shop-buy-back,
+.history-header,
+.history-day,
+.set-section,
+.set-hero,
+.settings-card,
+.target-card,
+.phase-guide,
+.batch-header,
+.batch-hero,
+.batch-timeline,
+.batch-group,
+.bc-progress,
+.bc-slide .bc-recipe,
+.detail-section,
+.add-actions {
+  margin-left: var(--gutter) !important;
+  margin-right: var(--gutter) !important;
+  width: auto !important;
+}
+
+/* 3) Les cartes "jour" partagent la MÊME gouttière que la carte du haut */
+.week-days {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.week-days .week-day {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* 4) En-têtes de page alignés sur la même gouttière */
+.page-title,
+.history-title,
+.shopping-title,
+.recipes-title {
+  padding-left: 0 !important;
+}
+
+/* 5) Le bloc cantine : label au-dessus, jours centrés en dessous.
+      Fini le "space-between" qui collait les jours à gauche. */
+.gen-cantine {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+.gen-cantine-label {
+  display: block;
+}
+.cantine-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  width: 100%;
+}
+.cant-day {
+  width: 100% !important;
+  aspect-ratio: 1 / 1;
+  height: auto !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 6) Chips protéines : grille 2 colonnes égales, centrées et alignées */
+.protein-chips {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+}
+.prot-chip {
+  width: 100%;
+  justify-content: center;
+}
+
+/* 7) Sous-cartes internes : pleine largeur de leur parent, pas de marge propre */
+.gen-cantine,
+.gen-proteins {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   HÉBÉ — COUCHE IDENTITÉ « chaleureux & vivant »
+   Nature, lumière, vitalité. Définie en dernier.
+═══════════════════════════════════════════════════ */
+
+/* Fond global : lumière chaude qui descend, halo végétal */
+body {
+  background:
+    radial-gradient(1100px 520px at 50% -8%, #EAF1E4 0%, rgba(234,241,228,0) 62%),
+    radial-gradient(900px 600px at 100% 8%, rgba(224,169,94,0.07) 0%, rgba(224,169,94,0) 55%),
+    var(--bg) !important;
+  background-attachment: fixed;
+}
+
+/* ── Carte « Ma semaine » : fond vivant + feuillage en filigrane ── */
+.gen-card {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(155deg, #EEF4E8 0%, #FFFFFF 60%),
+    var(--s1) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 10px 34px rgba(94,122,103,0.12) !important;
+}
+/* feuille filigrane en haut à droite */
+.gen-card::after {
+  content: '';
+  position: absolute;
+  top: -34px; right: -28px;
+  width: 150px; height: 150px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 8 C70 22 84 44 80 74 C58 70 40 56 36 34 C44 30 48 20 50 8 Z' fill='%237C9885'/%3E%3Cpath d='M50 8 C48 30 44 54 40 78' stroke='%23FFFFFF' stroke-width='1.4' fill='none' opacity='0.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.07;
+  transform: rotate(8deg);
+  pointer-events: none;
+}
+.gen-title {
+  position: relative;
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+/* petit liseré végétal sous le titre */
+.gen-title::after {
+  content: '';
+  display: block;
+  width: 38px; height: 3px;
+  margin-top: 9px;
+  border-radius: 3px;
+  background: var(--grad-sage);
+}
+
+/* ── Séparateur signature « brin » (équivalent du ◆ de Ponos) ── */
+.hb-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin: 6px 16px 14px;
+  opacity: 0.9;
+}
+.hb-divider::before,
+.hb-divider::after {
+  content: '';
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, var(--border-2));
+}
+.hb-divider::after { background: linear-gradient(90deg, var(--border-2), transparent); }
+.hb-divider span {
+  font-size: 12px;
+  color: var(--leaf-d);
+  line-height: 1;
+}
+
+/* ── Pills jours : état actif plus vivant ── */
+.cant-day.on {
+  background: var(--grad-pill) !important;
+  border-color: var(--sage-d) !important;
+  box-shadow: 0 4px 12px rgba(110,148,86,0.30);
+}
+
+/* ── Chips protéines sélectionnées : un peu plus présentes ── */
+.prot-chip.on {
+  background: linear-gradient(145deg, #EAF2E6, var(--sage-bg)) !important;
+  box-shadow: 0 2px 8px rgba(124,152,133,0.14);
+}
+
+/* ── Bouton générer : dégradé vivant + lueur chaude ── */
+.generate-btn {
+  background: linear-gradient(135deg, #88A491 0%, #6E8B76 100%) !important;
+  box-shadow: 0 10px 26px rgba(124,152,133,0.34), 0 2px 0 rgba(255,255,255,0.25) inset !important;
+}
+
+/* ── Cartes « jour » de la semaine : chaleur + accent latéral ── */
+.week-day {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, #FFFFFF 0%, var(--warm-tint) 140%),
+    var(--s1) !important;
+}
+.week-day .wd-num { color: var(--sage-d); }
+/* liseré vital sous la pastille date */
+.week-day .wd-left::after {
+  content: '';
+  display: block;
+  width: 22px; height: 2.5px;
+  margin: 6px auto 0;
+  border-radius: 2px;
+  background: var(--grad-sage);
+  opacity: .7;
+}
+.week-day.is-today {
+  background:
+    linear-gradient(180deg, #F3F8EF 0%, #FFFFFF 90%),
+    var(--s1) !important;
+  border-color: var(--sage-l) !important;
+}
+
+/* ── Tuiles Recettes / Courses : plus chaleureuses et distinctes ── */
+.tile-recipes {
+  background: linear-gradient(150deg, #EFF5E9, #FFFFFF) !important;
+}
+.tile-shop {
+  background: linear-gradient(150deg, var(--warm-bg), #FFFFFF) !important;
+}
+.week-tile .tile-ic { color: var(--leaf-d); }
+.tile-shop .tile-ic { color: var(--honey); }
+
+/* ── Fiche recette : héro mis en scène ── */
+.detail-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 22px 18px 18px !important;
+  background:
+    radial-gradient(160px 120px at 88% -10%, rgba(224,169,94,0.16), transparent 70%),
+    linear-gradient(165deg, #EEF4E8 0%, #FFFFFF 70%) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+.detail-emoji {
+  font-size: 30px !important;
+  width: 62px; height: 62px;
+  display: flex; align-items: center; justify-content: center;
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(94,122,103,0.12);
+  margin-bottom: 12px !important;
+}
+.detail-name {
+  font-size: 24px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em;
+  line-height: 1.12 !important;
+}
+
+/* ── Cartes macros (fiche recette) : teintées par macro ── */
+.macro-cell { position: relative; overflow: hidden; }
+.macro-cell.kcal    { background: linear-gradient(160deg, #EFF4EA, #FFFFFF) !important; }
+.macro-cell.protein { background: linear-gradient(160deg, #E8F2EC, #FFFFFF) !important; }
+.macro-cell.carbs   { background: linear-gradient(160deg, #FBF1E0, #FFFFFF) !important; }
+.macro-cell.fat     { background: linear-gradient(160deg, #FaEEE7, #FFFFFF) !important; }
+.macro-cell.kcal    .macro-cell-val { color: var(--sage-d); }
+.macro-cell.protein .macro-cell-val { color: var(--protein); }
+.macro-cell.carbs   .macro-cell-val { color: var(--carbs); }
+.macro-cell.fat     .macro-cell-val { color: var(--fat); }
+
+/* ── En-tête de section (préparation / ingrédients) : liseré végétal ── */
+.detail-section-title {
+  position: relative;
+  padding-left: 14px;
+}
+.detail-section-title::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 4px; height: 14px;
+  border-radius: 3px;
+  background: var(--grad-sage-v);
+}
+
+/* ═══════════════════════════════════════════════════
+   HÉBÉ — IDENTITÉ étendue aux AUTRES ONGLETS
+   Même langage que l'écran Semaine : dégradé vert tendre,
+   filigrane feuille, liseré vert→miel, halo chaud.
+═══════════════════════════════════════════════════ */
+
+/* feuille filigrane réutilisable — appliquée aux héros */
+.planner-header,
+.macros-hero,
+.set-hero,
+.batch-hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(155deg, #EEF4E8 0%, #FFFFFF 62%),
+    var(--s1) !important;
+  box-shadow: 0 10px 34px rgba(94,122,103,0.12) !important;
+}
+.planner-header::after,
+.macros-hero::after,
+.set-hero::after,
+.batch-hero::after {
+  content: '';
+  position: absolute;
+  top: -34px; right: -28px;
+  width: 150px; height: 150px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 8 C70 22 84 44 80 74 C58 70 40 56 36 34 C44 30 48 20 50 8 Z' fill='%237C9885'/%3E%3Cpath d='M50 8 C48 30 44 54 40 78' stroke='%23FFFFFF' stroke-width='1.4' fill='none' opacity='0.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.07;
+  transform: rotate(8deg);
+  pointer-events: none;
+}
+/* contenu des héros au-dessus du filigrane */
+.planner-header > *,
+.macros-hero > *,
+.set-hero > *,
+.batch-hero > * { position: relative; z-index: 1; }
+
+/* halo chaud (miel) en plus sur le héro réglages + batch (chiffre central) */
+.set-hero, .batch-hero {
+  background:
+    radial-gradient(160px 120px at 50% -20%, rgba(224,169,94,0.14), transparent 70%),
+    linear-gradient(155deg, #EEF4E8 0%, #FFFFFF 62%),
+    var(--s1) !important;
+}
+
+/* ── Gros chiffre du jour (Jour) : présence + couleur vitale ── */
+.kcal-val {
+  font-family: 'Fraunces', serif;
+  font-size: 34px;
+  font-weight: 600;
+  color: var(--sage-d);
+  letter-spacing: -0.01em;
+}
+
+/* ── Titres de page : liseré signature vert→miel dessous ── */
+.shopping-title,
+.history-title,
+.recipes-title,
+.page-title,
+.today-date {
+  position: relative;
+}
+.shopping-title::after,
+.history-title::after,
+.recipes-title::after {
+  content: '';
+  display: block;
+  width: 36px; height: 3px;
+  margin-top: 8px;
+  border-radius: 3px;
+  background: var(--grad-sage);
+}
+
+/* ── Slots du Jour (Entrée/Déjeuner…) : fond chaud + pastille vivante ── */
+.meal-slot {
+  background:
+    linear-gradient(180deg, #FFFFFF 0%, var(--warm-tint) 150%),
+    var(--s1) !important;
+}
+.slot-label::before { box-shadow: 0 0 0 3px rgba(124,152,133,0.08); }
+
+/* ── Cartes macros (Jour) : mini-barres colorées par macro déjà gérées ── */
+.mini-macro { padding: 2px 0; }
+
+/* ── Liste de courses : en-têtes de rayon plus vivants ── */
+.shop-group-head, .shop-cat-head {
+  position: relative;
+}
+/* la pastille/icone de rayon prend une touche chaude */
+.shop-cat-icon, .shop-group-icon { filter: saturate(1.1); }
+
+/* ── Cartes catégorie courses : fond très légèrement teinté ── */
+.shop-group {
+  background:
+    linear-gradient(180deg, #FFFFFF 0%, var(--warm-tint) 160%),
+    var(--s1) !important;
+}
+
+/* ── Historique : cartes-jour chaleureuses + accent latéral ── */
+.history-day {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, #FFFFFF 0%, var(--warm-tint) 150%),
+    var(--s1) !important;
+}
+.history-day::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 14px; bottom: 14px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--grad-sage-v);
+  opacity: .55;
+}
+
+/* ── Réglages : cartes programme sélectionnée plus vivante ── */
+.proto-card.selected, .proto-card.active {
+  background: linear-gradient(150deg, #EEF4E8, #FFFFFF) !important;
+  border-color: var(--sage) !important;
+}
+.set-section-head {
+  position: relative;
+  padding-left: 14px !important;
+}
+.set-section-head::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 4px; height: 16px;
+  border-radius: 3px;
+  background: var(--grad-sage-v);
+}
+
+/* ── Batch : carte recette + table ingrédients chaleureuses ── */
+.bc-recipe {
+  background:
+    linear-gradient(180deg, #FFFFFF 0%, var(--warm-tint) 150%),
+    var(--s1) !important;
+}
+.batch-hero-time { color: var(--sage-d); }
+
+/* ── Filtres protéines (Recettes) : actif plus vivant ── */
+.prot-filter-btn.active {
+  background: linear-gradient(145deg, #EAF2E6, var(--sage-bg)) !important;
+  box-shadow: 0 2px 8px rgba(124,152,133,0.14);
+}
+
+/* ── Onglet actif barre de nav : accent vert vif ── */
+.nav-btn.active { color: var(--sage-d) !important; }
+
+/* ── Anneau calorique (pièce maîtresse Jour & Macros) ── */
+.day-ring-block { display: flex; justify-content: center; margin: 6px 0 14px; }
+.kcal-ring-wrap { position: relative; display: inline-flex; align-items: center; justify-content: center; }
+.kcal-ring { display: block; }
+.kcal-ring-arc { transition: stroke-dasharray .6s cubic-bezier(.4,0,.2,1); }
+.kcal-ring-center {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+}
+.kcal-ring-val {
+  font-family: 'Fraunces', serif; font-weight: 600;
+  font-size: 38px; line-height: 1; color: var(--sage-d); letter-spacing: -0.02em;
+}
+.kcal-ring-val.over { color: var(--danger); }
+.kcal-ring-sub { font-size: 12px; color: var(--muted2); margin-top: 4px; }
+.kcal-ring-pct {
+  font-size: 11px; font-weight: 600; color: var(--leaf-d);
+  margin-top: 5px; padding: 2px 9px; border-radius: 99px;
+  background: var(--sage-bg);
+}
+.kcal-ring-pct.over { color: var(--danger); background: rgba(199,123,107,0.14); }
+
+/* ── Cartes recettes (liste) : avatar encadré + protéine en pastille ── */
+.recipe-card {
+  background:
+    linear-gradient(180deg, #FFFFFF 0%, var(--warm-tint) 170%),
+    var(--s1) !important;
+}
+.rc-emoji {
+  width: 48px !important; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px !important;
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+.rc-name { font-size: 15px !important; letter-spacing: -0.01em; }
+.rc-meta .rc-protein {
+  background: var(--sage-bg);
+  color: var(--protein) !important;
+  padding: 1px 8px; border-radius: 99px; font-size: 10.5px;
+}
+.rc-batch {
+  background: var(--warm-bg) !important;
+  color: var(--honey) !important;
+}
+.rc-arrow { color: var(--sage-l) !important; }
+
+/* ── Onglet Recettes : barre de recherche plus présente ── */
+.search-bar {
+  background: var(--s1) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow);
+}
+.search-bar:focus { border-color: var(--sage-l) !important; box-shadow: 0 0 0 3px rgba(124,152,133,0.12); }
+
+/* onglet filtre catégorie actif : dégradé vivant */
+.tab-btn.active {
+  background: linear-gradient(135deg, #88A491, #6E8B76) !important;
+  color: #fff !important; border-color: var(--sage-d) !important;
+  box-shadow: 0 4px 12px rgba(124,152,133,0.28);
+}
+
+/* ── Courses : box catégorie aussi larges que les autres onglets ── */
+/* La liste ne porte plus de padding latéral ; c'est .shop-cat qui porte
+   l'unique gouttière (16px), comme .meal-slot ailleurs → largeur 312px. */
+.shopping-list { padding-left: 0 !important; padding-right: 0 !important; }
+.shop-cat {
+  margin-left: var(--gutter) !important;
+  margin-right: var(--gutter) !important;
+  width: auto !important;
+}
+.shop-cat .shop-group,
+.shop-cat .shop-item { margin-left: 0 !important; margin-right: 0 !important; }
+
+/* ── Courses : en-tête retravaillé (chip semaine au lieu d'une grosse box) ── */
+.shopping-header { padding: 8px 16px 4px !important; }
+.shopping-title { margin-bottom: 12px !important; }
+.shop-range-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 14px 7px 12px;
+  background: var(--sage-bg);
+  color: var(--sage-d);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.01em;
+  margin-bottom: 12px;
+}
+.shop-range-chip svg { color: var(--sage); flex-shrink: 0; }
+.shop-stats {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 12.5px; color: var(--muted2); padding: 0 2px 12px !important;
+}
+.shop-stats .clear-btn {
+  background: none; border: none; color: var(--sage-d);
+  font-size: 12px; font-weight: 600; cursor: pointer; padding: 0;
+  text-decoration: none; border-bottom: 1px solid var(--sage-l);
+}
+.shop-progress {
+  height: 5px !important; border-radius: 99px;
+  background: var(--s3) !important; margin: 0 0 18px !important; overflow: hidden;
+}
+.shop-progress-fill { background: var(--grad-sage) !important; }
+
+/* ═══════════════════════════════════════════════════
+   COURSES — héro d'en-tête travaillé (carte + anneau)
+═══════════════════════════════════════════════════ */
+.shopping-header { padding: 8px 0 6px !important; }
+.shop-hero {
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; gap: 12px;
+  padding: 18px 18px;
+  background:
+    radial-gradient(150px 110px at 92% -10%, rgba(224,169,94,0.12), transparent 70%),
+    linear-gradient(155deg, #EEF4E8 0%, #FFFFFF 64%),
+    var(--s1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 34px rgba(94,122,103,0.12);
+}
+/* feuille filigrane cohérente avec les autres héros */
+.shop-hero::after {
+  content: '';
+  position: absolute; top: -30px; right: -26px; width: 130px; height: 130px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 8 C70 22 84 44 80 74 C58 70 40 56 36 34 C44 30 48 20 50 8 Z' fill='%237C9885'/%3E%3Cpath d='M50 8 C48 30 44 54 40 78' stroke='%23FFFFFF' stroke-width='1.4' fill='none' opacity='0.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-size: contain;
+  opacity: 0.06; transform: rotate(8deg); pointer-events: none;
+}
+.shop-hero-main { position: relative; z-index: 1; flex: 1; min-width: 0; }
+.shop-hero .shopping-title {
+  font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600;
+  letter-spacing: -0.01em; margin: 0 0 10px !important; line-height: 1.1;
+}
+.shop-hero .shopping-title::after { display: none; } /* pas de double liseré dans le héro */
+.shop-hero .shop-range-chip,
+.shop-hero .days-tabs { margin-bottom: 10px; }
+.shop-hero-hint { font-size: 12px; color: var(--muted2); }
+.shop-hero .clear-btn {
+  background: none; border: none; color: var(--sage-d);
+  font-size: 12.5px; font-weight: 600; cursor: pointer; padding: 0;
+  border-bottom: 1px solid var(--sage-l);
+}
+
+/* anneau articles cochés */
+.shop-hero-ring { position: relative; z-index: 1; flex-shrink: 0; }
+.shop-ring-wrap { position: relative; display: inline-flex; }
+.shop-ring-arc { transition: stroke-dasharray .5s cubic-bezier(.4,0,.2,1); }
+.shop-ring-center {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+}
+.shop-ring-num {
+  font-family: 'Fraunces', serif; font-size: 15px; font-weight: 500; color: var(--muted2);
+}
+.shop-ring-num span { font-size: 24px; font-weight: 600; color: var(--sage-d); }
+.shop-ring-lbl {
+  font-size: 9px; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--muted2); margin-top: 2px;
+}
+.shop-ring-check { font-size: 26px; color: var(--sage-d); line-height: 1; }
