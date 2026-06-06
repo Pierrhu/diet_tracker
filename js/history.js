@@ -44,8 +44,8 @@ export function renderHistory() {
         <span class="hday-macro">L <span>${Math.round(macros.fat)}g</span></span>
       </div>
       <div class="hday-bars">
-        <div class="hday-bar-row"><span class="hday-bar-label" style="color:var(--kcal)">k</span><div class="hday-bar-wrap">${mbar(macros.kcal, targets.kcal, 'var(--kcal)')}</div></div>
-        <div class="hday-bar-row"><span class="hday-bar-label" style="color:var(--protein)">P</span><div class="hday-bar-wrap">${mbar(macros.protein, targets.protein, 'var(--protein)')}</div></div>
+        <div class="hday-bar-row"><span class="hday-bar-label" style="color:var(--kcal)">Cal</span><div class="hday-bar-wrap">${mbar(macros.kcal, targets.kcal, 'var(--kcal)')}</div></div>
+        <div class="hday-bar-row"><span class="hday-bar-label" style="color:var(--protein)">Prot</span><div class="hday-bar-wrap">${mbar(macros.protein, targets.protein, 'var(--protein)')}</div></div>
       </div>`;
 
     const meals = el('div', 'hday-meals');

@@ -13,8 +13,8 @@ const PROTEINS = [
   { id: 'boeuf',     label: 'Bœuf',      emoji: '🥩' },
   { id: 'dinde',     label: 'Dinde',     emoji: '🦃' },
   { id: 'crevettes', label: 'Crevettes', emoji: '🦐' },
-  { id: 'saumon',    label: 'Saumon',    emoji: '🐟' },
-  { id: 'tofu',      label: 'Tofu',      emoji: '🍱' },
+  { id: 'saumon',    label: 'Poisson',   emoji: '🐟' },
+  { id: 'tofu',      label: 'Végé',      emoji: '🌱' },
 ];
 let cantineDays = JSON.parse(localStorage.getItem('hebe_cantine_days') || '[]');
 let lockedDays = JSON.parse(localStorage.getItem('hebe_locked_days') || '[]');
@@ -42,7 +42,7 @@ export function renderWeek() {
       <div class="masthead">
         <div class="mast-left">
           <div class="brand-word">Héb<span class="brand-accent">é</span></div>
-          <div class="brand-greek">jeunesse & vitalité · le carburant du corps</div>
+          <div class="brand-greek">bien manger sans y penser</div>
         </div>
         <button class="week-settings" aria-label="Réglages"><svg viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></button>
       </div>

@@ -8,6 +8,35 @@ import { el }               from './utils.js';
 import { collectPerishables, applyPerishables } from './perishables.js';
 import { USER } from '../data/user.js';
 
+// Petit anneau de progression « articles cochés » pour le héro de la liste.
+function shopRing(done, total) {
+  const size = 84, sw = 8, r = (size - sw) / 2, c = 2 * Math.PI * r;
+  const ratio = total ? Math.min(done / total, 1) : 0;
+  const dash = (ratio * c).toFixed(1);
+  const cx = size / 2;
+  const complete = total && done >= total;
+  return `
+    <div class="shop-ring-wrap" style="width:${size}px;height:${size}px">
+      <svg viewBox="0 0 ${size} ${size}" width="${size}" height="${size}">
+        <defs>
+          <linearGradient id="shopRingGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#A9C2B2"/>
+            <stop offset="100%" stop-color="#6E8B76"/>
+          </linearGradient>
+        </defs>
+        <circle cx="${cx}" cy="${cx}" r="${r}" fill="none" stroke="var(--s3)" stroke-width="${sw}"/>
+        <circle cx="${cx}" cy="${cx}" r="${r}" fill="none" stroke="url(#shopRingGrad)" stroke-width="${sw}"
+          stroke-linecap="round" stroke-dasharray="${dash} ${c.toFixed(1)}"
+          transform="rotate(-90 ${cx} ${cx})" class="shop-ring-arc"/>
+      </svg>
+      <div class="shop-ring-center">
+        ${complete
+          ? `<div class="shop-ring-check">✓</div><div class="shop-ring-lbl">terminé</div>`
+          : `<div class="shop-ring-num"><span>${done}</span>/${total}</div><div class="shop-ring-lbl">cochés</div>`}
+      </div>
+    </div>`;
+}
+
 const CHECKED_KEY = 'diet_shopping_checked';
 const getChecked   = () => JSON.parse(localStorage.getItem(CHECKED_KEY) || '[]');
 const saveChecked  = (a) => localStorage.setItem(CHECKED_KEY, JSON.stringify(a));
@@ -281,23 +310,29 @@ export function renderShopping() {
       ? `Semaine du ${new Date(rangeDates[0]+'T12:00:00').toLocaleDateString('fr-FR',{day:'numeric',month:'short'})}`
       : `${days} derniers jours`;
 
+    const pct = items.length ? Math.round(done / items.length * 100) : 0;
+
     view.innerHTML = `
       <div class="shopping-header">
-        <div class="shopping-title">Liste de courses</div>
-        ${rangeDates ? `
-          <div class="shop-range-banner">${rangeLabel}
-            <button class="shop-switch">Utiliser N jours</button>
+        <div class="shop-hero">
+          <div class="shop-hero-main">
+            <div class="shopping-title">Liste de courses</div>
+            ${rangeDates ? `
+              <div class="shop-range-chip">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <span>${rangeLabel}</span>
+              </div>
+            ` : `
+              <div class="days-tabs">
+                ${[3,7,14].map(d => `<button class="days-tab ${days===d?'active':''}" data-days="${d}">${d} jours</button>`).join('')}
+              </div>
+            `}
+            ${done > 0 ? '<button class="clear-btn">Tout décocher</button>' : ''}
           </div>
-        ` : `
-          <div class="days-tabs">
-            ${[3,7,14].map(d => `<button class="days-tab ${days===d?'active':''}" data-days="${d}">${d} jours</button>`).join('')}
+          <div class="shop-hero-ring">
+            ${shopRing(done, items.length)}
           </div>
-        `}
-        <div class="shop-stats">
-          ${items.length} ingrédients · ${done}/${items.length} cochés
-          ${done > 0 ? '<button class="clear-btn">Tout décocher</button>' : ''}
         </div>
-        <div class="shop-progress"><div class="shop-progress-fill" style="width:${items.length ? Math.round(done/items.length*100) : 0}%"></div></div>
       </div>
       <div class="shopping-list">
         ${items.length ? CATEGORIES.map(c => {
@@ -355,11 +390,6 @@ export function renderShopping() {
     `;
 
     // Events
-    view.querySelector('.shop-switch')?.addEventListener('click', () => {
-      rangeDates = null;
-      localStorage.removeItem('diet_shop_range');
-      app.querySelector('.view')?.remove(); render();
-    });
     view.querySelectorAll('.days-tab').forEach(b => b.addEventListener('click', () => {
       days = parseInt(b.dataset.days);
       localStorage.setItem('diet_shop_days', days);

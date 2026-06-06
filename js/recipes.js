@@ -91,7 +91,6 @@ export function renderRecipes() {
             <span>${r.macros.kcal} kcal</span>
             <span>${r.prepTime + r.cookTime} min</span>
           </div>
-          ${r.batch ? '<span class="rc-batch">batch</span>' : ''}
         </div>
         <span class="rc-arrow">›</span>
       </div>`).join('') : '<div class="no-results">Aucune recette trouvée.</div>';

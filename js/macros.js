@@ -1,7 +1,7 @@
 import { state, currentEntry } from './state.js';
 import { USER }                from '../data/user.js';
 import { getById }             from '../data/recipes.js';
-import { el, mbar, scaledMacros, computeDayMacros, formatDate } from './utils.js';
+import { el, mbar, kcalRing, scaledMacros, computeDayMacros, formatDate } from './utils.js';
 
 export function renderMacros() {
   const app = document.getElementById('app');
@@ -17,10 +17,8 @@ export function renderMacros() {
   const hero = el('div', `macros-hero ${over ? 'over-limit' : ''}`);
   hero.innerHTML = `
     <div class="macros-date">${formatDate(entry.date)}</div>
-    <div class="macros-kcal-big ${over ? 'over' : ''}">${Math.round(macros.kcal)}</div>
-    <div class="macros-kcal-sub">/ ${targets.kcal} kcal · ${Math.round((macros.kcal/targets.kcal)*100)}%</div>
+    <div class="day-ring-block">${kcalRing(macros.kcal, targets.kcal, { size: 184 })}</div>
     ${over ? `<div class="over-banner">Dépassement de ${Math.round(macros.kcal - targets.kcal)} kcal</div>` : ''}
-    ${mbar(macros.kcal, targets.kcal, 'var(--kcal)')}
     <div style="margin-top:20px">
       ${macroRow('Protéines', macros.protein, targets.protein, 'var(--protein)')}
       ${macroRow('Glucides',  macros.carbs,   targets.carbs,   'var(--carbs)')}
@@ -64,13 +62,15 @@ export function renderMacros() {
 
 function macroRow(name, val, target, color) {
   const pct = Math.round((val / target) * 100);
-  const over = val > target * 1.1;
+  const isProtein = /prot/i.test(name);
+  // Pour les protéines, dépasser la cible est positif : pas d'alerte rouge.
+  const over = !isProtein && val > target * 1.1;
   return `
     <div class="macro-row">
       <div class="macro-row-hd">
         <span class="macro-row-name">${name}</span>
         <span class="macro-row-nums ${over ? 'over' : ''}"><span>${Math.round(val)}g</span> / ${target}g · ${pct}%</span>
       </div>
-      ${mbar(val, target, color)}
+      ${mbar(val, target, color, isProtein ? 99 : 1.08)}
     </div>`;
 }

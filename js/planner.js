@@ -5,7 +5,7 @@ import { state, setState, currentEntry } from './state.js';
 import { saveEntry, getTodayDate }       from '../data/log.js';
 import { getDinners, getLunches, getSides, getSweets, getStarters, getById } from '../data/recipes.js';
 import { USER }                          from '../data/user.js';
-import { el, formatDate, mbar, scaledMacros, itemMacros, computeDayMacros, openSheet, closeSheet } from './utils.js';
+import { el, formatDate, mbar, kcalRing, scaledMacros, itemMacros, computeDayMacros, openSheet, closeSheet } from './utils.js';
 import { optimizeDay }                   from './optimizer.js';
 
 const SLOTS = [
@@ -89,11 +89,9 @@ export function renderPlanner() {
     </div>
     <div class="today-label">${isToday ? "Aujourd'hui" : 'Jour planifié'}</div>
     <div class="today-date">${formatDate(entry.date)}</div>
-    <div class="kcal-row">
-      <div><span class="kcal-val ${over ? 'over' : ''}">${Math.round(macros.kcal)}</span><span class="kcal-sep"> / ${targets.kcal} kcal</span></div>
-      <span class="kcal-pct ${over ? 'over' : ''}">${kcalPct}%</span>
+    <div class="day-ring-block">
+      ${kcalRing(macros.kcal, targets.kcal)}
     </div>
-    ${mbar(macros.kcal, targets.kcal, 'var(--accent)')}
     ${over ? `<div class="over-banner">Limite dépassée de ${Math.round(macros.kcal - targets.kcal)} kcal</div>` : ''}
     <div class="mini-macros">
       <div class="mini-macro protein-track ${macros.protein >= targets.protein ? 'reached' : (macros.protein >= targets.protein*0.8 ? 'close' : 'low')}">

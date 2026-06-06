@@ -92,12 +92,11 @@ export function generateWeek({ cantineDays = [], nextWeek = true, targets, prote
   const proteinOf = r => {
     const txt = JSON.stringify(r.ingredients).toLowerCase();
     if (/crevette/.test(txt)) return 'crevettes';
-    if (/saumon/.test(txt)) return 'saumon';
-    if (/colin|merlu|cabillaud|poisson blanc/.test(txt)) return 'poisson';
+    if (/saumon|colin|merlu|cabillaud|poisson blanc|poisson/.test(txt)) return 'saumon';
     if (/steak|boeuf|bœuf/.test(txt)) return 'boeuf';
     if (/dinde/.test(txt)) return 'dinde';
     if (/poulet/.test(txt)) return 'poulet';
-    if (/tofu/.test(txt)) return 'tofu';
+    if (/tofu|pois chiche|lentille|haricot/.test(txt)) return 'tofu';
     return 'autre';
   };
   // Pool dîners : viande/poisson + féculent. On limite le poisson (cher) à 1 plat max par semaine.

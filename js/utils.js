@@ -25,6 +25,41 @@ export function mbar(value, target, color, overThreshold = 1.08) {
   return `<div class="mbar-wrap"><div class="mbar ${over ? 'over' : ''}" style="width:${pct}%;background:${over ? 'var(--danger)' : color}"></div></div>`;
 }
 
+// Anneau de progression calorique (SVG donut). Pièce maîtresse visuelle des écrans Jour & Macros.
+// value/target en kcal. Affiche le chiffre au centre + la cible dessous.
+export function kcalRing(value, target, opts = {}) {
+  const size = opts.size || 168;
+  const sw = opts.stroke || 13;
+  const r = (size - sw) / 2;
+  const c = 2 * Math.PI * r;
+  const ratio = Math.max(0, Math.min(value / target, 1));
+  const over = value > target * 1.08;
+  const dash = (ratio * c).toFixed(1);
+  const pct = Math.round((value / target) * 100);
+  const stroke = over ? 'var(--danger)' : 'url(#hbRingGrad)';
+  const cx = size / 2;
+  return `
+    <div class="kcal-ring-wrap" style="width:${size}px;height:${size}px">
+      <svg class="kcal-ring" viewBox="0 0 ${size} ${size}" width="${size}" height="${size}">
+        <defs>
+          <linearGradient id="hbRingGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#A9C2B2"/>
+            <stop offset="100%" stop-color="#6E8B76"/>
+          </linearGradient>
+        </defs>
+        <circle cx="${cx}" cy="${cx}" r="${r}" fill="none" stroke="var(--s3)" stroke-width="${sw}"/>
+        <circle cx="${cx}" cy="${cx}" r="${r}" fill="none" stroke="${stroke}" stroke-width="${sw}"
+          stroke-linecap="round" stroke-dasharray="${dash} ${c.toFixed(1)}"
+          transform="rotate(-90 ${cx} ${cx})" class="kcal-ring-arc"/>
+      </svg>
+      <div class="kcal-ring-center">
+        <div class="kcal-ring-val ${over ? 'over' : ''}">${Math.round(value)}</div>
+        <div class="kcal-ring-sub">/ ${target} kcal</div>
+        <div class="kcal-ring-pct ${over ? 'over' : ''}">${pct}%</div>
+      </div>
+    </div>`;
+}
+
 // Macros d'une recette × servings, arrondis
 // Macros d'un plat : tient compte des overrides (quantités d'ingrédients ajustées en g).
 // item = { id, servings, overrides? : { ingIndex: qtyGrams } }
